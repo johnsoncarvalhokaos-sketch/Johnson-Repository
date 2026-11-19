@@ -1,0 +1,205 @@
+/* Entrevista imersiva (exploração, 19/11). Fora do fluxo do protótipo.
+   A conversa acontece numa tela só: o Consultor "fala" pelo anel (a pergunta surge palavra por palavra e o anel acompanha),
+   o anel escuta enquanto a pessoa digita e pensa depois de cada resposta. Só texto, como pede o c39: o anel é movido pelo ritmo
+   da fala do Consultor e da digitação, nunca pelo microfone. O que é capturado aparece ao vivo, ainda durante a digitação. */
+import { useEffect, useMemo, useRef, useState } from "react";
+import { createRoot } from "react-dom/client";
+import { VoiceRing, VoiceOrb } from "voice-ring";
+
+const RM = typeof matchMedia === "function" && matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* o que a demonstração reconhece no texto (exemplo: num produto real, quem extrai é o modelo) */
+const FERR = [[/whats/i, "WhatsApp Business"], [/planilha|excel|sheets/i, "Planilhas"], [/e-?mail/i, "E-mail"], [/\bcrm\b|pipedrive|hubspot/i, "CRM"], [/\berp\b|bling|omie/i, "ERP"], [/chatgpt|claude|gemini/i, "ChatGPT ou outra IA"], [/notion/i, "Notion"], [/instagram/i, "Instagram"], [/drive/i, "Google Drive"]];
+const AREAS = [[/orçament|vend|proposta|lead/i, "Vendas e comercial"], [/client|atend|\brespond/i, "Atendimento ao cliente"], [/cobran|financ|boleto|pagament/i, "Financeiro e cobrança"], [/relat[óo]rio|indicador|planilha/i, "Relatórios e processos internos"], [/pedido|entreg|estoque|produ/i, "Operações e entrega"], [/\bposts?\b|conte[úu]do|campanha|an[úu]ncio/i, "Marketing e conteúdo"]];
+const ROTINA = /\b(todo|toda|todos|todas|sempre|cada)\b[^.!?]*|\b(confiro|mando|monto|fecho|respondo|atualizo|preparo|reviso)\b[^.!?]*/gi;
+const achar = (txt, lista) => [...new Set(lista.filter(([re]) => re.test(txt)).map(([, n]) => n))];
+const trechos = txt => [...new Set((String(txt).match(ROTINA) || []).map(s => s.trim().replace(/^./, c => c.toUpperCase())).filter(s => s.length > 12))].slice(0, 3).map(s => s.length > 70 ? s.slice(0, 68).trim() + "…" : s);
+
+const IA = ["Ainda não uso no trabalho", "Uso de vez em quando, por conta própria", "Uso todo dia, com prompts que reaproveito", "Já tenho automações ou agentes rodando"];
+const FREQ = [["Todo dia", 22], ["Algumas vezes por semana", 10], ["Uma vez por semana", 4], ["Uma vez por mês", 1]];
+const TEMPO = [["Até 15 min", 0.2], ["15 a 30 min", 0.4], ["30 min a 1 h", 0.75], ["1 a 2 h", 1.5], ["Mais de 2 h", 2.5]];
+const PARTES = ["Sua rotina", "As áreas", "A conta"];
+
+const PASSOS = [
+  { id: "rotina", parte: 0, tipo: "texto", q: "Para começar: como é uma semana normal sua no trabalho? Conte do seu jeito, sem pressa.",
+    ex: "Passo boa parte do dia no WhatsApp respondendo clientes e montando orçamentos. Toda manhã confiro os orçamentos sem resposta e mando mensagem um por um. Na sexta fecho o relatório de vendas na planilha." },
+  { id: "ferr", parte: 0, tipo: "tags", q: "Quais ferramentas entram nisso? Já marquei as que você citou.", ops: ["WhatsApp Business", "Planilhas", "E-mail", "CRM", "ERP", "ChatGPT ou outra IA", "Notion", "Google Drive", "Instagram"] },
+  { id: "ia", parte: 0, tipo: "escolha", q: "E a IA: quanto ela já faz parte do seu trabalho hoje?", ops: IA },
+  { id: "areas", parte: 1, tipo: "tags", q: "Em quais áreas você sente que o tempo mais escorre?", ops: AREAS.map(a => a[1]) },
+  { id: "processo", parte: 1, tipo: "texto", q: "Escolha um processo que toma tempo e me conte como ele acontece hoje, do começo ao fim.",
+    ex: "Todo dia de manhã alguém abre a planilha de orçamentos, vê quem não respondeu há mais de 3 dias e manda mensagem um por um pelo WhatsApp. Leva umas duas horas." },
+  { id: "ritmo", parte: 1, tipo: "ritmo", q: "Com que frequência esse processo acontece, e quanto tempo leva cada vez?" },
+  { id: "conta", parte: 2, tipo: "conta", q: "Fiz a conta com o que você me contou. Confere?" },
+];
+
+/* um envelope de fala a partir do texto que está surgindo: vogal abre, espaço e pontuação fecham */
+function nivelDaFala(ch) { if (!ch) return 0; if (/[.,!?:]/.test(ch)) return 0.05; if (/\s/.test(ch)) return 0.18; return /[aeiouáéíóúâêôãõ]/i.test(ch) ? 0.85 : 0.55; }
+
+function Presenca({ tipo, estado, nivel, emocao, size }) {
+  const comum = { state: estado, level: nivel, emotion: emocao, size, theme: "light", calm: 0.35, "aria-label": "Consultor Pixel AI" };
+  if (tipo === "pixel") return <VoiceOrb type="pixel" color="#FF5A1F" {...comum} />;
+  return <VoiceRing type={tipo === "mono" ? "mono" : "ring"} {...comum} />;
+}
+
+function App() {
+  const [i, setI] = useState(-1);                  // -1 abertura · PASSOS.length fim
+  const [estado, setEstado] = useState("idle");    // idle | speaking | listening | processing
+  const [fala, setFala] = useState({ eco: "", q: "" });
+  const [vis, setVis] = useState(0);               // caracteres já ditos
+  const [txt, setTxt] = useState("");
+  const [sel, setSel] = useState([]);
+  const [ritmo, setRitmo] = useState({ freq: "", tempo: "" });
+  const [r, setR] = useState({});                  // respostas
+  const [mem, setMem] = useState({ ferr: [], areas: [], proc: [], ia: "" });
+  const [novo, setNovo] = useState(null);
+  const [tipo, setTipo] = useState("ring");
+  const [conversa, setConversa] = useState([]);
+  const [verConversa, setVerConversa] = useState(false);
+  const [memAberta, setMemAberta] = useState(false);
+  const nivel = useRef(0), tecla = useRef(0), campo = useRef(null);
+  const passo = PASSOS[i];
+  const total = fala.eco.length + fala.q.length;
+  const dizendo = estado === "speaking" && vis < total;
+
+  /* o anel lê este getter a cada quadro: fala do Consultor, digitação da pessoa ou silêncio */
+  const getNivel = useMemo(() => () => nivel.current, []);
+  useEffect(() => { let raf; const loop = () => { tecla.current *= 0.9; if (estado === "listening") nivel.current = Math.min(1, tecla.current); raf = requestAnimationFrame(loop); }; raf = requestAnimationFrame(loop); return () => cancelAnimationFrame(raf); }, [estado]);
+
+  /* a fala surge letra a letra; o anel acompanha */
+  useEffect(() => {
+    if (estado !== "speaking") return;
+    if (RM) { setVis(total); nivel.current = 0; setEstado(i >= PASSOS.length ? "idle" : "listening"); return; }
+    if (vis >= total) { nivel.current = 0; const t = setTimeout(() => { setEstado(i >= PASSOS.length ? "idle" : "listening"); campo.current?.focus(); }, 250); return () => clearTimeout(t); }
+    const all = fala.eco + fala.q, ch = all[vis];
+    nivel.current = nivelDaFala(ch);
+    const t = setTimeout(() => setVis(v => v + 1), /[.!?]/.test(ch) ? 260 : /,/.test(ch) ? 140 : 24);
+    return () => clearTimeout(t);
+  }, [estado, vis, total]);
+
+  function dizer(eco, q, prox) {
+    setFala({ eco: eco ? eco + " " : "", q }); setVis(0); setI(prox); setEstado("speaking");
+    setConversa(c => c.concat([{ quem: "c", t: (eco ? eco + " " : "") + q }]));
+  }
+  function guardar(k, v) { setMem(m => ({ ...m, [k]: Array.isArray(m[k]) ? [...new Set(m[k].concat(v))] : v })); setNovo(k); setTimeout(() => setNovo(null), 1400); }
+
+  /* captura ao vivo: enquanto a pessoa escreve, aparece o que o Consultor está entendendo */
+  const aoVivo = useMemo(() => passo && passo.tipo === "texto" ? { ferr: achar(txt, FERR).filter(f => !mem.ferr.includes(f)), areas: achar(txt, AREAS).filter(a => !mem.areas.includes(a)), proc: trechos(txt) } : null, [txt, i]);
+
+  function responder(valor, rotulo) {
+    const p = passo; const nr = { ...r, [p.id]: valor }; setR(nr);
+    setConversa(c => c.concat([{ quem: "p", t: rotulo || (Array.isArray(valor) ? valor.join(", ") : valor) }]));
+    setTxt(""); setSel([]); setEstado("processing"); nivel.current = 0;
+    let eco = "";
+    if (p.id === "rotina") { const f = achar(valor, FERR), a = achar(valor, AREAS), pr = trechos(valor); guardar("ferr", f); guardar("areas", a); guardar("proc", pr);
+      eco = pr.length ? `Anotei ${pr.length === 1 ? "uma rotina" : pr.length + " rotinas"} que se repetem${f.length ? ` e ${f.length === 1 ? "uma ferramenta" : f.length + " ferramentas"}` : ""}.` : "Entendi."; }
+    if (p.id === "ferr") { guardar("ferr", valor); eco = `${valor.length} ferramentas no mapa.`; }
+    if (p.id === "ia") { guardar("ia", valor); eco = /Ainda não|vez em quando/.test(valor) ? "Bom ponto de partida: dá para avançar rápido." : "Você já tem uma base boa para começar."; }
+    if (p.id === "areas") { guardar("areas", valor); eco = valor.length > 1 ? `${valor[0]} e mais ${valor.length - 1}. Vamos olhar um processo de perto.` : `${valor[0]}. Vamos olhar um processo de perto.`; }
+    if (p.id === "processo") { const pr = trechos(valor)[0] || (valor.length > 70 ? valor.slice(0, 68).trim() + "…" : valor); guardar("proc", [pr]); guardar("ferr", achar(valor, FERR)); eco = "Esse eu entendi bem."; }
+    if (p.id === "ritmo") eco = "Pronto, tenho os números.";
+    const prox = i + 1;
+    setTimeout(() => {
+      if (prox >= PASSOS.length) { dizer("", "Seu Plano está montado. Ele já começa por esse processo.", prox); return; }
+      dizer(eco, PASSOS[prox].q, prox);
+      if (PASSOS[prox].id === "ferr") setSel(mem.ferr.concat(achar(nr.rotina || "", FERR)).filter((v, k, a) => a.indexOf(v) === k));
+    }, RM ? 100 : 1100);
+  }
+
+  const horas = (() => { const f = FREQ.find(x => x[0] === (r.ritmo || ritmo).freq), t = TEMPO.find(x => x[0] === (r.ritmo || ritmo).tempo); return f && t ? Math.round(f[1] * t[1]) : null; })();
+  const legenda = { idle: i < 0 ? "Pronto quando você quiser" : "Entrevista concluída", speaking: "O Consultor está falando", listening: "Ouvindo você", processing: "Juntando com o que você já disse" }[estado];
+  const parte = i < 0 ? -1 : i >= PASSOS.length ? 3 : passo.parte;
+  const nMem = mem.ferr.length + mem.areas.length + mem.proc.length + (mem.ia ? 1 : 0);
+  const podeResponder = estado === "listening" || (estado === "speaking" && !dizendo);
+  const tamanho = typeof innerWidth === "number" && innerWidth < 700 ? 150 : 228, movel = typeof innerWidth === "number" && innerWidth <= 900; // no celular a lista vira folha
+
+  function digitar(e) { setTxt(e.target.value); tecla.current = Math.min(1, tecla.current + 0.45); if (estado === "speaking" && !dizendo) setEstado("listening"); }
+
+  return (
+    <div className="ei">
+      <div className="ei-haze" aria-hidden="true"></div>
+      <header className="ei-top">
+        <span className="ei-logo"><svg className="px" viewBox="0 0 40 46" aria-hidden="true" style={{ width: 22 }}><rect className="px-h" x="15" y="0" width="10" height="10" rx="3" /><rect className="px-b" x="0" y="12" width="40" height="34" rx="12" /><g className="px-e"><rect x="10.5" y="21.5" width="6" height="13" rx="3" /><rect x="23.5" y="21.5" width="6" height="13" rx="3" /></g></svg><b>Entrevista com o Consultor</b></span>
+        <ol className="ei-partes" aria-label="Partes da entrevista">{PARTES.map((n, k) => <li key={n} className={k < parte ? "ok" : k === parte ? "at" : ""} aria-current={k === parte ? "step" : undefined}><i></i><span>{n}</span></li>)}</ol>
+        <div className="ei-seg" role="group" aria-label="Presença do Consultor (exploração)">{[["ring", "Anel"], ["mono", "Anel mono"], ["pixel", "Pixel"]].map(([k, n]) => <button key={k} aria-pressed={tipo === k} onClick={() => setTipo(k)}>{n}</button>)}</div>
+      </header>
+
+      <main className="ei-m">
+        <section className="ei-palco" aria-label="Conversa">
+          <div className={"ei-anel " + estado}><Presenca tipo={tipo} estado={estado} nivel={getNivel} emocao={i >= PASSOS.length ? "positive" : estado === "processing" ? null : "calm"} size={tamanho} /></div>
+          <p className="ei-leg" aria-hidden="true">{legenda}</p>
+
+          {i < 0 ? (
+            <div className="ei-abre">
+              <h1>Vamos conversar sobre o seu trabalho</h1>
+              <p>Uns 15 minutos, só por texto. Você escreve do seu jeito e eu vou mostrando o que entendi. No fim, você confere a conta antes de virar plano.</p>
+              <button className="ei-btn jornada" onClick={() => dizer("", PASSOS[0].q, 0)}>Começar a entrevista</button>
+            </div>
+          ) : (
+            <>
+              <div className="ei-fala" aria-hidden="true"><span className="eco">{(fala.eco + fala.q).slice(0, Math.min(vis, fala.eco.length))}</span><span>{(fala.eco + fala.q).slice(fala.eco.length, vis)}</span>{dizendo && <i className="ei-cursor"></i>}</div>
+              <p className="ei-sr" aria-live="polite">{estado !== "speaking" || !dizendo ? fala.eco + fala.q : ""}</p>
+
+              {i < PASSOS.length && !dizendo && estado !== "processing" && (
+                <div className="ei-resp">
+                  {passo.tipo === "texto" && (<>
+                    <div className={"ei-in " + (estado === "listening" && txt ? "on" : "")}>
+                      <textarea id={"in-" + passo.id} ref={campo} rows={3} value={txt} onChange={digitar} placeholder="Escreva aqui" aria-label={passo.q}
+                        onKeyDown={e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); if (txt.trim()) responder(txt.trim()); } }} />
+                      <div className="ei-in-b">
+                        <button className="ei-lnk" onClick={() => { setTxt(passo.ex); setEstado("listening"); tecla.current = 0.8; campo.current?.focus(); }}>Usar um exemplo</button>
+                        <button className="ei-btn" disabled={!txt.trim()} onClick={() => responder(txt.trim())}>Enviar</button>
+                      </div>
+                    </div>
+                    {aoVivo && (aoVivo.ferr.length + aoVivo.areas.length + aoVivo.proc.length > 0) && (
+                      <p className="ei-vivo" aria-live="polite"><span>Estou entendendo:</span>{aoVivo.proc.map(x => <em key={x} className="p">{x}</em>)}{aoVivo.ferr.map(x => <em key={x}>{x}</em>)}{aoVivo.areas.map(x => <em key={x} className="a">{x}</em>)}</p>
+                    )}
+                  </>)}
+                  {passo.tipo === "tags" && (<>
+                    <div className="ei-chips" role="group" aria-label={passo.q}>{passo.ops.map(o => <button key={o} className="ei-ch" aria-pressed={sel.includes(o)} onClick={() => setSel(s => s.includes(o) ? s.filter(x => x !== o) : s.concat(o))}>{o}</button>)}</div>
+                    <button className="ei-btn" disabled={!sel.length} onClick={() => responder(sel)}>Continuar</button>
+                  </>)}
+                  {passo.tipo === "escolha" && <div className="ei-ops" role="group" aria-label={passo.q}>{passo.ops.map(o => <button key={o} className="ei-op" onClick={() => responder(o)}>{o}</button>)}</div>}
+                  {passo.tipo === "ritmo" && (<>
+                    <p className="ei-k">Frequência</p>
+                    <div className="ei-chips" role="radiogroup" aria-label="Frequência">{FREQ.map(([o]) => <button key={o} role="radio" className="ei-ch" aria-checked={ritmo.freq === o} onClick={() => setRitmo(x => ({ ...x, freq: o }))}>{o}</button>)}</div>
+                    <p className="ei-k">Cada vez</p>
+                    <div className="ei-chips" role="radiogroup" aria-label="Tempo de cada vez">{TEMPO.map(([o]) => <button key={o} role="radio" className="ei-ch" aria-checked={ritmo.tempo === o} onClick={() => setRitmo(x => ({ ...x, tempo: o }))}>{o}</button>)}</div>
+                    <button className="ei-btn" disabled={!ritmo.freq || !ritmo.tempo} onClick={() => responder(ritmo, `${ritmo.freq}, ${ritmo.tempo.toLowerCase()} cada vez`)}>Continuar</button>
+                  </>)}
+                  {passo.tipo === "conta" && (
+                    <div className="ei-conta">
+                      <p className="ei-num"><b>≈ {horas} h</b><span>por mês voltam para você, só nesse processo</span></p>
+                      <p className="ei-prem">Estimativa: {(r.ritmo || {}).freq?.toLowerCase()} × {(r.ritmo || {}).tempo?.toLowerCase()} cada vez.</p>
+                      <div className="ei-row"><button className="ei-btn jornada" onClick={() => responder("ok", "Confere, pode montar o plano")}>Confere, pode montar o plano</button><button className="ei-lnk" onClick={() => { setI(i - 1); setEstado("listening"); }}>Corrigir os números</button></div>
+                    </div>
+                  )}
+                </div>
+              )}
+              {i >= PASSOS.length && !dizendo && (
+                <div className="ei-fim">
+                  <p>O Plano já tem a sua rotina, {mem.ferr.length} ferramentas, {mem.areas.length} áreas e o primeiro processo para virar agente{horas != null ? `, com cerca de ${horas} h por mês na mesa` : ""}.</p>
+                  <div className="ei-row"><a className="ei-btn jornada" href="https://claude.ai/artifact/N58xZ5eyVrZHReRKUvym59" target="_blank" rel="noopener">Abrir o protótipo do Hub</a><button className="ei-lnk" onClick={() => { setI(-1); setEstado("idle"); setR({}); setMem({ ferr: [], areas: [], proc: [], ia: "" }); setConversa([]); setRitmo({ freq: "", tempo: "" }); setFala({ eco: "", q: "" }); }}>Recomeçar</button></div>
+                </div>
+              )}
+              {conversa.length > 1 && <button className="ei-lnk ei-ver" aria-expanded={verConversa} aria-controls="ei-conv" onClick={() => setVerConversa(v => !v)}>{verConversa ? "Esconder a conversa" : "Ver a conversa"}</button>}
+              {verConversa && <ol className="ei-conv" id="ei-conv">{conversa.map((m, k) => <li key={k} className={m.quem}><b>{m.quem === "c" ? "Consultor" : "Você"}</b>{m.t}</li>)}</ol>}
+            </>
+          )}
+        </section>
+
+        <aside className={"ei-mem " + (memAberta ? "aberta" : "")} aria-label="O que eu já entendi">
+          <button className="ei-mem-t" aria-expanded={movel ? memAberta : undefined} aria-controls="ei-mem-c" disabled={!movel} onClick={() => setMemAberta(v => !v)}><b>O que eu já entendi</b><em>{nMem}</em></button>
+          <div className="ei-mem-c" id="ei-mem-c">
+            {[["proc", "Rotinas e processos"], ["ferr", "Ferramentas"], ["areas", "Áreas que mais pesam"]].map(([k, n]) => (
+              <section key={k} className={"ei-g" + (novo === k ? " novo" : "")}><h2>{n}</h2>{mem[k].length ? <ul>{mem[k].map(x => <li key={x}>{x}</li>)}</ul> : <p>Ainda não falamos disso.</p>}</section>
+            ))}
+            <section className={"ei-g" + (novo === "ia" ? " novo" : "")}><h2>IA hoje</h2><p className={mem.ia ? "v" : ""}>{mem.ia || "Ainda não falamos disso."}</p></section>
+            <p className="ei-nota">Exploração com dados de exemplo. O reconhecimento no texto é simulado.</p>
+          </div>
+        </aside>
+      </main>
+    </div>
+  );
+}
+
+createRoot(document.getElementById("app")).render(<App />);
