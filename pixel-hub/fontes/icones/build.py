@@ -1,4 +1,5 @@
-import json, html
+import json, html, itertools
+from mascaras import mascarar
 I=json.load(open('icons2.json'))
 CAT_ORD=['Navegação','Ações','Estados','Objetos do Hub','Áreas dos agentes']
 AREA_COR={'area-vendas':'#FF5A1F','area-marketing':'#EC3FAC','area-atendimento':'#17AE78','area-financeiro':'#E39400','area-operacoes':'#2E6BFF','area-rh':'#7B5CFF','area-dados':'#10A3B3','area-gestao':'#10A3B3','area-chief':'#6B7090','area-orquestrador':'#6B7090','area-geral':'#6B7090'}
@@ -22,14 +23,15 @@ MAP=[
  ('etiqueta','Áreas, tags','etiqueta','Substitui'),('camadas','Usada em templates','camadas','Substitui'),('chart','Dados, relatórios','grafico','Substitui'),('wa','WhatsApp','—','Mantém a marca oficial'),
  ('Pixel','Consultor Pixel AI, agentes','—','Mantém o personagem'),('ícones de área (traço)','Templates por área','area-*','Substitui'),
 ]
-def standalone(svg):
+def standalone(svg,k):
     st='stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"'
-    s=svg.replace('class="p"','fill="var(--icbg,#fff)" '+st).replace('class="s"','fill="currentColor" fill-opacity=".12" '+st)
+    s=mascarar(svg,'pxm-'+k).replace('class="p"','fill="none" '+st).replace('class="s"','fill="currentColor" fill-opacity=".12" '+st)
     s=s.replace('class="pl"','fill="none" '+st).replace('class="sl"','fill="none" '+st).replace('class="d"','fill="currentColor"')
     return f'<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">{s}</svg>'
-data=[{'n':k,'c':v['cat'],'svg':v['svg'],'o':v['onde'],'raw':standalone(v['svg']),'cor':AREA_COR.get(k,'')} for k,v in I.items()]
+data=[{'n':k,'c':v['cat'],'svg':mascarar(v['svg'],'pxm-'+k),'o':v['onde'],'raw':standalone(v['svg'],k),'cor':AREA_COR.get(k,'')} for k,v in I.items()]
 cats=[c for c in CAT_ORD if any(d['c']==c for d in data)]
-def ic(n,size=24,extra=''): return f'<svg class="ic" viewBox="0 0 24 24" width="{size}" height="{size}" aria-hidden="true" {extra}>{I[n]["svg"]}</svg>'
+_n=itertools.count()
+def ic(n,size=24,extra=''): return f'<svg class="ic" viewBox="0 0 24 24" width="{size}" height="{size}" aria-hidden="true" {extra}>{mascarar(I[n]["svg"],f"pxm-{n}-{next(_n)}")}</svg>'
 hero_row=''.join(f'<span class="hr" style="color:{c}">{ic(n,40)}</span>' for n,c in [('agentes','#FF5A1F'),('trilha','#2E6BFF'),('skill','#EC3FAC'),('cerebro','#7B5CFF'),('ao-vivo','#FF5A1F'),('plano','#17AE78'),('kit','#E39400'),('rotina','#10A3B3'),('entrevista','#fff'),('calendario','#fff')])
 mp_rows=''.join(f'<tr><td>{html.escape(a)}</td><td>{html.escape(b)}</td><td>{(ic(c,22)+"<code>"+c+"</code>") if c in I else ("<code>"+c+"</code>")}</td><td><span class="st {"novo" if d=="Novo" else "mant" if d.startswith("Mantém") else ""}">{d}</span></td></tr>' for a,b,c,d in MAP)
 page=f'''<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Pixel Icons, biblioteca de ícones do Hub</title>
@@ -39,19 +41,19 @@ page=f'''<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta nam
 :root[data-theme="dark"]{{ --ink:#F2F2F5; --ink2:#A4A7B4; --line:#2A2B33; --soft:#1C1D24; --bg:#121318; color-scheme:dark; }}
 *{{ box-sizing:border-box; }} html{{ scroll-padding-top:env(safe-area-inset-top,0px); }}
 body{{ margin:0; background:var(--bg); color:var(--ink); font:16px/1.55 "Inter Tight","Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif; -webkit-font-smoothing:antialiased; }}
-.p{{ fill:var(--icbg,#fff); stroke:currentColor; stroke-width:1.5; stroke-linejoin:round; stroke-linecap:round }} .s{{ fill:currentColor; fill-opacity:.12; stroke:currentColor; stroke-width:1.5; stroke-linejoin:round; stroke-linecap:round }} .pl,.sl{{ fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round }} .d{{ fill:currentColor }}
+.p{{ fill:none; stroke:currentColor; stroke-width:1.5; stroke-linejoin:round; stroke-linecap:round }} .s{{ fill:currentColor; fill-opacity:.12; stroke:currentColor; stroke-width:1.5; stroke-linejoin:round; stroke-linecap:round }} .pl,.sl{{ fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round }} .d{{ fill:currentColor }}
 .ic{{ display:block; flex-shrink:0; }}
 .wrap{{ max-width:1180px; margin:0 auto; padding:0 28px; }}
-header.hero{{ background:#15161C; color:#fff; --icbg:#15161C; padding:64px 0 56px; }}
+header.hero{{ background:#15161C; color:#fff; padding:64px 0 56px; }}
 .hero h1{{ margin:0; font-size:clamp(40px,6vw,72px); line-height:1; letter-spacing:-.035em; font-weight:650; }}
 .hero p.l{{ margin:18px 0 0; max-width:58ch; font-size:18px; color:rgba(255,255,255,.72); }}
 .hrow{{ display:flex; flex-wrap:wrap; gap:28px 40px; margin-top:44px; }} .hr{{ display:inline-flex; }}
 .meta{{ display:flex; flex-wrap:wrap; gap:28px; margin-top:44px; padding-top:22px; border-top:1px solid rgba(255,255,255,.12); color:rgba(255,255,255,.7); font-size:14.5px; }} .meta b{{ display:block; color:#fff; font-size:26px; letter-spacing:-.02em; font-weight:650; }}
 section{{ padding:64px 0 0; }} h2{{ margin:0; font-size:30px; letter-spacing:-.025em; line-height:1.15; font-weight:650; }} .sub{{ margin:8px 0 0; color:var(--ink2); max-width:66ch; }}
 .ref{{ display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:16px; margin-top:28px; }}
-.rc{{ padding:20px; border-radius:20px; background:var(--soft); }} .rc .demo{{ height:72px; display:flex; align-items:center; gap:14px; color:var(--ink); --icbg:var(--soft); }} .rc b{{ display:block; margin-top:14px; font-size:15.5px; }} .rc span{{ display:block; margin-top:4px; font-size:14px; color:var(--ink2); line-height:1.5; }}
+.rc{{ padding:20px; border-radius:20px; background:var(--soft); }} .rc .demo{{ height:72px; display:flex; align-items:center; gap:14px; color:var(--ink); }} .rc b{{ display:block; margin-top:14px; font-size:15.5px; }} .rc span{{ display:block; margin-top:4px; font-size:14px; color:var(--ink2); line-height:1.5; }}
 .rules{{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:40px; margin-top:28px; align-items:start; }}
-.kl{{ position:relative; aspect-ratio:1; max-width:420px; border-radius:24px; background:var(--soft); display:grid; place-items:center; color:var(--ink); --icbg:var(--soft); }}
+.kl{{ position:relative; aspect-ratio:1; max-width:420px; border-radius:24px; background:var(--soft); display:grid; place-items:center; color:var(--ink); }}
 .kl svg.grid, .kl .big{{ position:absolute; left:9%; top:9%; width:82%; height:82%; }} .kl .big{{ z-index:1; }}
 .rl{{ list-style:none; margin:0; padding:0; }} .rl li{{ display:grid; grid-template-columns:120px minmax(0,1fr); gap:16px; padding:14px 0; border-bottom:1px solid var(--line); }} .rl li:first-child{{ padding-top:0; }} .rl dt,.rl b{{ font-weight:600; }} .rl span{{ color:var(--ink2); }}
 .tools{{ position:sticky; top:0; z-index:5; display:flex; flex-wrap:wrap; align-items:center; gap:10px 16px; margin-top:24px; padding:12px 0; background:var(--bg); border-bottom:1px solid var(--line); }}
@@ -59,12 +61,12 @@ section{{ padding:64px 0 0; }} h2{{ margin:0; font-size:30px; letter-spacing:-.0
 .seg{{ display:inline-flex; padding:3px; border-radius:12px; background:var(--soft); }} .seg button{{ height:34px; padding:0 12px; border:0; border-radius:9px; background:none; color:var(--ink2); font:inherit; font-size:14px; font-weight:550; cursor:pointer; }} .seg button[aria-pressed="true"]{{ background:var(--bg); color:var(--ink); box-shadow:0 1px 2px rgba(0,0,0,.12); }} .seg button:focus-visible{{ outline:2px solid var(--ink); }}
 .cat{{ margin-top:36px; }} .cat h3{{ margin:0 0 14px; font-size:18px; font-weight:650; display:flex; gap:10px; align-items:baseline; }} .cat h3 em{{ font-style:normal; font-size:14px; color:var(--ink2); font-weight:500; }}
 .grid{{ display:grid; grid-template-columns:repeat(auto-fill,minmax(132px,1fr)); gap:10px; }}
-.it{{ display:flex; flex-direction:column; align-items:center; gap:12px; padding:22px 10px 14px; border:0; border-radius:16px; background:var(--tile); color:var(--fg); font:inherit; cursor:pointer; transition:transform .15s cubic-bezier(.2,0,0,1), box-shadow .15s; --icbg:var(--tile); }}
+.it{{ display:flex; flex-direction:column; align-items:center; gap:12px; padding:22px 10px 14px; border:0; border-radius:16px; background:var(--tile); color:var(--fg); font:inherit; cursor:pointer; transition:transform .15s cubic-bezier(.2,0,0,1), box-shadow .15s; }}
 .it:hover{{ box-shadow:0 0 0 1.5px var(--fg); }} .it:active{{ transform:scale(.97); }} .it:focus-visible{{ outline:2px solid var(--ink); outline-offset:2px; }}
 .it .nm{{ font-size:13px; font-weight:600; opacity:.82; }} .it .ok{{ font-size:12.5px; opacity:.7; min-height:18px; }}
 body{{ --tile:var(--soft); --fg:var(--ink); }} body.bg-escuro{{ --tile:#1D1E26; --fg:#fff; }} body.bg-cor .it{{ --tile:color-mix(in srgb,var(--c,#FF5A1F) 12%,#fff); --fg:var(--c,#C2410C); }}
 .tbl{{ width:100%; border-collapse:collapse; margin-top:24px; font-size:15px; }} .tblw{{ overflow-x:auto; }} .tbl th{{ text-align:left; font-size:13.5px; font-weight:600; color:var(--ink2); padding:10px 12px; border-bottom:1px solid var(--line); }} .tbl td{{ padding:12px; border-bottom:1px solid var(--line); vertical-align:middle; }}
-.tbl td:nth-child(3){{ display:flex; align-items:center; gap:10px; --icbg:var(--bg); }} .tbl code{{ font:600 13px ui-monospace,SFMono-Regular,Menlo,monospace; color:var(--ink2); }}
+.tbl td:nth-child(3){{ display:flex; align-items:center; gap:10px; }} .tbl code{{ font:600 13px ui-monospace,SFMono-Regular,Menlo,monospace; color:var(--ink2); }}
 .st{{ display:inline-flex; height:24px; align-items:center; padding:0 9px; border-radius:999px; background:var(--soft); font-size:12.5px; font-weight:650; color:var(--ink2); white-space:nowrap; }} .st.novo{{ background:#E8EFFF; color:#1F4FCC; }} .st.mant{{ background:#FFF3E5; color:#8A4B00; }}
 footer{{ padding:64px 0 72px; color:var(--ink2); font-size:14px; }}
 .toast{{ position:fixed; left:50%; bottom:calc(24px + env(safe-area-inset-bottom,0px)); transform:translateX(-50%) translateY(20px); opacity:0; padding:10px 16px; border-radius:12px; background:#15161C; color:#fff; font-size:14px; transition:all .2s; pointer-events:none; }} .toast.on{{ opacity:1; transform:translateX(-50%); }}
@@ -89,7 +91,7 @@ footer{{ padding:64px 0 72px; color:var(--ink2); font-size:14px; }}
 <li><b>Traço</b><span>1,5 px, pontas e junções redondas, igual em todos os ícones.</span></li>
 <li><b>Raio</b><span>De 2 a 6 px conforme o tamanho da forma; objetos grandes usam 3 a 5.</span></li>
 <li><b>Preenchimento</b><span>Só na parte que dá corpo ao objeto, a 12% da cor do contorno. Nunca duas cores diferentes no mesmo ícone.</span></li>
-<li><b>Sobreposição</b><span>A forma da frente esconde a de trás: no código, ela pinta com a cor do fundo, pela variável --icbg.</span></li>
+<li><b>Sobreposição</b><span>A forma da frente esconde a de trás: no código, uma máscara (&lt;mask&gt;) recorta o que fica atrás dela. A frente é transparente e funciona sobre qualquer fundo, sem depender da cor dele.</span></li>
 <li><b>Tamanhos</b><span>16, 20 e 24 px na interface; 32 e 48 px em destaques.</span></li>
 <li><b>Cor</b><span>Herda a cor do texto. Nas áreas e nas skills, a cor do Pixel da área. Marcas (WhatsApp, Telegram, Google) seguem com o logo oficial.</span></li></ul></div></section>
 <section id="biblioteca"><h2>Biblioteca</h2><p class="sub">Clique num ícone para copiar o SVG.</p>

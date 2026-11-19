@@ -9,14 +9,14 @@ Protótipo navegável em HTML de arquivo único da plataforma Pixel AI Hub. Esta
 - `home/pixel-hub-produto-home.html` — versão que abre direto no Início (gerada).
 - `fontes/embed.py` — gera as duas versões acima a partir do produto.
 - `fontes/*.js|css` — cópias dos blocos acrescentados (referência).
-- `fontes/icones/` — biblioteca Pixel Icons: `icons.py` (geometria), `v2.py` (estilo atual, gera `icons2.json`), `build.py` (gera `pixel-icons.html`).
+- `fontes/icones/` — biblioteca Pixel Icons: `icons.py` (geometria), `v2.py` (estilo atual, gera `icons2.json`), `mascaras.py` (recortes por máscara; `python3 mascaras.py` roda o autoteste), `build.py` (gera `pixel-icons.html`).
 - `artifacts/*-your-edit`, `legado/`, `pixel-hub-prototipo*.html` — histórico; não usar como guia.
 
 ## Como trabalhar
 - Mudança no produto: acrescentar blocos `<style>` e `<script>` no fim de `pixel-hub-produto.html`, antes de `</body>`, sobrescrevendo funções (`telaInicio`, `lateral`, `frListaNova`, `frTplDrawer`, `esC`, `esMapaLista`, `tcAgora`, `hoProximo`, `cardEtapa`, `bk7Drawer`, `view`) ou trocando trechos exatos. `S` é o estado, `A` o mapa de ações, `R()` re-renderiza. Um script final repinta no `DOMContentLoaded`.
 - Depois de mudar: `python3 fontes/embed.py`.
 - Testar com Playwright em 1440 × 900 e 390 × 844, nos três perfis (admin, membro, individual): sem erros no console e sem rolagem lateral.
-- Ícones: mapa `PXI`; classes `ip` (frente, `--icbg`), `is` (corpo, 12%), `ipl` (linha), `idt` (detalhe sólido); traço 1,5 px. Ícone antigo é trocado via `PXI_ANTIGOS`.
+- Ícones: mapa `PXI`; classes `ip` (frente, transparente; recorta o que vem antes por `<mask>`, bloco em `fontes/mascaras.js`; `--icbg` não é mais usado), `is` (corpo, 12%), `ipl` (linha), `idt` (detalhe sólido); traço 1,5 px. Ícone antigo é trocado via `PXI_ANTIGOS`.
 - Cores: ação da jornada laranja `#C9420C` (hover `#B93C0A`); "agora" azul `#1F4FCC` (`--agora-forte #2E6BFF`); marca `#FF5A1F`. Espaçamento em escala de 4.
 - Vocabulário: "fase" em toda a jornada; "Conteúdo complementar".
 
@@ -29,4 +29,4 @@ Protótipo navegável em HTML de arquivo único da plataforma Pixel AI Hub. Esta
 - Em grandes atualizações, atualizar `briefing-novo-chat.md` sem ele pedir.
 
 ## Pendências abertas
-Ver "Pendências e decisões em aberto" em `briefing-novo-chat.md` (c06 catálogo de skills, c37 validação com dev, datas dos hands-on, máscaras nos ícones, capa do vídeo do Bruno).
+Ver "Pendências e decisões em aberto" em `briefing-novo-chat.md` (c06 catálogo de skills, c37 validação com dev, datas dos hands-on, capa do vídeo do Bruno).

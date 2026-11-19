@@ -1,6 +1,6 @@
 # Briefing para continuar o Pixel Hub 2.0 num novo chat
 
-**Atualizado em 09/11/2026.** Cole este arquivo no início do novo chat. A seção "Estado atual" é a fonte da verdade; o resto do arquivo é histórico, em ordem cronológica, para consulta.
+**Atualizado em 19/11/2026.** Cole este arquivo no início do novo chat. A seção "Estado atual" é a fonte da verdade; o resto do arquivo é histórico, em ordem cronológica, para consulta.
 
 ## Estado atual (09/11)
 
@@ -43,7 +43,7 @@ Feitos e no protótipo: todos, menos **c06** (interface pronta; faltam as 149 sk
 2. Catálogo real das 149 skills e raio X dos outros 10 templates por área.
 3. Datas reais dos hands-on das fases 2 a 4 e quem conduz (hoje: quintas 5, 12, 19 e 26/11, exemplo).
 4. Validar com o dev a separação do onboarding por perfil (c37); três perguntas vieram do c36, não do documento.
-5. Converter os recortes dos ícones em máscaras antes do handoff.
+5. ~~Converter os recortes dos ícones em máscaras antes do handoff.~~ Feito em 19/11 (ver histórico).
 6. Parte 2 do documento ainda parcial: entrevista de verdade, plano novo e Agent Builder novo.
 7. Capa do vídeo do Bruno usa um frame do IBGC On-demand (com o logo); trocar por um frame da Pixel.
 
@@ -380,3 +380,4 @@ Tudo em `legado/` (fundamentos de design antigos, Design System v1.1, mapeamento
 - No Mobbin, buscas amplas por padrão (por padrão de tela, não descrevendo a solução já imaginada).
 - Publicar o protótipo sempre no mesmo link, com aprovação; testar em 1440 × 900 e 390 × 844 antes de publicar.
 - Feedback direto, iteração curta e exatidão: nada inventado.
+- **19/11: recortes dos ícones viraram máscaras.** A forma da frente (`p` na biblioteca, `ip` no produto) não pinta mais com a cor do fundo (`--icbg`): fica transparente e recorta, por `<mask>`, o que vem antes dela. Funciona sobre qualquer fundo (hover, cartões tingidos, degradês). Biblioteca: `fontes/icones/mascaras.py` (com autoteste) é usado pelo `build.py`; o SVG copiado já sai com `<defs><mask>` e sem `--icbg`; a regra "Sobreposição" da página foi reescrita. Produto: bloco `fontes/mascaras.js` no fim de `pixel-hub-produto.html` converte todo `svg` com `.ip` ao renderizar (MutationObserver). Onde o recorte branco caía sobre fundo de outra cor, o visual mudou de leve (menu cinza, ícones em selos tingidos, calendário das Pendências); o play cheio nos botões escuros (`.btn-p`) e no selo azul (`.mj-pi`) foi mantido de propósito. Testado em 1440 × 900 e 390 × 844, três perfis, nove telas: sem erros e sem rolagem lateral. Ainda não publicado nos links.
