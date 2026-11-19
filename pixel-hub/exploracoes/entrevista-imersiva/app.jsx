@@ -42,6 +42,8 @@ function Presenca({ tipo, estado, nivel, emocao, size }) {
 }
 
 function App() {
+  const [larg, setLarg] = useState(typeof innerWidth === "number" ? innerWidth : 1440);
+  useEffect(() => { const f = () => setLarg(innerWidth); addEventListener("resize", f); return () => removeEventListener("resize", f); }, []);
   const [i, setI] = useState(-1);                  // -1 abertura · PASSOS.length fim
   const [estado, setEstado] = useState("idle");    // idle | speaking | listening | processing
   const [fala, setFala] = useState({ eco: "", q: "" });
@@ -81,7 +83,9 @@ function App() {
     setFala({ eco: eco ? eco + " " : "", q }); setVis(0); setI(prox); setEstado("speaking");
     setConversa(c => c.concat([{ quem: "c", t: (eco ? eco + " " : "") + q }]));
   }
-  function guardar(k, v) { const vs = [].concat(v).filter(Boolean); if (!vs.length) return; setMem(m => ({ ...m, [k]: Array.isArray(m[k]) ? [...new Set(m[k].concat(vs))] : vs[0] })); setUlt(vs[vs.length - 1]); setNovo(n => [...new Set(n.concat(k))]); setTimeout(() => setNovo(n => n.filter(x => x !== k)), 1600); }
+  function guardar(k, v, troca) { const vs = [].concat(v).filter(Boolean), atual = [].concat(mem[k] || []); const nov = troca ? vs.filter(x => !atual.includes(x)) : vs.filter(x => !atual.includes(x)); if (!vs.length && !troca) return;
+    setMem(m => ({ ...m, [k]: troca ? vs : Array.isArray(m[k]) ? [...new Set(m[k].concat(vs))] : vs[0] })); if (!nov.length) return; // nada novo: nada acende
+    setUlt(nov[nov.length - 1]); setNovo(n => [...new Set(n.concat(k))]); setTimeout(() => setNovo(n => n.filter(x => x !== k)), 1600); }
 
   /* captura ao vivo: enquanto a pessoa escreve, aparece o que o Consultor está entendendo */
   const aoVivo = useMemo(() => passo && passo.tipo === "texto" ? { ferr: achar(txt, FERR).filter(f => !mem.ferr.includes(f)), areas: achar(txt, AREAS).filter(a => !mem.areas.includes(a)), proc: trechos(txt) } : null, [txt, i]);
@@ -93,7 +97,7 @@ function App() {
     let eco = "";
     if (p.id === "rotina") { const f = achar(valor, FERR), a = achar(valor, AREAS), pr = trechos(valor); guardar("ferr", f); guardar("areas", a); guardar("proc", pr);
       eco = pr.length ? `Anotei ${pr.length === 1 ? "uma rotina" : pr.length + " rotinas"} que se repetem${f.length ? ` e ${f.length === 1 ? "uma ferramenta" : f.length + " ferramentas"}` : ""}.` : "Entendi."; }
-    if (p.id === "ferr") { guardar("ferr", valor); eco = `${valor.length} ferramentas no mapa.`; }
+    if (p.id === "ferr") { guardar("ferr", valor, true); eco = `${valor.length} ferramentas no mapa.`; }
     if (p.id === "ia") { guardar("ia", valor); eco = /Ainda não|vez em quando/.test(valor) ? "Bom ponto de partida: dá para avançar rápido." : "Você já tem uma base boa para começar."; }
     if (p.id === "areas") { guardar("areas", valor); eco = valor.length > 1 ? `${valor[0]} e mais ${valor.length - 1}. Vamos olhar um processo de perto.` : `${valor[0]}. Vamos olhar um processo de perto.`; }
     if (p.id === "processo") { guardar("princ", String(valor).split(/(?<=[.!?])\s/)[0]); guardar("ferr", achar(valor, FERR)); eco = "Esse eu entendi bem."; }
@@ -111,9 +115,9 @@ function App() {
   const parte = i < 0 ? -1 : i >= PASSOS.length ? 3 : passo.parte;
   const TEMAS = [["princ", "Processo principal", "o processo principal"], ["proc", "Rotinas que se repetem", "as rotinas"], ["areas", "Áreas que mais pesam", "as áreas"], ["ferr", "Ferramentas", "as ferramentas"], ["ia", "IA hoje", "a IA hoje"]];
   const cheio = k => Array.isArray(mem[k]) ? mem[k].length > 0 : !!mem[k], faltam = TEMAS.filter(([k]) => !cheio(k)), nTemas = TEMAS.length - faltam.length;
-  const rit = r.ritmo || ritmo, sec = (k, n, corpo) => cheio(k) && <section key={k} className={"ei-g" + (k === "princ" ? " ei-princ" : "")}><h2>{n}{novo.includes(k) && <span className="ei-agora">agora</span>}</h2>{corpo}</section>;
+  const rit = r.ritmo || ritmo, sec = (k, n, corpo) => cheio(k) && <section key={k} className={"ei-g" + (k === "princ" ? " ei-princ" : "")}><div className="ei-g-h"><h3>{n}</h3>{novo.includes(k) && <span className="ei-agora" aria-hidden="true">agora</span>}</div>{corpo}</section>;
   const podeResponder = estado === "listening" || (estado === "speaking" && !dizendo);
-  const tamanho = typeof innerWidth === "number" && innerWidth < 700 ? 150 : 228, movel = typeof innerWidth === "number" && innerWidth <= 900; // no celular a lista vira folha
+  const tamanho = larg < 700 ? 150 : 228, movel = larg <= 900; // no celular a lista vira folha
 
   function digitar(e) { setTxt(e.target.value); tecla.current = Math.min(1, tecla.current + 0.45); if (estado === "speaking" && !dizendo) setEstado("listening"); }
 
@@ -191,18 +195,20 @@ function App() {
         </section>
 
         <aside className={"ei-mem " + (memAberta ? "aberta" : "")} aria-label="O que eu já entendi">
-          <button className="ei-mem-t" aria-expanded={movel ? memAberta : undefined} aria-controls="ei-mem-c" disabled={!movel} onClick={() => setMemAberta(v => !v)}>
-            <span className="ei-mem-tt"><b>O que eu já entendi</b><small>{nTemas} de {TEMAS.length} temas</small></span>
-            {movel && ult && !memAberta && <span className="ei-mem-ult">{ult}</span>}
-            {movel && <svg className="ei-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 14.5 12 9l5.5 5.5" /></svg>}
-          </button>
-          <div className="ei-mem-c" id="ei-mem-c">
+          {movel
+            ? <button className="ei-mem-t" aria-expanded={memAberta} aria-controls="ei-mem-c" onClick={() => setMemAberta(v => !v)}>
+                <span className="ei-mem-tt"><b>O que eu já entendi</b><small>{nTemas} de {TEMAS.length} temas</small></span>
+                {ult && !memAberta && <span className="ei-mem-ult">{ult}</span>}
+                <svg className="ei-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 14.5 12 9l5.5 5.5" /></svg>
+              </button>
+            : <div className="ei-mem-t"><span className="ei-mem-tt"><h2>O que eu já entendi</h2><small>{nTemas} de {TEMAS.length} temas</small></span></div>}
+          <div className="ei-mem-c" id="ei-mem-c" tabIndex={0} aria-label="O que eu já entendi, em detalhe">
             {sec("princ", "Processo principal", <><p className="ei-pt">{mem.princ}</p>{(rit.freq || rit.tempo) && <p className="ei-pm">{[rit.freq, rit.tempo && rit.tempo.toLowerCase() + " cada vez"].filter(Boolean).join(" · ")}</p>}{horas != null && <p className="ei-ph"><b>≈ {horas} h</b><span>por mês na mesa</span></p>}</>)}
             {sec("proc", "Rotinas que se repetem", <ul className="ei-rot">{mem.proc.map(x => <li key={x}>{x}</li>)}</ul>)}
             {sec("areas", "Áreas que mais pesam", <div className="ei-tags">{mem.areas.map(x => <em key={x} className="ei-tag a">{x}</em>)}</div>)}
             {sec("ferr", "Ferramentas", <div className="ei-tags">{mem.ferr.map(x => <em key={x} className="ei-tag">{x}</em>)}</div>)}
             {sec("ia", "IA hoje", <p className="ei-pv">{mem.ia}</p>)}
-            {faltam.length > 0 && <p className="ei-falta">{nTemas ? "Ainda vamos falar de: " : "Vou anotando aqui o que você contar: "}{faltam.map(t => t[2]).join(", ").replace(/, ([^,]*)$/, " e $1")}.</p>}
+            {faltam.length > 0 && i < PASSOS.length && <p className="ei-falta">{nTemas ? "Ainda vamos falar de: " : "Vou anotando aqui o que você contar: "}{faltam.map(t => t[2]).join(", ").replace(/, ([^,]*)$/, " e $1")}.</p>}
             <p className="ei-nota">Exploração com dados de exemplo. O reconhecimento no texto é simulado.</p>
           </div>
         </aside>
