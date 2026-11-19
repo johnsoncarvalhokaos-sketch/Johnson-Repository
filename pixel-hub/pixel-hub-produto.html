@@ -7635,7 +7635,7 @@ svg .ip{ fill:none; }
 .ent-vz{ font-size:13px; color:var(--muted); }
 .ent-chips{ display:flex; flex-wrap:wrap; gap:6px; } .ent-chips .cw-chip{ font-size:12.5px; }
 .ent-eu{ font-size:13.5px; line-height:1.45; } .ent-eu b{ font-weight:600; }
-.ent-pr{ display:flex; flex-direction:column; gap:3px; padding-top:8px; border-top:1px solid var(--line); }
+.ent-pr{ display:flex; flex-direction:column; gap:4px; padding-top:8px; border-top:1px solid var(--line); }
 .ent-pr:first-of-type{ padding-top:0; border-top:0; }
 .ent-pr b{ font-size:13.5px; font-weight:600; line-height:1.35; }
 .ent-pr small{ font-size:12.5px; color:var(--muted); line-height:1.4; }
@@ -7647,10 +7647,10 @@ svg .ip{ fill:none; }
 .ent-conta{ display:flex; flex-direction:column; gap:8px; }
 .ent-conta li{ display:flex; justify-content:space-between; gap:12px; padding:8px 12px; border-radius:10px; background:#fff; border:1px solid var(--line); font-size:14px; }
 .ent-conta li b{ font-weight:600; white-space:nowrap; }
-.ent-fim{ display:flex; flex-direction:column; align-items:flex-start; gap:12px; padding:16px; border-radius:14px; background:var(--soft); border:1px solid var(--line); }
-.ent-fim b{ font-size:15.5px; font-weight:600; }
-.ent-fim p{ font-size:14.5px; color:var(--ink-2); }
-.ent-fim .ent-ac{ display:flex; flex-wrap:wrap; gap:8px; }
+/* a conversa segue o espaçamento do Consultor (.cw-b) e os cartões ocupam a largura, como no diagnóstico */
+.ent-cw .thread{ padding:0; gap:14px; }
+.ent-cw .cw-b .ma .mb{ align-items:stretch; }
+.emptyb h1.ent-vzh{ margin:0; font-family:var(--f-s); font-size:16px; font-weight:600; letter-spacing:0; }
 .ent-capm{ display:none; }
 @media (max-width:900px){
   .ent-cw{ grid-template-columns:minmax(0,1fr); }
@@ -7729,7 +7729,7 @@ function entAck(q,val){ const id=q.id;
 /* cartões das perguntas novas e o fim */
 (function(){ const _p=pergunta; pergunta=function(){ if(!S.entOn) return _p(); const v=S.v, q=v4Q(S.profile)[v.qi];
   const card=c=>`<div class="ma in">${px("hub",28)}<div class="mb"><div class="who"><b>Consultor Pixel AI</b><time>agora</time></div>${c}</div></div>`;
-  if(v.done){ const n=entProcs(v.a).length, f=(v.a.ferr||[]).length; return card(`<div class="ent-fim"><b>Plano montado</b><p>O seu Plano Agêntico já tem o que eu entendi aqui: ${n===1?"1 processo":n+" processos"}, ${f===1?"1 ferramenta":f+" ferramentas"} e o seu estágio na transformação. Você pode revisar tudo no Plano.</p><div class="ent-ac"><button class="btn btn-p btn-jornada" data-act="irPlano">Abrir o Plano Agêntico${u("arrow")}</button><button class="btn btn-g" data-act="irHome">Voltar ao Início</button></div></div>`); }
+  if(v.done){ const n=entProcs(v.a).length, f=(v.a.ferr||[]).length; return card(`<div class="askc"><p class="ask-q">Plano montado</p><p>O seu Plano Agêntico já tem o que eu entendi aqui: ${n===1?"1 processo":n+" processos"}, ${f===1?"1 ferramenta":f+" ferramentas"} e o seu estágio na transformação. Você pode revisar tudo no Plano.</p><div class="ask-b"><button class="btn btn-p btn-jornada" data-act="irPlano">Abrir o Plano Agêntico${u("arrow")}</button><button class="btn btn-g" data-act="irHome">Voltar ao Início</button></div></div>`); }
   if(!q||v.typing||v.clar||(q.type!=="tags"&&q.type!=="conta")) return _p();
   const corr=v.hist.length?`<button class="lnk" data-act="desfazer">${u("back")}Corrigir a resposta anterior</button>`:"";
   if(q.type==="tags"){ const sel=v.sel; return card(`<div class="askc"><p class="ask-q">${esc(q.t)}</p>${q.sub?`<p class="muted ent-sub">${esc(q.sub)}</p>`:""}<div class="ent-tags" role="group" aria-label="${esc(q.t)}">${q.opts.map(o=>{ const on=sel.includes(o); return `<button class="ob2-ch ${on?"on":""}" aria-pressed="${on}" data-act="entTag" data-arg="${esc(o)}">${on?u("check"):""}${esc(o)}</button>`; }).join("")}</div>${sel.includes("Outra")?`<div class="fld"><label for="ent-outra">Quais outras?</label><input class="inp" id="ent-outra" data-bind="v.other" value="${esc(v.other)}" placeholder="Ex.: Pipedrive, Bling"></div>`:""}<div class="ask-b"><button class="btn btn-p btn-sm" data-act="entTags" ${sel.length?"":"disabled"}>Enviar${u("arrow")}</button><span class="muted ask-c">${sel.length===1?"1 marcada":sel.length+" marcadas"}</span></div>${corr}</div>`); }
@@ -7738,7 +7738,7 @@ function entAck(q,val){ const id=q.id;
 Object.assign(A,{
   entTag:o=>{ const v=S.v, i=v.sel.indexOf(o); if(i>=0) v.sel.splice(i,1); else { if(o==="Nenhuma delas") v.sel=[]; else v.sel=v.sel.filter(x=>x!=="Nenhuma delas"); v.sel.push(o); } R(); },
   entTags:()=>{ const v=S.v; if(!v.sel.length) return; const outras=(v.other||"").split(/[,;]/).map(x=>x.trim()).filter(Boolean);
-    if(v.sel.includes("Outra")&&!outras.length){ document.getElementById("ent-outra")?.focus(); return; } responder(v.sel.filter(x=>x!=="Outra").concat(outras)); },
+    if(v.sel.includes("Outra")&&!outras.length){ document.getElementById("ent-outra")?.focus(); aviso("Conte quais são as outras ferramentas."); return; } responder(v.sel.filter(x=>x!=="Outra").concat(outras)); },
   entConta:()=>responder("ok","Confere, pode montar o plano"),
   entCapM:()=>{ S.capM=!S.capM; R(); }
 });
@@ -7750,7 +7750,7 @@ function entCap(){ const v=S.v, a=v.a, Qs=v4Q(S.profile), q=Qs[v.qi], pt=v.done?
   const eu=[a.nome,a.cargo,a.areaP,a.empresa].filter(Boolean);
   const ps=entProcs(a), tot=ps.reduce((s,p)=>s+(p.h||0),0), areas=(a.inef||[]).filter(x=>x!=="Outra"&&x!=="Não sei identificar.").map(x=>x.replace(/\.$/,""));
   return `<div class="ent-cap-h"><b>O que eu já entendi</b><small>Atualiza a cada resposta. Nada vai para o Plano antes de você conferir a conta.</small></div>
-    <ol class="ent-pt" aria-label="Partes da entrevista">${ENT_PARTES.map((n,i)=>`<li class="${i<pt?"ok":i===pt?"at":""}"><span>${i<pt?u("check"):i+1}</span>${esc(n)}</li>`).join("")}</ol>
+    <ol class="ent-pt" aria-label="Partes da entrevista">${ENT_PARTES.map((n,i)=>`<li class="${i<pt?"ok":i===pt?"at":""}" ${i===pt?'aria-current="step"':""}><span>${i<pt?u("check"):i+1}</span>${esc(n)}</li>`).join("")}</ol>
     ${eu.length?`<section class="ent-sec"><span class="lbl">Sobre você<em>Do onboarding</em></span><p class="ent-eu"><b>${esc(eu[0])}</b>${eu.slice(1).map(x=>`, ${esc(x)}`).join("")}</p></section>`:""}
     <section class="ent-sec${novo(/^ferr$/)}"><span class="lbl">Ferramentas${a.ferr?`<em>${a.ferr.length}</em>`:""}</span>${a.ferr&&a.ferr.length?`<div class="ent-chips">${a.ferr.map(f=>`<span class="cw-chip">${esc(f)}</span>`).join("")}</div>`:`<p class="ent-vz">Ainda não falamos disso.</p>`}</section>
     <section class="ent-sec${novo(/^mat/)}"><span class="lbl">Estágio de IA${est?"":`<em>${mats} de 6</em>`}</span>${est?`<p class="ent-eu"><b>${esc(est)}</b></p>`:`<p class="ent-vz">${mats?"Formando com as suas respostas.":"Sai das seis perguntas sobre IA."}</p>`}</section>
@@ -7776,7 +7776,7 @@ function telaEntrevista(){ const v=S.v, q=v4Q(S.profile)[v.qi];
 /* Plano antes da entrevista: ele nasce dela */
 (function(){ const _tp=telaPlano; telaPlano=function(){ if(S.entrev) return _tp();
   return `<div class="shell noagent ${S.sideOpen?"side-open":""}">${lateral()}${S.sideOpen?'<div class="scrim" data-act="menuM"></div>':""}<main class="center">${topoApp("Plano Agêntico","Sai da sua entrevista")}<div class="views"><div class="view" id="scroller"><div class="page">
-    <div class="emptyb"><svg class="u" viewBox="0 0 24 24" aria-hidden="true">${PXI.plano}</svg><b id="focus-h" tabindex="-1">O seu Plano nasce da entrevista</b><p>Numa conversa por texto, o Consultor entende a sua rotina, as áreas e os processos que tomam tempo. Dela saem o destino, o estágio e os primeiros agentes.</p><button class="btn btn-p btn-jornada" data-act="irEntrevista">Começar a entrevista${u("arrow")}</button></div>
+    <div class="emptyb"><svg class="u" viewBox="0 0 24 24" aria-hidden="true">${PXI.plano}</svg><h1 class="ent-vzh" id="focus-h" tabindex="-1">O seu Plano nasce da entrevista</h1><p>Numa conversa por texto, o Consultor entende a sua rotina, as áreas e os processos que tomam tempo. Dela saem o destino, o estágio e os primeiros agentes.</p><button class="btn btn-p btn-jornada" data-act="irEntrevista">Começar a entrevista${u("arrow")}</button></div>
   </div></div></div></main></div>`; }; })();
 (function(){ const _tc=telaConsultor; telaConsultor=function(){ const h=_tc(); return S.entrev?h:h.replace(/<span class="cw-chip">Plano: [^<]*<\/span>/,'<span class="cw-chip">Plano: depois da entrevista</span>'); }; })();
 
