@@ -13,7 +13,7 @@ const FERR = [[/whats/i, "WhatsApp Business"], [/planilha|excel|sheets/i, "Plani
 const AREAS = [[/orçament|vend|proposta|lead/i, "Vendas e comercial"], [/client|atend|\brespond/i, "Atendimento ao cliente"], [/cobran|financ|boleto|pagament/i, "Financeiro e cobrança"], [/relat[óo]rio|indicador|planilha/i, "Relatórios e processos internos"], [/pedido|entreg|estoque|produ/i, "Operações e entrega"], [/\bposts?\b|conte[úu]do|campanha|an[úu]ncio/i, "Marketing e conteúdo"]];
 const ROTINA = /\b(todo|toda|todos|todas|sempre|cada)\b[^.!?]*|\b(confiro|mando|monto|fecho|respondo|atualizo|preparo|reviso)\b[^.!?]*/gi;
 const achar = (txt, lista) => [...new Set(lista.filter(([re]) => re.test(txt)).map(([, n]) => n))];
-const trechos = txt => [...new Set((String(txt).match(ROTINA) || []).map(s => s.trim().replace(/^./, c => c.toUpperCase())).filter(s => s.length > 12))].slice(0, 3).map(s => s.length > 70 ? s.slice(0, 68).trim() + "…" : s);
+const trechos = txt => [...new Set((String(txt).match(ROTINA) || []).map(s => s.trim().replace(/^./, c => c.toUpperCase())).filter(s => s.length > 12))].slice(0, 3);
 
 const IA = ["Ainda não uso no trabalho", "Uso de vez em quando, por conta própria", "Uso todo dia, com prompts que reaproveito", "Já tenho automações ou agentes rodando"];
 const FREQ = [["Todo dia", 22], ["Algumas vezes por semana", 10], ["Uma vez por semana", 4], ["Uma vez por mês", 1]];
@@ -50,8 +50,9 @@ function App() {
   const [sel, setSel] = useState([]);
   const [ritmo, setRitmo] = useState({ freq: "", tempo: "" });
   const [r, setR] = useState({});                  // respostas
-  const [mem, setMem] = useState({ ferr: [], areas: [], proc: [], ia: "" });
-  const [novo, setNovo] = useState(null);
+  const [mem, setMem] = useState({ ferr: [], areas: [], proc: [], ia: "", princ: "" });
+  const [novo, setNovo] = useState([]); // seções que acabaram de receber algo
+  const [ult, setUlt] = useState("");
   const [tipo, setTipo] = useState("ring");
   const [conversa, setConversa] = useState([]);
   const [verConversa, setVerConversa] = useState(false);
@@ -80,7 +81,7 @@ function App() {
     setFala({ eco: eco ? eco + " " : "", q }); setVis(0); setI(prox); setEstado("speaking");
     setConversa(c => c.concat([{ quem: "c", t: (eco ? eco + " " : "") + q }]));
   }
-  function guardar(k, v) { setMem(m => ({ ...m, [k]: Array.isArray(m[k]) ? [...new Set(m[k].concat(v))] : v })); setNovo(k); setTimeout(() => setNovo(null), 1400); }
+  function guardar(k, v) { const vs = [].concat(v).filter(Boolean); if (!vs.length) return; setMem(m => ({ ...m, [k]: Array.isArray(m[k]) ? [...new Set(m[k].concat(vs))] : vs[0] })); setUlt(vs[vs.length - 1]); setNovo(n => [...new Set(n.concat(k))]); setTimeout(() => setNovo(n => n.filter(x => x !== k)), 1600); }
 
   /* captura ao vivo: enquanto a pessoa escreve, aparece o que o Consultor está entendendo */
   const aoVivo = useMemo(() => passo && passo.tipo === "texto" ? { ferr: achar(txt, FERR).filter(f => !mem.ferr.includes(f)), areas: achar(txt, AREAS).filter(a => !mem.areas.includes(a)), proc: trechos(txt) } : null, [txt, i]);
@@ -95,7 +96,7 @@ function App() {
     if (p.id === "ferr") { guardar("ferr", valor); eco = `${valor.length} ferramentas no mapa.`; }
     if (p.id === "ia") { guardar("ia", valor); eco = /Ainda não|vez em quando/.test(valor) ? "Bom ponto de partida: dá para avançar rápido." : "Você já tem uma base boa para começar."; }
     if (p.id === "areas") { guardar("areas", valor); eco = valor.length > 1 ? `${valor[0]} e mais ${valor.length - 1}. Vamos olhar um processo de perto.` : `${valor[0]}. Vamos olhar um processo de perto.`; }
-    if (p.id === "processo") { const pr = trechos(valor)[0] || (valor.length > 70 ? valor.slice(0, 68).trim() + "…" : valor); guardar("proc", [pr]); guardar("ferr", achar(valor, FERR)); eco = "Esse eu entendi bem."; }
+    if (p.id === "processo") { guardar("princ", String(valor).split(/(?<=[.!?])\s/)[0]); guardar("ferr", achar(valor, FERR)); eco = "Esse eu entendi bem."; }
     if (p.id === "ritmo") eco = "Pronto, tenho os números.";
     const prox = i + 1;
     setTimeout(() => {
@@ -108,7 +109,9 @@ function App() {
   const horas = (() => { const f = FREQ.find(x => x[0] === (r.ritmo || ritmo).freq), t = TEMPO.find(x => x[0] === (r.ritmo || ritmo).tempo); return f && t ? Math.round(f[1] * t[1]) : null; })();
   const legenda = { idle: i < 0 ? "Pronto quando você quiser" : "Entrevista concluída", speaking: "O Consultor está falando", listening: "Ouvindo você", processing: "Juntando com o que você já disse" }[estado];
   const parte = i < 0 ? -1 : i >= PASSOS.length ? 3 : passo.parte;
-  const nMem = mem.ferr.length + mem.areas.length + mem.proc.length + (mem.ia ? 1 : 0);
+  const TEMAS = [["princ", "Processo principal", "o processo principal"], ["proc", "Rotinas que se repetem", "as rotinas"], ["areas", "Áreas que mais pesam", "as áreas"], ["ferr", "Ferramentas", "as ferramentas"], ["ia", "IA hoje", "a IA hoje"]];
+  const cheio = k => Array.isArray(mem[k]) ? mem[k].length > 0 : !!mem[k], faltam = TEMAS.filter(([k]) => !cheio(k)), nTemas = TEMAS.length - faltam.length;
+  const rit = r.ritmo || ritmo, sec = (k, n, corpo) => cheio(k) && <section key={k} className={"ei-g" + (k === "princ" ? " ei-princ" : "")}><h2>{n}{novo.includes(k) && <span className="ei-agora">agora</span>}</h2>{corpo}</section>;
   const podeResponder = estado === "listening" || (estado === "speaking" && !dizendo);
   const tamanho = typeof innerWidth === "number" && innerWidth < 700 ? 150 : 228, movel = typeof innerWidth === "number" && innerWidth <= 900; // no celular a lista vira folha
 
@@ -178,7 +181,7 @@ function App() {
               {i >= PASSOS.length && !dizendo && (
                 <div className="ei-fim">
                   <p>O Plano já tem a sua rotina, {mem.ferr.length} ferramentas, {mem.areas.length} áreas e o primeiro processo para virar agente{horas != null ? `, com cerca de ${horas} h por mês na mesa` : ""}.</p>
-                  <div className="ei-row"><a className="ei-btn jornada" href="https://claude.ai/artifact/N58xZ5eyVrZHReRKUvym59" target="_blank" rel="noopener">Abrir o protótipo do Hub</a><button className="ei-lnk" onClick={() => { setI(-1); setEstado("idle"); setR({}); setMem({ ferr: [], areas: [], proc: [], ia: "" }); setConversa([]); setRitmo({ freq: "", tempo: "" }); setFala({ eco: "", q: "" }); }}>Recomeçar</button></div>
+                  <div className="ei-row"><a className="ei-btn jornada" href="https://claude.ai/artifact/N58xZ5eyVrZHReRKUvym59" target="_blank" rel="noopener">Abrir o protótipo do Hub</a><button className="ei-lnk" onClick={() => { setI(-1); setEstado("idle"); setR({}); setMem({ ferr: [], areas: [], proc: [], ia: "", princ: "" }); setConversa([]); setRitmo({ freq: "", tempo: "" }); setFala({ eco: "", q: "" }); }}>Recomeçar</button></div>
                 </div>
               )}
               {conversa.length > 1 && <button className="ei-lnk ei-ver" aria-expanded={verConversa} aria-controls="ei-conv" onClick={() => setVerConversa(v => !v)}>{verConversa ? "Esconder a conversa" : "Ver a conversa"}</button>}
@@ -188,12 +191,18 @@ function App() {
         </section>
 
         <aside className={"ei-mem " + (memAberta ? "aberta" : "")} aria-label="O que eu já entendi">
-          <button className="ei-mem-t" aria-expanded={movel ? memAberta : undefined} aria-controls="ei-mem-c" disabled={!movel} onClick={() => setMemAberta(v => !v)}><b>O que eu já entendi</b><em>{nMem}</em></button>
+          <button className="ei-mem-t" aria-expanded={movel ? memAberta : undefined} aria-controls="ei-mem-c" disabled={!movel} onClick={() => setMemAberta(v => !v)}>
+            <span className="ei-mem-tt"><b>O que eu já entendi</b><small>{nTemas} de {TEMAS.length} temas</small></span>
+            {movel && ult && !memAberta && <span className="ei-mem-ult">{ult}</span>}
+            {movel && <svg className="ei-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 14.5 12 9l5.5 5.5" /></svg>}
+          </button>
           <div className="ei-mem-c" id="ei-mem-c">
-            {[["proc", "Rotinas e processos"], ["ferr", "Ferramentas"], ["areas", "Áreas que mais pesam"]].map(([k, n]) => (
-              <section key={k} className={"ei-g" + (novo === k ? " novo" : "")}><h2>{n}</h2>{mem[k].length ? <ul>{mem[k].map(x => <li key={x}>{x}</li>)}</ul> : <p>Ainda não falamos disso.</p>}</section>
-            ))}
-            <section className={"ei-g" + (novo === "ia" ? " novo" : "")}><h2>IA hoje</h2><p className={mem.ia ? "v" : ""}>{mem.ia || "Ainda não falamos disso."}</p></section>
+            {sec("princ", "Processo principal", <><p className="ei-pt">{mem.princ}</p>{(rit.freq || rit.tempo) && <p className="ei-pm">{[rit.freq, rit.tempo && rit.tempo.toLowerCase() + " cada vez"].filter(Boolean).join(" · ")}</p>}{horas != null && <p className="ei-ph"><b>≈ {horas} h</b><span>por mês na mesa</span></p>}</>)}
+            {sec("proc", "Rotinas que se repetem", <ul className="ei-rot">{mem.proc.map(x => <li key={x}>{x}</li>)}</ul>)}
+            {sec("areas", "Áreas que mais pesam", <div className="ei-tags">{mem.areas.map(x => <em key={x} className="ei-tag a">{x}</em>)}</div>)}
+            {sec("ferr", "Ferramentas", <div className="ei-tags">{mem.ferr.map(x => <em key={x} className="ei-tag">{x}</em>)}</div>)}
+            {sec("ia", "IA hoje", <p className="ei-pv">{mem.ia}</p>)}
+            {faltam.length > 0 && <p className="ei-falta">{nTemas ? "Ainda vamos falar de: " : "Vou anotando aqui o que você contar: "}{faltam.map(t => t[2]).join(", ").replace(/, ([^,]*)$/, " e $1")}.</p>}
             <p className="ei-nota">Exploração com dados de exemplo. O reconhecimento no texto é simulado.</p>
           </div>
         </aside>
