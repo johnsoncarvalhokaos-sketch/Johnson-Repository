@@ -1,0 +1,7 @@
+/* linha do estágio: compacta, abaixo do título; o semáforo usa as mesmas cores do Plano */
+.hst{ display:flex; align-items:center; flex-wrap:wrap; gap:12px 16px; margin:-8px 0 28px; padding:12px 16px; border-radius:16px; background:var(--soft); }
+.hst-sem{ display:flex; gap:4px; flex-shrink:0; } .hst-sem i{ width:22px; height:6px; border-radius:3px; background:var(--line); }
+.hst-sem i:nth-child(1).p,.hst-sem i:nth-child(1).n{ background:#E5484D; } .hst-sem i:nth-child(2).p,.hst-sem i:nth-child(2).n{ background:#F2850D; } .hst-sem i:nth-child(3).p,.hst-sem i:nth-child(3).n{ background:#E8B30C; } .hst-sem i:nth-child(4).p,.hst-sem i:nth-child(4).n{ background:#8CC63F; } .hst-sem i:nth-child(5).p,.hst-sem i:nth-child(5).n{ background:#2E9E6B; }
+.hst-sem i.n{ box-shadow:0 0 0 2px #fff,0 0 0 3.5px var(--ink); }
+.hst-t{ display:flex; align-items:baseline; flex-wrap:wrap; gap:4px 12px; margin:0; flex:1; min-width:0; } .hst-t b{ font-size:15px; font-weight:600; } .hst-t span{ font-size:14px; color:var(--ink-2); }
+.hst-l{ margin-left:auto; display:inline-flex; align-items:center; gap:4px; font-size:14px; font-weight:600; } .hst-l .u{ width:14px; height:14px; }

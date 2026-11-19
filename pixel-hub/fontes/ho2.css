@@ -1,0 +1,28 @@
+/* cartão-evento: o único da Home com bloco de data e fundo escuro liso */
+.ho2-c{ display:grid; grid-template-columns:104px minmax(0,1fr) auto; gap:24px; align-items:center; padding:20px 24px 20px 20px; border-radius:22px; background:#15161C; color:#fff; box-shadow:0 18px 40px -28px rgba(21,22,28,.7); }
+.ho2-dt{ display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0; height:112px; border-radius:16px; background:#fff; color:var(--ink); line-height:1; }
+.ho2-dt span{ font-size:12.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-2); } .ho2-dt span:first-child{ color:var(--brand-ink); }
+.ho2-dt b{ margin:4px 0 2px; font-family:var(--f-d); font-size:40px; font-weight:600; letter-spacing:-.03em; font-variant-numeric:tabular-nums; }
+.ho2-dt i{ margin-top:8px; padding-top:7px; border-top:1px solid var(--line); width:64%; text-align:center; font-style:normal; font-size:13.5px; font-weight:650; color:var(--ink); }
+.ho2-dt.vz b{ color:var(--ink-2); }
+.ho2-st{ display:flex; align-items:center; gap:10px; margin:0; font-size:13.5px; color:rgba(255,255,255,.65); font-weight:600; }
+.ho2-pill{ display:inline-flex; align-items:center; gap:7px; height:26px; padding:0 10px; border-radius:999px; background:rgba(255,255,255,.1); color:#fff; font-size:13px; font-weight:650; }
+.ho2-pill.perto{ background:rgba(255,90,31,.18); color:#FFB596; } .ho2-pill.aovivo{ background:#FF5A1F; color:#fff; } .ho2-pill.depois{ color:rgba(255,255,255,.7); }
+.ho2-pill i{ width:7px; height:7px; border-radius:50%; background:#fff; box-shadow:0 0 0 3px rgba(255,255,255,.3); animation:hoPulso 1.6s ease-in-out infinite; }
+.ho2-t{ display:block; margin-top:8px; font-family:var(--f-d); font-size:25px; line-height:1.15; font-weight:600; letter-spacing:-.02em; text-wrap:balance; }
+.ho2-d{ margin:6px 0 0; font-size:15px; line-height:1.5; color:rgba(255,255,255,.75); max-width:58ch; text-wrap:pretty; }
+.ho2-h{ margin:10px 0 0; } .ho2-h .frd-traits{ margin:0; } .ho2-h .frd-traits li{ color:rgba(255,255,255,.75); } .ho2-h .frd-traits li + li{ border-left-color:rgba(255,255,255,.16); } .ho2-h .frd-tri{ background:rgba(255,255,255,.08); box-shadow:0 0 0 1px rgba(255,255,255,.12); color:#fff; }
+.ho2-a .btn-p{ background:#fff !important; color:var(--ink) !important; box-shadow:none; white-space:nowrap; } .ho2-a .btn-p:hover{ background:#ECECF0 !important; }
+.ho2-a .btn-g{ background:transparent !important; color:#fff !important; border-color:rgba(255,255,255,.3) !important; } .ho2-a .btn-g:hover{ background:rgba(255,255,255,.08) !important; }
+.ho2-c.aovivo{ box-shadow:0 0 0 2px #FF5A1F,0 18px 40px -24px rgba(255,90,31,.6); }
+/* as 4 fases numa linha, embaixo do cartão */
+.ho2-fs{ list-style:none; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:0; margin:12px 0 0; padding:0; }
+.ho2-fs li{ position:relative; } .ho2-fs li + li::before{ content:""; position:absolute; left:-6px; right:calc(100% - 6px); top:27px; }
+.ho2-fs button{ display:grid; grid-template-columns:28px minmax(0,1fr); gap:10px; align-items:start; width:100%; padding:12px 10px; border:0; border-radius:12px; background:none; font:inherit; text-align:left; cursor:pointer; color:var(--ink); transition:background-color .15s; }
+.ho2-fs button:hover{ background:var(--soft); }
+.ho2-n{ width:28px; height:28px; border-radius:50%; display:grid; place-items:center; font-size:13px; font-weight:700; box-shadow:inset 0 0 0 1.5px var(--line-2); color:var(--ink-2); } .ho2-n .u{ width:14px; height:14px; }
+.ho2-fs li.at .ho2-n{ background:var(--ink); color:#fff; box-shadow:none; } .ho2-fs li.ok .ho2-n{ background:var(--ok); color:#fff; box-shadow:none; }
+.ho2-fs small{ display:block; font-size:13px; font-weight:600; color:var(--ink-2); } .ho2-fs li.at small{ color:var(--ink); }
+.ho2-fs b{ display:block; margin-top:2px; font-size:14px; font-weight:500; line-height:1.35; color:var(--ink-2); } .ho2-fs li.at b{ color:var(--ink); font-weight:600; }
+@media (max-width:900px){ .ho2-c{ grid-template-columns:84px minmax(0,1fr); gap:16px; padding:16px; } .ho2-dt{ height:96px; } .ho2-dt b{ font-size:32px; } .ho2-a{ grid-column:1/-1; } .ho2-a .btn{ width:100%; justify-content:center; } .ho2-fs{ grid-template-columns:1fr 1fr; } }
+@media (prefers-reduced-motion:reduce){ .ho2-pill i{ animation:none; } }

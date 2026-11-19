@@ -1,0 +1,438 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Kanban do Protótipo Hub</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: cabeçalho com progresso, faixa de combinados, três colunas de quadro que empilham no celular.
+   Cor: neutros frios com um verde petróleo como acento; quatro matizes discretos para as entregas. */
+:root {
+  --bg: #f3f5f6;
+  --surface: #ffffff;
+  --col: #e8ecee;
+  --fg: #16212a;
+  --muted: #5c6b76;
+  --line: #d3dade;
+  --accent: #0e6b5c;
+  --accent-fg: #ffffff;
+  --d1: #1f6fb2;
+  --d2: #b4661a;
+  --d3: #8a3f6f;
+  --d4: #2f7d4a;
+  --d5: #5c6b76;
+  --d6: #5b4fd1;
+  --d7: #a6790a;
+  --font: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11181d;
+    --surface: #19232a;
+    --col: #151e24;
+    --fg: #e6ecef;
+    --muted: #93a2ad;
+    --line: #2a3841;
+    --accent: #3fb59f;
+    --accent-fg: #07201b;
+    --d1: #6aaee6;
+    --d2: #e0a15d;
+    --d3: #d28bb8;
+    --d4: #74c28d;
+    --d5: #93a2ad;
+    --d6: #a6a0f0;
+    --d7: #e0b84a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11181d;
+  --surface: #19232a;
+  --col: #151e24;
+  --fg: #e6ecef;
+  --muted: #93a2ad;
+  --line: #2a3841;
+  --accent: #3fb59f;
+  --accent-fg: #07201b;
+  --d1: #6aaee6;
+  --d2: #e0a15d;
+  --d3: #d28bb8;
+  --d4: #74c28d;
+  --d5: #93a2ad;
+  --d6: #a6a0f0;
+  --d7: #e0b84a;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font);
+  font-size: 15px;
+  line-height: 1.45;
+  padding-block: 28px 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 1180px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+header { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 24px; }
+header > div { min-width: 0; }
+h1 { font-size: clamp(1.45rem, 3.4vw, 1.9rem); line-height: 1.15; margin: 0; letter-spacing: -0.01em; text-wrap: balance; }
+.sub { color: var(--muted); margin: 4px 0 0; }
+.progress { display: flex; flex-direction: column; gap: 6px; min-width: min(260px, 100%); }
+.progress-top { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; color: var(--muted); }
+.progress-top strong { color: var(--fg); font-variant-numeric: tabular-nums; }
+.bar { height: 8px; border-radius: 99px; background: var(--col); overflow: hidden; border: 1px solid var(--line); }
+.bar > i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .25s ease; }
+.rules {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px 24px;
+}
+.rules h2 { grid-column: 1 / -1; margin: 0; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.rules p { margin: 0; font-size: 14px; min-width: 0; }
+.rules b { font-weight: 600; }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  font: inherit; font-size: 13px; font-weight: 500;
+  border: 1px solid var(--line); background: var(--surface); color: var(--fg);
+  padding: 6px 12px; border-radius: 99px; cursor: pointer;
+}
+.chip[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.chip:focus-visible, .mv:focus-visible, .card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.board { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: start; }
+.col { background: var(--col); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 10px; min-height: 140px; min-width: 0; }
+.col.over { outline: 2px dashed var(--accent); outline-offset: -4px; }
+.col-head { display: flex; align-items: center; justify-content: space-between; padding: 2px 4px; }
+.col-head h2 { font-size: 14px; margin: 0; font-weight: 700; }
+.count { font-family: var(--mono); font-size: 12px; color: var(--muted); background: var(--surface); border: 1px solid var(--line); border-radius: 99px; padding: 1px 9px; font-variant-numeric: tabular-nums; }
+.empty { color: var(--muted); font-size: 13px; text-align: center; padding: 18px 8px; border: 1px dashed var(--line); border-radius: 8px; }
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 11px 12px 10px;
+  display: flex; flex-direction: column; gap: 8px;
+  cursor: grab;
+  min-width: 0;
+}
+.card.dragging { opacity: .45; }
+.card-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.tag { font-size: 12px; font-weight: 600; color: var(--c); display: inline-flex; align-items: center; gap: 6px; min-width: 0; }
+.tag::before { content: ""; width: 8px; height: 8px; border-radius: 2px; background: var(--c); flex: none; }
+.effort { font-family: var(--mono); font-size: 11px; color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 0 6px; flex: none; }
+.card h3 { margin: 0; font-size: 15px; font-weight: 600; line-height: 1.35; overflow-wrap: anywhere; }
+.card p { margin: 0; font-size: 13.5px; color: var(--muted); overflow-wrap: anywhere; }
+.cd { border-left: 3px solid var(--accent); background: var(--col); border-radius: 0 6px 6px 0; padding: 6px 10px; }
+.cd-label { display: block; font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; font-weight: 700; color: var(--accent); margin-bottom: 2px; }
+.cd-text { margin: 0; font-size: 13.5px; color: var(--fg); overflow-wrap: anywhere; }
+.card-foot { display: flex; justify-content: flex-end; gap: 6px; }
+.mv {
+  font: inherit; font-size: 13px; font-weight: 500;
+  border: 1px solid var(--line); background: transparent; color: var(--fg);
+  border-radius: 6px; padding: 4px 10px; cursor: pointer;
+}
+.mv:hover { border-color: var(--accent); color: var(--accent); }
+.mv.go { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+.mv.go:hover { color: var(--accent-fg); filter: brightness(1.08); }
+.col[data-col="done"] .card h3 { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--line); }
+.status { font-size: 12.5px; color: var(--muted); }
+@media (max-width: 860px) { .board { grid-template-columns: minmax(0, 1fr); } .card { cursor: default; } }
+@media (prefers-reduced-motion: reduce) { .bar > i { transition: none; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Kanban do protótipo</h1>
+      <p class="sub">Ajustes da entrega para o Johnson mexer no protótipo do Hub.</p>
+    </div>
+    <div class="progress" aria-live="polite">
+      <div class="progress-top"><span>Progresso</span><strong id="pct">0 de 0</strong></div>
+      <div class="bar"><i id="barfill"></i></div>
+    </div>
+  </header>
+
+  <section class="rules" aria-label="Combinados da entrega">
+    <h2>Combinados</h2>
+    <p><b>Ferramentas e skills:</b> cada template e cada skill ganha uma página própria.</p>
+    <p><b>Detalhe da skill:</b> rotinas e "o que compõe o sistema" ficam em abas ou accordions. O resto fica na tela. A escolha entre aba e accordion é sua.</p>
+    <p><b>Home:</b> muda só o hands-on e o próximo passo com a entrevista. O resto da Home não muda.</p>
+  </section>
+
+  <div class="filters" id="filters" role="group" aria-label="Filtrar por entrega"></div>
+
+  <main class="board" id="board"></main>
+  <p class="status" id="status"></p>
+</div>
+
+<script>
+(function () {
+  var DELIVERIES = [
+    { id: "d1", name: "Menu novo", color: "var(--d1)" },
+    { id: "d2", name: "Ferramentas e skills", color: "var(--d2)" },
+    { id: "d3", name: "Detalhe da skill", color: "var(--d3)" },
+    { id: "d4", name: "Home", color: "var(--d4)" },
+    { id: "d5", name: "Geral", color: "var(--d5)" },
+    { id: "d6", name: "Trilha", color: "var(--d6)" },
+    { id: "d7", name: "Onboarding", color: "var(--d7)" }
+  ];
+  var COLS = [
+    { id: "todo", name: "A fazer" },
+    { id: "doing", name: "Em andamento" },
+    { id: "done", name: "Feito" }
+  ];
+  var CARDS = [
+    { id: "c01", d: "d1", e: "P", t: "Criar o item \"Ferramentas e skills\" no menu, logo abaixo da Trilha" },
+    { id: "c02", d: "d1", e: "P", t: "Trilha com submenu: Jornada do agente e Base de conhecimento" },
+    { id: "c03", d: "d1", e: "P", t: "Menu lateral sempre visível e expandido, com o nome de cada item" },
+
+    { id: "c04", d: "d2", e: "P", t: "Tirar templates e skills da Base de conhecimento" },
+    { id: "c05", d: "d2", e: "P", t: "Cartões dos templates: Marketing OS, Segundo Cérebro, Amora e os 11 por área, cada um com \"Ver detalhes\"" },
+    { id: "c06", d: "d2", e: "P", t: "Cartões das 149 skills, com filtro por área e busca por nome ou objetivo" },
+    { id: "c07", d: "d2", e: "M", t: "Página própria para cada template e para cada skill", n: "Cada item abre a sua página, não um modal compartilhado." },
+
+    { id: "c08", d: "d3", e: "P", t: "Manter na tela: para que serve, quando usar, como funciona e o que vem no download" },
+    { id: "c09", d: "d3", e: "P", t: "Colocar \"Rotinas\" em aba ou accordion" },
+    { id: "c10", d: "d3", e: "P", t: "Colocar \"O que compõe o sistema\" em aba ou accordion" },
+    { id: "c11", d: "d3", e: "P", t: "Ações: \"Baixar a skill\" e \"Perguntar ao Consultor\"" },
+
+    { id: "c12", d: "d4", e: "P", t: "Destacar o hands-on ao vivo da fase atual: nome da fase, texto, encontro e \"Participar\"" },
+    { id: "c13", d: "d4", e: "P", t: "Mostrar os 4 próximos encontros ao lado, com a fase atual marcada" },
+    { id: "c14", d: "d4", e: "P", t: "Fazer o destaque mudar sozinho quando a pessoa conclui a fase" },
+    { id: "c16", d: "d4", e: "P", t: "Colocar no topo da Home o cartão \"Sua entrevista com o Consultor\", como primeiro passo antes do plano", n: "A entrevista em si não faz parte desta entrega. O botão pode levar a uma tela provisória." },
+    { id: "c17", d: "d4", e: "P", t: "Depois do plano, trocar o próximo passo pelas travas: criar o primeiro agente pela etapa 1, terminar a Fase 1 e montar o segundo cérebro", n: "Não mexer no resto da Home." },
+    { id: "c18", d: "d4", e: "M", t: "Unificar o hands-on e a trilha num bloco só, com a fase como seletor", n: "À esquerda, a descrição da fase com call to action para o hands-on ou para seguir a trilha; o bloco de fases funciona como seletor. Dá pra fazer com as fases embaixo também, tudo dentro de um único container (versão horizontal, mais respiro e hierarquia). Combinado no WhatsApp (Pixel & Dois Ponto Zero, 04/11, 19:19–19:23).", cd: "Inverter a ordem dos blocos: a descrição da fase com o call to action fica à direita, e o bloco de fases (seletor) fica à esquerda. Esse comportamento é igual ao de abas, o que mantém o padrão ocidental de uso: selecionar à esquerda e ver o conteúdo à direita." },
+    { id: "c19", d: "d4", e: "P", t: "Liberar o hands-on de qualquer fase, com alerta em vez de bloqueio", n: "Não bloquear: só avisar que o ideal é iniciar aquela fase antes de participar do hands-on. Combinado no WhatsApp (Pixel & Dois Ponto Zero, 04/11, 20:09–20:11).", cd: "Inserir também um CTA de assistir à gravação do último encontro." },
+    { id: "c20", d: "d4", e: "M", t: "Mostrar a data de cada hands-on e oferecer a gravação do último encontro como alternativa", n: "Incentivar sempre a participação ao vivo, destacando a data do próximo hands-on, mas manter a gravação como alternativa pra quem quiser seguir no próprio ritmo. Hoje não há gravação das fases 2, 3 e 4 — já pensar o layout pra quando houver. Combinado no WhatsApp (Pixel & Dois Ponto Zero, 04/11, 20:13–20:16)." },
+    { id: "c21", d: "d5", e: "M", t: "Na seção de Mentorias, separar mentorias técnicas de hands-ons, com acesso aos próximos encontros ao vivo e às gravações de cada uma", n: "Tela fora do escopo original da Home, mas decidida na mesma conversa de WhatsApp (Pixel & Dois Ponto Zero, 04/11, 20:16)." },
+    { id: "c22", d: "d5", e: "M", t: "Modal \"Como a Pixel funciona\" no primeiro acesso à plataforma, que pode ser pulado", n: "Se a pessoa pular, vira uma pendência com opção de dismiss. Em aberto: como encadear essa pendência com a pendência já existente de marcar um boarding. Combinado no WhatsApp (Pixel & Dois Ponto Zero, 04/11, 19:55).", cd: "Inserir um checkbox com o texto \"Não mostrar novamente\"." },
+
+    { id: "c15", d: "d5", e: "P", t: "Passada final de revisão em todas as telas do protótipo" },
+
+    { id: "c23", d: "d6", e: "M", t: "Trocar a lista longa por foco no \"agora\": passo atual em destaque + carrossel de subpassos (1.1, 1.2, 1.3…)", n: "Resolve o paradoxo da escolha e a sensação de sobrecarga. Estudo C da reunião, o preferido. Prazo: finalizar para produção até segunda (9/11) ou terça (10/11) no máximo. Reunião Pixel <> :Zero, 06/11 (Granola + Fathom)." },
+    { id: "c24", d: "d6", e: "P", t: "Ao concluir o carrossel de subpassos, avançar automaticamente para o próximo passo", n: "Reunião Pixel <> :Zero, 06/11." },
+    { id: "c25", d: "d6", e: "M", t: "Unificar o vídeo da aula com os subpassos numa única visualização", n: "Vídeo já expandido acima dos subpassos, sem clique extra. Reunião Pixel <> :Zero, 06/11." },
+    { id: "c26", d: "d6", e: "M", t: "Abas com scroll livre + aba fixa no topo ao rolar", n: "Inspiração: Notion. Reunião Pixel <> :Zero, 06/11." },
+    { id: "c27", d: "d6", e: "P", t: "Deixar os ícones das abas internas neutros", n: "Pra não conflitar com as cores dos agentes. Reunião Pixel <> :Zero, 06/11." },
+    { id: "c28", d: "d6", e: "P", t: "Azul marca a fase atual (\"agora\"); laranja fica reservado para outros elementos", n: "Reunião Pixel <> :Zero, 06/11." },
+    { id: "c29", d: "d6", e: "P", t: "Usar \"fase\" em vez de \"bloco\" em todo o produto; manter o termo \"trilha\"", n: "Nomenclatura simples pra usuários 30+. Resolve a pendência em aberto \"fase\" ou \"bloco\" do documento de ajustes anterior. Reunião Pixel <> :Zero, 06/11." },
+
+    { id: "c30", d: "d2", e: "P", t: "Trocar o ícone de skill (Sparkles) por um ícone de arquivo/chave", n: "Sparkles ficou saturado de \"IA\". Ícone neutro (preto/monocromático) no card; a cor vem da área via tag. Reunião Pixel <> :Zero, 06/11." },
+    { id: "c31", d: "d2", e: "M", t: "Tratar os agentes prontos (Marketing OS, Amora) como produto: cards mais robustos e visuais", n: "Tag \"Plug and play\". Reunião Pixel <> :Zero, 06/11." },
+    { id: "c32", d: "d2", e: "P", t: "Templates/agentes em construção: cards mais simples, com a tag \"Template inicial\"", n: "Reunião Pixel <> :Zero, 06/11." },
+    { id: "c33", d: "d2", e: "P", t: "Segundo Cérebro com estrutura distinta: ícone de cérebro, card diferenciado", n: "Não é um agente, por isso não segue o mesmo padrão de card. Reunião Pixel <> :Zero, 06/11." },
+    { id: "c34", d: "d2", e: "P", t: "Renomear \"Base de Conhecimento\" para \"Conteúdo Complementar\"", n: "Resolve a confusão de propósito da seção. Reunião Pixel <> :Zero, 06/11." },
+    { id: "c35", d: "d2", e: "M", t: "Vincular o conteúdo à aula da trilha e mostrar, na página do conteúdo, em quais aulas ele aparece", n: "Reunião Pixel <> :Zero, 06/11." },
+
+    { id: "c36", d: "d7", e: "M", t: "Separar o onboarding em três fluxos por perfil: Founder, Company Gestor e Company Membro", n: "Founder: onboarding individual completo. Company Gestor: visão macro da empresa (segmento, o que vende, estrutura). Company Membro/convidado: só função, atribuições e onde gasta tempo. Resolve a redundância de membros respondendo as mesmas perguntas do admin. Reunião Pixel <> :Zero, 06/11." },
+    { id: "c37", d: "d7", e: "P", t: "Revisar e validar com o time de dev o protótipo já construído dessa separação por perfil", n: "Reunião Pixel <> :Zero, 06/11." }
+  ];
+
+  var state = {};          // id -> coluna
+  var filter = "all";
+  var db = null;
+  var canWrite = true;
+  var dragId = null;
+  var sending = {};        // id -> true enquanto uma escrita está em andamento
+
+  CARDS.forEach(function (c) { state[c.id] = "todo"; });
+
+  var $board = document.getElementById("board");
+  var $filters = document.getElementById("filters");
+  var $status = document.getElementById("status");
+  var $pct = document.getElementById("pct");
+  var $fill = document.getElementById("barfill");
+
+  function setStatus(msg) { $status.textContent = msg; }
+
+  function delivery(id) { return DELIVERIES.filter(function (d) { return d.id === id; })[0]; }
+
+  function renderFilters() {
+    $filters.textContent = "";
+    var all = [{ id: "all", name: "Todas" }].concat(DELIVERIES);
+    all.forEach(function (d) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "chip";
+      b.textContent = d.name;
+      b.setAttribute("aria-pressed", String(filter === d.id));
+      b.addEventListener("click", function () { filter = d.id; renderFilters(); renderBoard(); });
+      $filters.appendChild(b);
+    });
+  }
+
+  function move(id, col) {
+    var prev = state[id];
+    if (prev === col || sending[id]) return;
+    state[id] = col;
+    renderBoard();
+    if (!db) { setStatus("Só neste navegador. Esta página não está salvando para os outros."); return; }
+    sending[id] = true;
+    db.doc("cards/" + id).set({ col: col }).then(function () {
+      sending[id] = false;
+      setStatus("Salvo para todo mundo que abrir esta página.");
+    }).catch(function () {
+      sending[id] = false;
+      state[id] = prev;
+      renderBoard();
+      setStatus("Não foi possível salvar. Para mover cartões, peça acesso de edição ao dono da página.");
+    });
+  }
+
+  function cardEl(c, colIndex) {
+    var d = delivery(c.d);
+    var el = document.createElement("article");
+    el.className = "card";
+    el.draggable = true;
+    el.tabIndex = 0;
+    el.style.setProperty("--c", d.color);
+
+    var top = document.createElement("div");
+    top.className = "card-top";
+    var tag = document.createElement("span");
+    tag.className = "tag";
+    tag.textContent = c.id.toUpperCase() + " · " + d.name;
+    var ef = document.createElement("span");
+    ef.className = "effort";
+    ef.textContent = c.e;
+    ef.title = c.e === "P" ? "Pequeno: até 2h" : "Médio: meio dia";
+    top.appendChild(tag);
+    top.appendChild(ef);
+    el.appendChild(top);
+
+    var h = document.createElement("h3");
+    h.textContent = c.t;
+    el.appendChild(h);
+
+    if (c.n) {
+      var p = document.createElement("p");
+      p.textContent = c.n;
+      el.appendChild(p);
+    }
+
+    if (c.cd) {
+      var cdWrap = document.createElement("div");
+      cdWrap.className = "cd";
+      var cdLabel = document.createElement("span");
+      cdLabel.className = "cd-label";
+      cdLabel.textContent = "Direção criativa";
+      var cdText = document.createElement("p");
+      cdText.className = "cd-text";
+      cdText.textContent = c.cd;
+      cdWrap.appendChild(cdLabel);
+      cdWrap.appendChild(cdText);
+      el.appendChild(cdWrap);
+    }
+
+    var foot = document.createElement("div");
+    foot.className = "card-foot";
+    if (colIndex > 0) {
+      var back = document.createElement("button");
+      back.type = "button";
+      back.className = "mv";
+      back.textContent = "Voltar";
+      back.addEventListener("click", function () { move(c.id, COLS[colIndex - 1].id); });
+      foot.appendChild(back);
+    }
+    if (colIndex < COLS.length - 1) {
+      var go = document.createElement("button");
+      go.type = "button";
+      go.className = "mv go";
+      go.textContent = colIndex === 0 ? "Começar" : "Concluir";
+      go.addEventListener("click", function () { move(c.id, COLS[colIndex + 1].id); });
+      foot.appendChild(go);
+    }
+    el.appendChild(foot);
+
+    el.addEventListener("dragstart", function (ev) {
+      dragId = c.id;
+      el.classList.add("dragging");
+      try { ev.dataTransfer.setData("text/plain", c.id); ev.dataTransfer.effectAllowed = "move"; } catch (e) {}
+    });
+    el.addEventListener("dragend", function () { dragId = null; el.classList.remove("dragging"); });
+    return el;
+  }
+
+  function renderBoard() {
+    $board.textContent = "";
+    COLS.forEach(function (col, i) {
+      var visible = CARDS.filter(function (c) { return state[c.id] === col.id && (filter === "all" || c.d === filter); });
+      var section = document.createElement("section");
+      section.className = "col";
+      section.dataset.col = col.id;
+      section.setAttribute("aria-label", col.name);
+
+      var head = document.createElement("div");
+      head.className = "col-head";
+      var h = document.createElement("h2");
+      h.textContent = col.name;
+      var n = document.createElement("span");
+      n.className = "count";
+      n.textContent = String(visible.length);
+      head.appendChild(h);
+      head.appendChild(n);
+      section.appendChild(head);
+
+      if (!visible.length) {
+        var e = document.createElement("div");
+        e.className = "empty";
+        e.textContent = i === 2 ? "Nada concluído ainda." : "Nenhum cartão aqui.";
+        section.appendChild(e);
+      }
+      visible.forEach(function (c) { section.appendChild(cardEl(c, i)); });
+
+      section.addEventListener("dragover", function (ev) { ev.preventDefault(); section.classList.add("over"); });
+      section.addEventListener("dragleave", function () { section.classList.remove("over"); });
+      section.addEventListener("drop", function (ev) {
+        ev.preventDefault();
+        section.classList.remove("over");
+        if (dragId) move(dragId, col.id);
+      });
+      $board.appendChild(section);
+    });
+
+    var done = CARDS.filter(function (c) { return state[c.id] === "done"; }).length;
+    $pct.textContent = done + " de " + CARDS.length;
+    $fill.style.width = Math.round((done / CARDS.length) * 100) + "%";
+  }
+
+  renderFilters();
+  renderBoard();
+
+  // Estado compartilhado: o quadro funciona sozinho e o banco entra quando estiver disponível.
+  if (window.claude && window.claude.use) {
+    window.claude.use("db").then(function (store) {
+      if (!store) { setStatus("Só neste navegador. Esta página não está salvando para os outros."); return; }
+      db = store;
+      setStatus("Carregando o quadro compartilhado...");
+      var timer = setTimeout(function () {
+        setStatus("Não consegui alcançar o quadro compartilhado ainda. O que aparece pode estar desatualizado.");
+      }, 10000);
+      db.collection("cards").onSnapshot(function (snap) {
+        if (!snap.metadata.fromCache) { clearTimeout(timer); setStatus("Quadro compartilhado. Quem abrir esta página vê os mesmos cartões."); }
+        snap.docs.forEach(function (doc) {
+          var data = doc.data();
+          if (data && state.hasOwnProperty(doc.id) && COLS.some(function (c) { return c.id === data.col; })) {
+            state[doc.id] = data.col;
+          }
+        });
+        renderBoard();
+      }, function () {
+        clearTimeout(timer);
+        db = null;
+        setStatus("Só neste navegador. Esta página não está salvando para os outros.");
+      });
+    }).catch(function () {
+      setStatus("Só neste navegador. Esta página não está salvando para os outros.");
+    });
+  } else {
+    setStatus("Só neste navegador. Esta página não está salvando para os outros.");
+  }
+})();
+</script>
+
+</body></html>

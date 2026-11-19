@@ -1,0 +1,17 @@
+/* cartão de template de agente: o Pixel em destaque numa faixa da cor dele, papel, nome, uma frase e o rodapé */
+.tp-g{ display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:16px; }
+.tp{ position:relative; display:flex; flex-direction:column; padding:0; border:0; border-radius:20px; background:#fff; box-shadow:0 0 0 1px var(--line); font:inherit; text-align:left; cursor:pointer; color:var(--ink); overflow:hidden; transition:box-shadow .2s, transform .2s cubic-bezier(.2,0,0,1); }
+.tp:hover{ box-shadow:0 0 0 1px color-mix(in srgb,var(--tp-c) 35%,var(--line)),0 16px 34px -24px color-mix(in srgb,var(--tp-c) 60%,rgba(21,22,28,.5)); transform:translateY(-2px); }
+.tp:active{ transform:none; } .tp:focus-visible{ outline:2px solid var(--ink); outline-offset:2px; }
+.tp-top{ position:relative; display:flex; align-items:flex-start; justify-content:flex-end; height:72px; padding:14px 16px; background:linear-gradient(135deg,color-mix(in srgb,var(--tp-c) 16%,#fff),color-mix(in srgb,var(--tp-c) 6%,#fff)); }
+.tp-px{ position:absolute; left:20px; bottom:-26px; width:64px; height:64px; border-radius:20px; background:#fff; display:grid; place-items:center; box-shadow:0 0 0 1px var(--line),0 8px 18px -12px rgba(21,22,28,.35); transition:transform .25s cubic-bezier(.2,0,0,1); }
+.tp:hover .tp-px{ transform:translateY(-3px) rotate(-3deg); }
+.tp-top .tpl-tag{ background:rgba(255,255,255,.85) !important; box-shadow:0 0 0 1px rgba(21,22,28,.06); }
+.tp-b{ display:flex; flex-direction:column; padding:38px 20px 0; }
+.tp-b small{ font-size:13px; font-weight:600; color:color-mix(in srgb,var(--tp-c) 75%,#15161C); }
+.tp-b b{ margin-top:2px; font-family:var(--f-d); font-size:19px; font-weight:600; letter-spacing:-.015em; }
+.tp-d{ margin-top:6px; font-size:14.5px; line-height:1.55; color:var(--ink-2); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; min-height:3.1em; }
+.tp-f{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:auto; padding:16px 20px 18px; }
+.tp-m{ font-size:13px; color:var(--ink-2); }
+.tp-go{ display:inline-flex; align-items:center; gap:4px; font-size:14px; font-weight:600; color:var(--ink); white-space:nowrap; } .tp-go .u{ width:15px; height:15px; transition:transform .15s; } .tp:hover .tp-go .u{ transform:translateX(3px); }
+@media (prefers-reduced-motion:reduce){ .tp, .tp-px{ transition:none; } .tp:hover, .tp:hover .tp-px{ transform:none; } }

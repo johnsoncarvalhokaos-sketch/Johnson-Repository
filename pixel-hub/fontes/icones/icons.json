@@ -1,0 +1,397 @@
+{
+"inicio": {
+"cat": "Navegação",
+"svg": "<path class=\"s\" d=\"M3.5 10.6a2 2 0 0 1 .74-1.55l6.5-5.3a2 2 0 0 1 2.52 0l6.5 5.3a2 2 0 0 1 .74 1.55V19a2 2 0 0 1-2 2H5.5a2 2 0 0 1-2-2z\"/><rect class=\"p\" x=\"9.5\" y=\"14\" width=\"5\" height=\"7\" rx=\"1.6\"/>",
+"onde": "Menu: Início"
+},
+"trilha": {
+"cat": "Navegação",
+"svg": "<path class=\"sl\" d=\"M8.6 18.5H15a3.25 3.25 0 0 0 0-6.5H9a3.25 3.25 0 0 1 0-6.5h6.4\"/><circle class=\"p\" cx=\"6\" cy=\"18.5\" r=\"2.6\"/><circle class=\"p\" cx=\"18\" cy=\"5.5\" r=\"2.6\"/>",
+"onde": "Menu: Trilha, Jornada do agente"
+},
+"conteudo": {
+"cat": "Navegação",
+"svg": "<path class=\"s\" d=\"M3 5.6A1.6 1.6 0 0 1 4.6 4h4.2A2.4 2.4 0 0 1 11.2 6.4V20a2.3 2.3 0 0 0-2.3-2.3H4.6A1.6 1.6 0 0 1 3 16.1z\"/><path class=\"p\" d=\"M21 5.6A1.6 1.6 0 0 0 19.4 4h-4.2a2.4 2.4 0 0 0-2.4 2.4V20a2.3 2.3 0 0 1 2.3-2.3h4.3a1.6 1.6 0 0 0 1.6-1.6z\"/>",
+"onde": "Menu: Conteúdo complementar"
+},
+"ferramentas": {
+"cat": "Navegação",
+"svg": "<rect class=\"s\" x=\"2.5\" y=\"8\" width=\"19\" height=\"12.5\" rx=\"3.2\"/><path class=\"pl\" d=\"M8.75 8V6.6A1.6 1.6 0 0 1 10.35 5h3.3a1.6 1.6 0 0 1 1.6 1.6V8\"/><rect class=\"p\" x=\"10\" y=\"12\" width=\"4\" height=\"3.4\" rx=\"1.2\"/>",
+"onde": "Menu: Ferramentas e skills"
+},
+"plano": {
+"cat": "Navegação",
+"svg": "<circle class=\"s\" cx=\"12\" cy=\"12\" r=\"9.5\"/><path class=\"p\" fill-rule=\"evenodd\" d=\"M12 6.6a5.4 5.4 0 1 1 0 10.8 5.4 5.4 0 0 1 0-10.8zm0 3.3a2.1 2.1 0 1 0 0 4.2 2.1 2.1 0 0 0 0-4.2z\"/>",
+"onde": "Menu: Plano Agêntico; estágio"
+},
+"agentes": {
+"cat": "Navegação",
+"svg": "<rect class=\"s\" x=\"3\" y=\"8.2\" width=\"18\" height=\"13\" rx=\"5.2\"/><rect class=\"p\" x=\"10.9\" y=\"3.6\" width=\"2.2\" height=\"4\" rx=\"1.1\"/><rect class=\"p\" x=\"7.8\" y=\"12.2\" width=\"2.6\" height=\"5\" rx=\"1.3\"/><rect class=\"p\" x=\"13.6\" y=\"12.2\" width=\"2.6\" height=\"5\" rx=\"1.3\"/>",
+"onde": "Menu: Agentes; Novo agente"
+},
+"mentorias": {
+"cat": "Navegação",
+"svg": "<rect class=\"s\" x=\"2.5\" y=\"6\" width=\"13.5\" height=\"12\" rx=\"3.2\"/><path class=\"p\" d=\"M17.4 10.3 20.5 8.1A.95.95 0 0 1 22 8.9v6.2a.95.95 0 0 1-1.5.78l-3.1-2.2z\"/>",
+"onde": "Menu: Mentorias"
+},
+"comunidade": {
+"cat": "Navegação",
+"svg": "<circle class=\"p\" cx=\"9\" cy=\"7.8\" r=\"3.6\"/><path class=\"p\" d=\"M2.6 19.1A6.4 6.4 0 0 1 15.4 19.1a.9.9 0 0 1-.9.9H3.5a.9.9 0 0 1-.9-.9z\"/><circle class=\"s\" cx=\"16.8\" cy=\"8.6\" r=\"2.8\"/><path class=\"s\" d=\"M17.6 20h3a.9.9 0 0 0 .9-.95 5.2 5.2 0 0 0-6.5-4.95 7.6 7.6 0 0 1 2.6 5.9z\"/>",
+"onde": "Menu: Comunidade; RH"
+},
+"cases": {
+"cat": "Navegação",
+"svg": "<path class=\"s\" d=\"M7 3.8h10V10a5 5 0 0 1-10 0z\"/><path class=\"sl\" d=\"M7 6H5.6A1.6 1.6 0 0 0 4 7.6 3.6 3.6 0 0 0 7.4 11.2\"/><path class=\"sl\" d=\"M17 6h1.4A1.6 1.6 0 0 1 20 7.6a3.6 3.6 0 0 1-3.4 3.6\"/><rect class=\"p\" x=\"11\" y=\"14.6\" width=\"2\" height=\"4.6\" rx=\"1\"/><rect class=\"p\" x=\"7.8\" y=\"18.6\" width=\"8.4\" height=\"2.6\" rx=\"1.3\"/>",
+"onde": "Menu: Cases"
+},
+"empresa": {
+"cat": "Navegação",
+"svg": "<rect class=\"s\" x=\"3.5\" y=\"3\" width=\"11.5\" height=\"18\" rx=\"2.6\"/><rect class=\"s\" x=\"16\" y=\"9\" width=\"4.5\" height=\"12\" rx=\"2\"/><rect class=\"p\" x=\"6.4\" y=\"6.2\" width=\"2.3\" height=\"2.3\" rx=\"0.7\"/><rect class=\"p\" x=\"9.8\" y=\"6.2\" width=\"2.3\" height=\"2.3\" rx=\"0.7\"/><rect class=\"p\" x=\"6.4\" y=\"10.2\" width=\"2.3\" height=\"2.3\" rx=\"0.7\"/><rect class=\"p\" x=\"9.8\" y=\"10.2\" width=\"2.3\" height=\"2.3\" rx=\"0.7\"/><rect class=\"p\" x=\"7.9\" y=\"15.6\" width=\"2.7\" height=\"5.4\" rx=\"0.9\"/>",
+"onde": "Menu: Empresa"
+},
+"suporte": {
+"cat": "Navegação",
+"svg": "<circle class=\"s\" cx=\"12\" cy=\"12\" r=\"9.5\"/><path class=\"pl\" d=\"M9.6 9.6a2.5 2.5 0 1 1 3.4 2.3c-.6.25-1 .8-1 1.45v.4\"/><circle class=\"p\" cx=\"12\" cy=\"16.9\" r=\"1.25\"/>",
+"onde": "Menu: Suporte"
+},
+"notificacao": {
+"cat": "Navegação",
+"svg": "<path class=\"s\" d=\"M6 15.2V11a6 6 0 0 1 12 0v4.2l1.3 1.9a.9.9 0 0 1-.74 1.4H5.44a.9.9 0 0 1-.74-1.4z\"/><path class=\"p\" d=\"M9.8 19.6h4.4a2.2 2.2 0 0 1-4.4 0z\"/>",
+"onde": "Topo: notificações"
+},
+"ajustes": {
+"cat": "Navegação",
+"svg": "<path class=\"sl\" d=\"M4 7h16\"/><path class=\"sl\" d=\"M4 17h16\"/><rect class=\"p\" x=\"13.4\" y=\"4.2\" width=\"2.6\" height=\"5.6\" rx=\"1.3\"/><rect class=\"p\" x=\"8\" y=\"14.2\" width=\"2.6\" height=\"5.6\" rx=\"1.3\"/>",
+"onde": "Ajustes do protótipo; filtros"
+},
+"seta": {
+"cat": "Ações",
+"svg": "<path class=\"pl\" d=\"M5 12h13.5\"/><path class=\"pl\" d=\"M13 6.5 18.5 12 13 17.5\"/>",
+"onde": "Botões: Continuar, Participar"
+},
+"voltar": {
+"cat": "Ações",
+"svg": "<path class=\"pl\" d=\"M19 12H5.5\"/><path class=\"pl\" d=\"M11 6.5 5.5 12l5.5 5.5\"/>",
+"onde": "Voltar ao Início"
+},
+"chevron": {
+"cat": "Ações",
+"svg": "<path class=\"pl\" d=\"M9.5 6.5 15 12l-5.5 5.5\"/>",
+"onde": "Links: Ver detalhes, Abrir o Plano"
+},
+"chevron-baixo": {
+"cat": "Ações",
+"svg": "<path class=\"pl\" d=\"M6.5 9.5 12 15l5.5-5.5\"/>",
+"onde": "Selects, recolher"
+},
+"fechar": {
+"cat": "Ações",
+"svg": "<path class=\"pl\" d=\"M6.5 6.5l11 11\"/><path class=\"pl\" d=\"M17.5 6.5l-11 11\"/>",
+"onde": "Drawers, janelas, pendências"
+},
+"check": {
+"cat": "Ações",
+"svg": "<path class=\"pl\" d=\"M5 12.6 9.6 17.2 19 7.4\"/>",
+"onde": "Concluído, selecionado"
+},
+"mais": {
+"cat": "Ações",
+"svg": "<path class=\"pl\" d=\"M12 5.5v13\"/><path class=\"pl\" d=\"M5.5 12h13\"/>",
+"onde": "Novo agente, adicionar"
+},
+"editar": {
+"cat": "Ações",
+"svg": "<path class=\"s\" d=\"M14.4 5.2a2.2 2.2 0 0 1 3.1 0l1.3 1.3a2.2 2.2 0 0 1 0 3.1L9.4 19l-4.9.5.5-4.9z\"/><path class=\"p\" d=\"M14.4 5.2a2.2 2.2 0 0 1 3.1 0l1.3 1.3a2.2 2.2 0 0 1 0 3.1l-1.3 1.3-4.4-4.4z\"/><path class=\"pl\" d=\"M13.2 20.2h6.6\"/>",
+"onde": "Ajustar no Agent Builder"
+},
+"buscar": {
+"cat": "Ações",
+"svg": "<circle class=\"s\" cx=\"10.5\" cy=\"10.5\" r=\"6.5\"/><path class=\"pl\" d=\"M15.6 15.6 20 20\"/><circle class=\"pl\" cx=\"10.5\" cy=\"10.5\" r=\"6.5\"/>",
+"onde": "Buscas"
+},
+"enviar": {
+"cat": "Ações",
+"svg": "<path class=\"p\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linejoin=\"round\" d=\"M4.4 4.6 20.3 11.3H7.1z\"/><path class=\"s\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linejoin=\"round\" d=\"M20.3 12.7 4.4 19.4 7.1 12.7z\"/>",
+"onde": "Consultor: enviar"
+},
+"copiar": {
+"cat": "Ações",
+"svg": "<rect class=\"s\" x=\"3\" y=\"3\" width=\"12\" height=\"12\" rx=\"3\"/><rect class=\"p\" x=\"9\" y=\"9\" width=\"12\" height=\"12\" rx=\"3\"/>",
+"onde": "Copiar pedido"
+},
+"baixar": {
+"cat": "Ações",
+"svg": "<path class=\"sl\" d=\"M4 15v2.4A2.6 2.6 0 0 0 6.6 20h10.8a2.6 2.6 0 0 0 2.6-2.6V15\"/><path class=\"pl\" d=\"M12 4v10\"/><path class=\"pl\" d=\"M7.6 9.6 12 14l4.4-4.4\"/>",
+"onde": "Baixar a skill, o kit"
+},
+"ampliar": {
+"cat": "Ações",
+"svg": "<path class=\"pl\" d=\"M14 4h6v6\"/><path class=\"pl\" d=\"M20 4l-6.5 6.5\"/><path class=\"pl\" d=\"M10 20H4v-6\"/><path class=\"pl\" d=\"M4 20l6.5-6.5\"/>",
+"onde": "Abrir em página"
+},
+"externo": {
+"cat": "Ações",
+"svg": "<path class=\"sl\" d=\"M10 5H7a3 3 0 0 0-3 3v9a3 3 0 0 0 3 3h9a3 3 0 0 0 3-3v-3\"/><path class=\"pl\" d=\"M14 4h6v6\"/><path class=\"pl\" d=\"M20 4l-8.5 8.5\"/>",
+"onde": "Links para fora"
+},
+"opcoes": {
+"cat": "Ações",
+"svg": "<circle class=\"p\" cx=\"5.5\" cy=\"12\" r=\"1.9\"/><circle class=\"p\" cx=\"12\" cy=\"12\" r=\"1.9\"/><circle class=\"p\" cx=\"18.5\" cy=\"12\" r=\"1.9\"/>",
+"onde": "Menus de mais opções"
+},
+"play": {
+"cat": "Ações",
+"svg": "<path class=\"p\" d=\"M8 5.4v13.2a1 1 0 0 0 1.52.85l10.6-6.6a1 1 0 0 0 0-1.7L9.52 4.55A1 1 0 0 0 8 5.4z\"/>",
+"onde": "Aulas, vídeos"
+},
+"compartilhar": {
+"cat": "Ações",
+"svg": "<circle class=\"p\" cx=\"18\" cy=\"5.5\" r=\"2.6\"/><circle class=\"p\" cx=\"6\" cy=\"12\" r=\"2.6\"/><circle class=\"p\" cx=\"18\" cy=\"18.5\" r=\"2.6\"/><path class=\"sl\" d=\"M8.3 10.8l7.4-4.1\"/><path class=\"sl\" d=\"M8.3 13.2l7.4 4.1\"/>",
+"onde": "Compartilhar"
+},
+"sair": {
+"cat": "Ações",
+"svg": "<path class=\"sl\" d=\"M10 4H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h3\"/><path class=\"pl\" d=\"M10 12h10\"/><path class=\"pl\" d=\"M16 8l4 4-4 4\"/>",
+"onde": "Sair da conta"
+},
+"info": {
+"cat": "Estados",
+"svg": "<circle class=\"s\" cx=\"12\" cy=\"12\" r=\"9.5\"/><path class=\"pl\" d=\"M12 11v5.4\"/><circle class=\"p\" cx=\"12\" cy=\"7.7\" r=\"1.3\"/>",
+"onde": "Avisos, notas"
+},
+"alerta": {
+"cat": "Estados",
+"svg": "<path class=\"s\" d=\"M10.27 4a2 2 0 0 1 3.46 0l7.6 13.2A2 2 0 0 1 19.6 20H4.4a2 2 0 0 1-1.73-2.8z\"/><path class=\"pl\" d=\"M12 9v4.6\"/><circle class=\"p\" cx=\"12\" cy=\"16.8\" r=\"1.25\"/>",
+"onde": "Alerta da fase futura"
+},
+"sucesso": {
+"cat": "Estados",
+"svg": "<circle class=\"s\" cx=\"12\" cy=\"12\" r=\"9.5\"/><path class=\"pl\" d=\"M8 12.3l2.8 2.8L16.2 9.6\"/>",
+"onde": "Entrevista concluída, fase concluída"
+},
+"erro": {
+"cat": "Estados",
+"svg": "<circle class=\"s\" cx=\"12\" cy=\"12\" r=\"9.5\"/><path class=\"pl\" d=\"M9 9l6 6\"/><path class=\"pl\" d=\"M15 9l-6 6\"/>",
+"onde": "Erros"
+},
+"cadeado": {
+"cat": "Estados",
+"svg": "<rect class=\"s\" x=\"4.5\" y=\"10\" width=\"15\" height=\"11\" rx=\"3.2\"/><path class=\"pl\" d=\"M8 10V8a4 4 0 0 1 8 0v2\"/><rect class=\"p\" x=\"11\" y=\"13.6\" width=\"2\" height=\"4\" rx=\"1\"/>",
+"onde": "Trava do Agent Builder"
+},
+"relogio": {
+"cat": "Estados",
+"svg": "<circle class=\"s\" cx=\"12\" cy=\"12\" r=\"9.5\"/><path class=\"pl\" d=\"M12 7.4V12l3 2\"/>",
+"onde": "Tempo da etapa, agenda"
+},
+"ao-vivo": {
+"cat": "Estados",
+"svg": "<circle class=\"p\" cx=\"12\" cy=\"12\" r=\"2.4\"/><path class=\"sl\" d=\"M8.1 15.9a5.5 5.5 0 0 1 0-7.8\"/><path class=\"sl\" d=\"M15.9 8.1a5.5 5.5 0 0 1 0 7.8\"/><path class=\"pl\" d=\"M5.3 18.7a9.5 9.5 0 0 1 0-13.4\"/><path class=\"pl\" d=\"M18.7 5.3a9.5 9.5 0 0 1 0 13.4\"/>",
+"onde": "Hands-on ao vivo"
+},
+"estrela": {
+"cat": "Estados",
+"svg": "<path class=\"p\" d=\"M12 3.6l2.5 5.07 5.6.81-4.05 3.95.96 5.57L12 16.37l-5.01 2.63.96-5.57L3.9 9.48l5.6-.81z\"/>",
+"onde": "Favoritos, destaque"
+},
+"escudo": {
+"cat": "Estados",
+"svg": "<path class=\"s\" d=\"M12 3l7 2.6v5.8c0 4.6-3 8.2-7 9.6-4-1.4-7-5-7-9.6V5.6z\"/><path class=\"pl\" d=\"M8.8 12.2l2.2 2.2 4.2-4.2\"/>",
+"onde": "Aprovação, segurança"
+},
+"skill": {
+"cat": "Objetos do Hub",
+"svg": "<path class=\"s\" d=\"M19.05 10.00Q19.23 10.44 19.64 10.44L21.07 10.43Q21.47 10.42 21.47 10.99L21.47 13.01Q21.47 13.58 21.07 13.57L19.64 13.56Q19.23 13.56 19.05 14.00L18.40 15.57Q18.22 16.01 18.50 16.30L19.52 17.30Q19.81 17.58 19.41 17.98L17.98 19.41Q17.58 19.81 17.30 19.52L16.30 18.50Q16.01 18.22 15.57 18.40L14.00 19.05Q13.56 19.23 13.56 19.64L13.57 21.07Q13.58 21.47 13.01 21.47L10.99 21.47Q10.42 21.47 10.43 21.07L10.44 19.64Q10.44 19.23 10.00 19.05L8.43 18.40Q7.99 18.22 7.70 18.50L6.70 19.52Q6.42 19.81 6.02 19.41L4.59 17.98Q4.19 17.58 4.48 17.30L5.50 16.30Q5.78 16.01 5.60 15.57L4.95 14.00Q4.77 13.56 4.36 13.56L2.93 13.57Q2.53 13.58 2.53 13.01L2.53 10.99Q2.53 10.42 2.93 10.43L4.36 10.44Q4.77 10.44 4.95 10.00L5.60 8.43Q5.78 7.99 5.50 7.70L4.48 6.70Q4.19 6.42 4.59 6.02L6.02 4.59Q6.42 4.19 6.70 4.48L7.70 5.50Q7.99 5.78 8.43 5.60L10.00 4.95Q10.44 4.77 10.44 4.36L10.43 2.93Q10.42 2.53 10.99 2.53L13.01 2.53Q13.58 2.53 13.57 2.93L13.56 4.36Q13.56 4.77 14.00 4.95L15.57 5.60Q16.01 5.78 16.30 5.50L17.30 4.48Q17.58 4.19 17.98 4.59L19.41 6.02Q19.81 6.42 19.52 6.70L18.50 7.70Q18.22 7.99 18.40 8.43Z\"/><circle class=\"p\" cx=\"12\" cy=\"12\" r=\"3.3\"/>",
+"onde": "Toda skill (na cor da área)"
+},
+"template": {
+"cat": "Objetos do Hub",
+"svg": "<rect class=\"s\" x=\"3\" y=\"3\" width=\"18\" height=\"18\" rx=\"4\"/><rect class=\"p\" x=\"6.2\" y=\"6.2\" width=\"11.6\" height=\"3.6\" rx=\"1.3\"/><rect class=\"p\" x=\"6.2\" y=\"11.6\" width=\"5\" height=\"6.2\" rx=\"1.3\"/><rect class=\"p\" x=\"12.8\" y=\"11.6\" width=\"5\" height=\"2.4\" rx=\"1.2\"/><rect class=\"p\" x=\"12.8\" y=\"15.4\" width=\"5\" height=\"2.4\" rx=\"1.2\"/>",
+"onde": "Templates de agentes"
+},
+"kit": {
+"cat": "Objetos do Hub",
+"svg": "<path class=\"s\" d=\"M4 8.6 12 4.2l8 4.4v7.1a2 2 0 0 1-1.03 1.75L12 21.3l-6.97-3.85A2 2 0 0 1 4 15.7z\"/><path class=\"p\" d=\"M12 4.2l7.7 4.25L12 12.7 4.3 8.45z\"/>",
+"onde": "Agentes prontos, kits"
+},
+"cerebro": {
+"cat": "Objetos do Hub",
+"svg": "<path class=\"s\" d=\"M11.2 5.2a3 3 0 1 0-5.6.4 4 4 0 0 0-2.5 5.8 4 4 0 0 0 .6 6.6 4 4 0 0 0 7.5 1.1z\"/><path class=\"p\" d=\"M12.8 5.2a3 3 0 1 1 5.6.4 4 4 0 0 1 2.5 5.8 4 4 0 0 1-.6 6.6 4 4 0 0 1-7.5 1.1z\"/><path d=\"M15.4 9.6c1.2.1 2 .9 2.2 2.1M15 15.6c1.3-.4 2.6.1 3.2 1.1\" fill=\"none\" stroke=\"var(--icbg,#fff)\" stroke-width=\"1.6\" stroke-linecap=\"round\"/><path class=\"pl\" d=\"M8.6 9.6c-1.2.1-2 .9-2.2 2.1\"/><path class=\"pl\" d=\"M9 15.6c-1.3-.4-2.6.1-3.2 1.1\"/>",
+"onde": "Segundo Cérebro"
+},
+"prompt": {
+"cat": "Objetos do Hub",
+"svg": "<path class=\"s\" d=\"M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v8a2.5 2.5 0 0 1-2.5 2.5H11l-4.4 3.3a.8.8 0 0 1-1.3-.64V17A2.5 2.5 0 0 1 4 14.5z\"/><path class=\"pl\" d=\"M8 9h8\"/><path class=\"pl\" d=\"M8 12.5h5\"/>",
+"onde": "Prompts, pedidos prontos"
+},
+"automacao": {
+"cat": "Objetos do Hub",
+"svg": "<rect class=\"s\" x=\"3\" y=\"3\" width=\"18\" height=\"18\" rx=\"6\"/><path class=\"p\" d=\"M13.2 5.5 7.6 13h3.6l-.6 5.5L16.4 11h-3.7z\"/>",
+"onde": "Automações"
+},
+"rotina": {
+"cat": "Objetos do Hub",
+"svg": "<path class=\"pl\" d=\"M4.5 11V9.6a3 3 0 0 1 3-3h11\"/><path class=\"pl\" d=\"M15.5 3.6l3 3-3 3\"/><path class=\"sl\" d=\"M19.5 13v1.4a3 3 0 0 1-3 3h-11\"/><path class=\"sl\" d=\"M8.5 20.4l-3-3 3-3\"/>",
+"onde": "Rotinas"
+},
+"repositorio": {
+"cat": "Objetos do Hub",
+"svg": "<circle class=\"p\" cx=\"6.5\" cy=\"5.5\" r=\"2.4\"/><circle class=\"p\" cx=\"6.5\" cy=\"18.5\" r=\"2.4\"/><circle class=\"p\" cx=\"17.5\" cy=\"8.5\" r=\"2.4\"/><path class=\"sl\" d=\"M6.5 8v8\"/><path class=\"sl\" d=\"M17.5 11a5 5 0 0 1-5 5H8.9\"/>",
+"onde": "Repositórios"
+},
+"documento": {
+"cat": "Objetos do Hub",
+"svg": "<path class=\"s\" d=\"M5 5.2A2.2 2.2 0 0 1 7.2 3h6.3L19 8.5v10.3a2.2 2.2 0 0 1-2.2 2.2H7.2A2.2 2.2 0 0 1 5 18.8z\"/><path class=\"p\" d=\"M14 3l5 5h-3.2A1.8 1.8 0 0 1 14 6.2z\"/><path class=\"pl\" d=\"M8.6 13h6.8\"/><path class=\"pl\" d=\"M8.6 16.5h4.4\"/>",
+"onde": "Docs, SKILL.md, modelos"
+},
+"aula": {
+"cat": "Objetos do Hub",
+"svg": "<rect class=\"s\" x=\"2.5\" y=\"5\" width=\"19\" height=\"14\" rx=\"3.4\"/><path class=\"p\" d=\"M10 9.1v5.8a.6.6 0 0 0 .92.5l4.6-2.9a.6.6 0 0 0 0-1l-4.6-2.9a.6.6 0 0 0-.92.5z\"/>",
+"onde": "Aulas da Trilha"
+},
+"mentoria-tecnica": {
+"cat": "Objetos do Hub",
+"svg": "<path class=\"sl\" d=\"M4.5 14v-2a7.5 7.5 0 0 1 15 0v2\"/><rect class=\"p\" x=\"3\" y=\"13.4\" width=\"4.4\" height=\"7\" rx=\"2.2\"/><rect class=\"p\" x=\"16.6\" y=\"13.4\" width=\"4.4\" height=\"7\" rx=\"2.2\"/>",
+"onde": "Mentoria técnica; Atendimento"
+},
+"gravacao": {
+"cat": "Objetos do Hub",
+"svg": "<circle class=\"s\" cx=\"12\" cy=\"12\" r=\"9.5\"/><circle class=\"p\" cx=\"12\" cy=\"12\" r=\"4.2\"/>",
+"onde": "Gravações"
+},
+"fase": {
+"cat": "Objetos do Hub",
+"svg": "<path class=\"pl\" d=\"M5.5 21V4\"/><path class=\"s\" d=\"M7 4.6h10.4a.9.9 0 0 1 .72 1.44L15.8 9l2.32 2.96a.9.9 0 0 1-.72 1.44H7z\"/>",
+"onde": "Fases e etapas"
+},
+"mapa": {
+"cat": "Objetos do Hub",
+"svg": "<path class=\"s\" d=\"M3 6.4a1.2 1.2 0 0 1 .78-1.12L8.5 3.5v15l-4.72 1.77A.6.6 0 0 1 3 19.7z\"/><path class=\"p\" d=\"M9.8 3.5l4.4 2v15l-4.4-2z\"/><path class=\"s\" d=\"M15.5 5.5l4.72-1.77A.6.6 0 0 1 21 4.3v13.3a1.2 1.2 0 0 1-.78 1.12L15.5 20.5z\"/>",
+"onde": "Mapa da jornada"
+},
+"entrevista": {
+"cat": "Objetos do Hub",
+"svg": "<rect class=\"p\" x=\"8.5\" y=\"2.8\" width=\"7\" height=\"11.6\" rx=\"3.5\"/><path class=\"sl\" d=\"M5.4 11.2a6.6 6.6 0 0 0 13.2 0\"/><path class=\"sl\" d=\"M12 17.8V21\"/>",
+"onde": "Entrevista com o Consultor"
+},
+"estagio": {
+"cat": "Objetos do Hub",
+"svg": "<path class=\"sl\" style=\"stroke-width:3.4\" d=\"M4.5 16.5a7.5 7.5 0 0 1 15 0\"/><path class=\"pl\" d=\"M12 16.5l3.6-4.4\"/><circle class=\"p\" cx=\"12\" cy=\"16.5\" r=\"1.9\"/>",
+"onde": "Estágio na transformação"
+},
+"horas": {
+"cat": "Objetos do Hub",
+"svg": "<path class=\"s\" d=\"M6.5 3.5h11a.9.9 0 0 1 .9.9V6a5 5 0 0 1-2.4 4.3L14.2 12l1.8 1.7A5 5 0 0 1 18.4 18v1.6a.9.9 0 0 1-.9.9h-11a.9.9 0 0 1-.9-.9V18A5 5 0 0 1 8 13.7L9.8 12 8 10.3A5 5 0 0 1 5.6 6V4.4a.9.9 0 0 1 .9-.9z\"/><path class=\"p\" d=\"M8.6 18.4c.4-1.4 1.6-2.4 3.4-2.4s3 1 3.4 2.4z\"/>",
+"onde": "Horas que voltam"
+},
+"conexao": {
+"cat": "Objetos do Hub",
+"svg": "<rect class=\"p\" x=\"6.5\" y=\"5.2\" width=\"11\" height=\"7.4\" rx=\"2.6\"/><rect class=\"p\" x=\"8.9\" y=\"2.2\" width=\"1.9\" height=\"4\" rx=\"0.95\"/><rect class=\"p\" x=\"13.2\" y=\"2.2\" width=\"1.9\" height=\"4\" rx=\"0.95\"/><path class=\"sl\" d=\"M12 12.6v2.6a3.6 3.6 0 0 1-3.6 3.6H6.4a1.9 1.9 0 0 0-1.9 1.9V21\"/>",
+"onde": "Conectores, ferramentas ligadas"
+},
+"chave": {
+"cat": "Objetos do Hub",
+"svg": "<circle class=\"s\" cx=\"8\" cy=\"15.5\" r=\"5\"/><circle class=\"p\" cx=\"8\" cy=\"15.5\" r=\"1.7\"/><path class=\"pl\" d=\"M11.6 11.9 19.5 4\"/><path class=\"pl\" d=\"M16.5 7l2.2 2.2\"/>",
+"onde": "Chaves de acesso"
+},
+"usuario": {
+"cat": "Objetos do Hub",
+"svg": "<circle class=\"p\" cx=\"12\" cy=\"7.8\" r=\"4\"/><path class=\"s\" d=\"M4.5 19.4A7.5 7.5 0 0 1 19.5 19.4a.9.9 0 0 1-.9.9H5.4a.9.9 0 0 1-.9-.9z\"/>",
+"onde": "Conta, responsável"
+},
+"convidar": {
+"cat": "Objetos do Hub",
+"svg": "<circle class=\"p\" cx=\"10\" cy=\"7.8\" r=\"3.8\"/><path class=\"s\" d=\"M3.4 19.2a6.6 6.6 0 0 1 13.2 0 .9.9 0 0 1-.9.9H4.3a.9.9 0 0 1-.9-.9z\"/><path class=\"pl\" d=\"M19 8v6\"/><path class=\"pl\" d=\"M16 11h6\"/>",
+"onde": "Convidar participante"
+},
+"calendario": {
+"cat": "Objetos do Hub",
+"svg": "<rect class=\"s\" x=\"3\" y=\"5\" width=\"18\" height=\"16\" rx=\"3.4\"/><rect class=\"p\" x=\"3\" y=\"5\" width=\"18\" height=\"5.2\" rx=\"2.6\"/><rect class=\"p\" x=\"7\" y=\"2.8\" width=\"2\" height=\"4.6\" rx=\"1\"/><rect class=\"p\" x=\"15\" y=\"2.8\" width=\"2\" height=\"4.6\" rx=\"1\"/><rect class=\"p\" x=\"7\" y=\"13.4\" width=\"3\" height=\"3\" rx=\"0.9\"/>",
+"onde": "Agenda, agendar mentoria"
+},
+"etiqueta": {
+"cat": "Objetos do Hub",
+"svg": "<path class=\"s\" d=\"M3.5 5.5a2 2 0 0 1 2-2h6.1a2 2 0 0 1 1.42.59l7.4 7.4a2 2 0 0 1 0 2.83l-6.1 6.1a2 2 0 0 1-2.83 0l-7.4-7.4A2 2 0 0 1 3.5 11.6z\"/><circle class=\"p\" cx=\"8.3\" cy=\"8.3\" r=\"1.8\"/>",
+"onde": "Áreas, etiquetas"
+},
+"camadas": {
+"cat": "Objetos do Hub",
+"svg": "<path class=\"s\" d=\"M3.6 12.5 12 17l8.4-4.5\"/><path class=\"s\" d=\"M3.6 16.5 12 21l8.4-4.5\"/><path class=\"p\" d=\"M12 3l8.4 4.5L12 12 3.6 7.5z\"/>",
+"onde": "Usada em templates"
+},
+"grafico": {
+"cat": "Objetos do Hub",
+"svg": "<rect class=\"s\" x=\"3.5\" y=\"11\" width=\"4\" height=\"9.5\" rx=\"1.4\"/><rect class=\"p\" x=\"10\" y=\"4\" width=\"4\" height=\"16.5\" rx=\"1.4\"/><rect class=\"s\" x=\"16.5\" y=\"8\" width=\"4\" height=\"12.5\" rx=\"1.4\"/>",
+"onde": "Dados, relatórios"
+},
+"pasta": {
+"cat": "Objetos do Hub",
+"svg": "<path class=\"s\" d=\"M3 6.6A2.6 2.6 0 0 1 5.6 4h3.6a2 2 0 0 1 1.5.68L12 6.2h6.4A2.6 2.6 0 0 1 21 8.8V10H3z\"/><rect class=\"p\" x=\"3\" y=\"9\" width=\"18\" height=\"11.5\" rx=\"2.6\"/>",
+"onde": "Pastas, coleções"
+},
+"email": {
+"cat": "Objetos do Hub",
+"svg": "<rect class=\"s\" x=\"2.5\" y=\"4.5\" width=\"19\" height=\"15\" rx=\"3.4\"/><path class=\"pl\" d=\"M6 8.6l6 4.4 6-4.4\"/>",
+"onde": "E-mail"
+},
+"moeda": {
+"cat": "Objetos do Hub",
+"svg": "<circle class=\"s\" cx=\"12\" cy=\"12\" r=\"9.5\"/><path class=\"pl\" d=\"M14.6 9.2A2.8 2.8 0 0 0 12 7.8c-1.6 0-2.7.9-2.7 2.1 0 2.9 5.4 1.5 5.4 4.2 0 1.2-1.1 2.1-2.7 2.1a2.8 2.8 0 0 1-2.6-1.4\"/><path class=\"pl\" d=\"M12 6v1.8M12 16.2V18\"/>",
+"onde": "Financeiro, saldo"
+},
+"area-vendas": {
+"cat": "Áreas dos agentes",
+"svg": "<rect class=\"s\" x=\"3\" y=\"3\" width=\"18\" height=\"18\" rx=\"5\"/><path class=\"pl\" d=\"M6.8 15.6l3.4-3.4 2.6 2.4 4.4-4.8\"/><path class=\"pl\" d=\"M13.8 9.6h3.4V13\"/>",
+"onde": "Pixel Vendas"
+},
+"area-marketing": {
+"cat": "Áreas dos agentes",
+"svg": "<path class=\"s\" d=\"M4 10.4a2 2 0 0 1 2-2h2.2L15 4.6a.8.8 0 0 1 1.2.7v13.4a.8.8 0 0 1-1.2.7l-6.8-3.8H6a2 2 0 0 1-2-2z\"/><path class=\"pl\" d=\"M19 9.5a3.4 3.4 0 0 1 0 5\"/><rect class=\"p\" x=\"6.5\" y=\"15\" width=\"3\" height=\"5.4\" rx=\"1.5\"/>",
+"onde": "Pixel Marketing"
+},
+"area-atendimento": {
+"cat": "Áreas dos agentes",
+"svg": "<path class=\"sl\" d=\"M4.5 14v-2a7.5 7.5 0 0 1 15 0v2\"/><rect class=\"p\" x=\"3\" y=\"13.4\" width=\"4.4\" height=\"7\" rx=\"2.2\"/><rect class=\"p\" x=\"16.6\" y=\"13.4\" width=\"4.4\" height=\"7\" rx=\"2.2\"/><path class=\"pl\" d=\"M18.8 20.4c0 .9-1.6 1.6-4.3 1.6H13\"/>",
+"onde": "Pixel Atendimento"
+},
+"area-financeiro": {
+"cat": "Áreas dos agentes",
+"svg": "<circle class=\"s\" cx=\"12\" cy=\"12\" r=\"9.5\"/><path class=\"pl\" d=\"M14.6 9.2A2.8 2.8 0 0 0 12 7.8c-1.6 0-2.7.9-2.7 2.1 0 2.9 5.4 1.5 5.4 4.2 0 1.2-1.1 2.1-2.7 2.1a2.8 2.8 0 0 1-2.6-1.4\"/><path class=\"pl\" d=\"M12 6v1.8M12 16.2V18\"/>",
+"onde": "Pixel Financeiro"
+},
+"area-operacoes": {
+"cat": "Áreas dos agentes",
+"svg": "<path class=\"s\" d=\"M4 8.6 12 4.2l8 4.4v7.1a2 2 0 0 1-1.03 1.75L12 21.3l-6.97-3.85A2 2 0 0 1 4 15.7z\"/><path class=\"p\" d=\"M12 12.7v8.6l-6.97-3.85A2 2 0 0 1 4 15.7V8.6z\"/>",
+"onde": "Pixel Operações"
+},
+"area-rh": {
+"cat": "Áreas dos agentes",
+"svg": "<circle class=\"p\" cx=\"9\" cy=\"7.8\" r=\"3.6\"/><path class=\"p\" d=\"M2.6 19.1A6.4 6.4 0 0 1 15.4 19.1a.9.9 0 0 1-.9.9H3.5a.9.9 0 0 1-.9-.9z\"/><circle class=\"s\" cx=\"16.8\" cy=\"8.6\" r=\"2.8\"/><path class=\"s\" d=\"M17.6 20h3a.9.9 0 0 0 .9-.95 5.2 5.2 0 0 0-6.5-4.95 7.6 7.6 0 0 1 2.6 5.9z\"/>",
+"onde": "Pixel RH"
+},
+"area-dados": {
+"cat": "Áreas dos agentes",
+"svg": "<rect class=\"s\" x=\"3.5\" y=\"11\" width=\"4\" height=\"9.5\" rx=\"1.4\"/><rect class=\"p\" x=\"10\" y=\"4\" width=\"4\" height=\"16.5\" rx=\"1.4\"/><rect class=\"s\" x=\"16.5\" y=\"8\" width=\"4\" height=\"12.5\" rx=\"1.4\"/>",
+"onde": "Pixel Dados"
+},
+"area-gestao": {
+"cat": "Áreas dos agentes",
+"svg": "<rect class=\"s\" x=\"2.5\" y=\"7.5\" width=\"19\" height=\"13\" rx=\"3.2\"/><path class=\"pl\" d=\"M8.8 7.5V6a1.6 1.6 0 0 1 1.6-1.6h3.2a1.6 1.6 0 0 1 1.6 1.6v1.5\"/><path class=\"p\" d=\"M2.5 11.6h19v1.2a2 2 0 0 1-1.4 1.9L13.4 16.8a4.4 4.4 0 0 1-2.8 0L3.9 14.7a2 2 0 0 1-1.4-1.9z\"/>",
+"onde": "Pixel Gestão"
+},
+"area-chief": {
+"cat": "Áreas dos agentes",
+"svg": "<rect class=\"s\" x=\"3\" y=\"4\" width=\"18\" height=\"16\" rx=\"3.4\"/><path class=\"p\" d=\"M3 13h4.6l1.4 2.4h6l1.4-2.4H21v3.6a3.4 3.4 0 0 1-3.4 3.4H6.4A3.4 3.4 0 0 1 3 16.6z\"/>",
+"onde": "Pixel Chief of Staff"
+},
+"area-orquestrador": {
+"cat": "Áreas dos agentes",
+"svg": "<circle class=\"p\" cx=\"12\" cy=\"5\" r=\"2.6\"/><circle class=\"s\" cx=\"5.5\" cy=\"18.5\" r=\"2.6\"/><circle class=\"s\" cx=\"18.5\" cy=\"18.5\" r=\"2.6\"/><path class=\"pl\" d=\"M12 7.6v4.2\"/><path class=\"pl\" d=\"M12 11.8l-4.6 4.6\"/><path class=\"pl\" d=\"M12 11.8l4.6 4.6\"/>",
+"onde": "Pixel Orquestrador"
+},
+"area-geral": {
+"cat": "Áreas dos agentes",
+"svg": "<path class=\"s\" d=\"M12 3.5a8.5 8.5 0 0 0-7.4 12.7L3.5 20.5l4.4-1.1A8.5 8.5 0 1 0 12 3.5z\"/><circle class=\"p\" cx=\"8\" cy=\"12\" r=\"1.4\"/><circle class=\"p\" cx=\"12\" cy=\"12\" r=\"1.4\"/><circle class=\"p\" cx=\"16\" cy=\"12\" r=\"1.4\"/>",
+"onde": "Pixel Geral"
+}
+}

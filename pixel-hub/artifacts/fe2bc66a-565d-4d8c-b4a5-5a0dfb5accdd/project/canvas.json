@@ -1,0 +1,809 @@
+{
+ "v": 3,
+ "attachments": {},
+ "boards": {
+  "Main.dc.html": {
+   "h": 2100,
+   "page": "capa",
+   "title": "Capa e mapa das telas",
+   "w": 2144,
+   "x": 0,
+   "y": 0
+  },
+  "au-login.dc.html": {
+   "h": 1228,
+   "page": "acesso",
+   "title": "01 Entrar",
+   "w": 2144,
+   "x": 0,
+   "y": 0
+  },
+  "au-login-erro.dc.html": {
+   "h": 996,
+   "page": "acesso",
+   "title": "02 Entrar, senha errada",
+   "w": 2144,
+   "x": 2224,
+   "y": 0
+  },
+  "au-bloqueada.dc.html": {
+   "h": 996,
+   "page": "acesso",
+   "title": "03 Acesso bloqueado",
+   "w": 2144,
+   "x": 4448,
+   "y": 0
+  },
+  "au-esqueci.dc.html": {
+   "h": 996,
+   "page": "acesso",
+   "title": "04 Recuperar a senha",
+   "w": 2144,
+   "x": 6672,
+   "y": 0
+  },
+  "au-enviado.dc.html": {
+   "h": 996,
+   "page": "acesso",
+   "title": "05 Confira o seu e-mail",
+   "w": 2144,
+   "x": 8896,
+   "y": 0
+  },
+  "au-nova.dc.html": {
+   "h": 996,
+   "page": "acesso",
+   "title": "06 Crie uma senha nova",
+   "w": 2144,
+   "x": 11120,
+   "y": 0
+  },
+  "au-vencido.dc.html": {
+   "h": 996,
+   "page": "acesso",
+   "title": "07 Link vencido",
+   "w": 2144,
+   "x": 13344,
+   "y": 0
+  },
+  "au-convite.dc.html": {
+   "h": 1089,
+   "page": "acesso",
+   "title": "08 Primeiro acesso pelo convite",
+   "w": 2144,
+   "x": 15568,
+   "y": 0
+  },
+  "au-conv-exp.dc.html": {
+   "h": 996,
+   "page": "acesso",
+   "title": "09 Convite expirado",
+   "w": 2144,
+   "x": 17792,
+   "y": 0
+  },
+  "au-conv-usado.dc.html": {
+   "h": 996,
+   "page": "acesso",
+   "title": "10 Convite já usado",
+   "w": 2144,
+   "x": 20016,
+   "y": 0
+  },
+  "au-sem-lugar.dc.html": {
+   "h": 996,
+   "page": "acesso",
+   "title": "11 Empresa sem lugares",
+   "w": 2144,
+   "x": 22240,
+   "y": 0
+  },
+  "au-compra.dc.html": {
+   "h": 996,
+   "page": "acesso",
+   "title": "12 Confirmar o e-mail da compra",
+   "w": 2144,
+   "x": 24464,
+   "y": 0
+  },
+  "au-compra-senha.dc.html": {
+   "h": 996,
+   "page": "acesso",
+   "title": "13 Criar a senha da compra",
+   "w": 2144,
+   "x": 26688,
+   "y": 0
+  },
+  "au-ajuda.dc.html": {
+   "h": 996,
+   "page": "acesso",
+   "title": "14 Ajuda para entrar",
+   "w": 2144,
+   "x": 28912,
+   "y": 0
+  },
+  "onb-visao.dc.html": {
+   "h": 1254,
+   "page": "onboarding",
+   "title": "15 Visão geral",
+   "w": 2144,
+   "x": 0,
+   "y": 0
+  },
+  "onb-diag.dc.html": {
+   "h": 1906,
+   "page": "onboarding",
+   "title": "16 Diagnóstico em chat",
+   "w": 2144,
+   "x": 2224,
+   "y": 0
+  },
+  "onb-prep.dc.html": {
+   "h": 996,
+   "page": "onboarding",
+   "title": "17 Montando o diagnóstico",
+   "w": 2144,
+   "x": 4448,
+   "y": 0
+  },
+  "onb-res.dc.html": {
+   "h": 2603,
+   "page": "onboarding",
+   "title": "18 Diagnóstico visual",
+   "w": 2144,
+   "x": 6672,
+   "y": 0
+  },
+  "onb-agenda.dc.html": {
+   "h": 1322,
+   "page": "onboarding",
+   "title": "19 Agendamento do onboarding",
+   "w": 2144,
+   "x": 8896,
+   "y": 0
+  },
+  "inicio.dc.html": {
+   "h": 1562,
+   "page": "inicio",
+   "title": "20 Início",
+   "w": 2144,
+   "x": 0,
+   "y": 0
+  },
+  "inicio-agente.dc.html": {
+   "h": 1523,
+   "page": "inicio",
+   "title": "21 Início com agente",
+   "w": 2144,
+   "x": 2224,
+   "y": 0
+  },
+  "consultor-painel.dc.html": {
+   "h": 1158,
+   "page": "inicio",
+   "title": "22 Conversa do Consultor no painel",
+   "w": 2144,
+   "x": 4448,
+   "y": 0
+  },
+  "notificacoes.dc.html": {
+   "h": 1066,
+   "page": "inicio",
+   "title": "23 Notificações",
+   "w": 2144,
+   "x": 6672,
+   "y": 0
+  },
+  "trilha.dc.html": {
+   "h": 1433,
+   "page": "trilha",
+   "title": "24 Trilha",
+   "w": 2144,
+   "x": 0,
+   "y": 0
+  },
+  "trilha-consultor.dc.html": {
+   "h": 1276,
+   "page": "trilha",
+   "title": "25 Passo conduzido pelo Consultor",
+   "w": 2144,
+   "x": 2224,
+   "y": 0
+  },
+  "plano.dc.html": {
+   "h": 2031,
+   "page": "trilha",
+   "title": "26 Plano Agêntico",
+   "w": 2144,
+   "x": 4448,
+   "y": 0
+  },
+  "trilha-vb.dc.html": {
+   "h": 2143,
+   "page": "trilhav",
+   "title": "27 Trilha, versão final (B)",
+   "w": 2144,
+   "x": 0,
+   "y": 0
+  },
+  "trilha-vb2.dc.html": {
+   "h": 1966,
+   "page": "trilhav",
+   "title": "28 Trilha, versão B com abas",
+   "w": 2144,
+   "x": 2224,
+   "y": 0
+  },
+  "trilha-vb3.dc.html": {
+   "h": 1845,
+   "page": "trilhav",
+   "title": "29 Trilha, versão B alternativa",
+   "w": 2144,
+   "x": 4448,
+   "y": 0
+  },
+  "trilha-va.dc.html": {
+   "h": 2277,
+   "page": "trilhav",
+   "title": "30 Trilha, versão A: foco na etapa",
+   "w": 2144,
+   "x": 6672,
+   "y": 0
+  },
+  "trilha-vc.dc.html": {
+   "h": 1672,
+   "page": "trilhav",
+   "title": "31 Trilha, versão C: checklist guiado",
+   "w": 2144,
+   "x": 8896,
+   "y": 0
+  },
+  "base-abas.dc.html": {
+   "x": 0,
+   "y": 0,
+   "w": 2144,
+   "h": 1527,
+   "title": "32 Base de conhecimento (oficial), aba Aulas",
+   "page": "base"
+  },
+  "base-abas-aula.dc.html": {
+   "x": 2224,
+   "y": 0,
+   "w": 2144,
+   "h": 1040,
+   "title": "33 Base, aula aberta no painel lateral",
+   "page": "base"
+  },
+  "base-abas-col.dc.html": {
+   "x": 4448,
+   "y": 0,
+   "w": 2144,
+   "h": 1164,
+   "title": "34 Base (oficial), coleção",
+   "page": "base"
+  },
+  "base-abas-drawer.dc.html": {
+   "x": 6672,
+   "y": 0,
+   "w": 2144,
+   "h": 1233,
+   "title": "35 Base (oficial), drawer do item",
+   "page": "base"
+  },
+  "base-abas-busca.dc.html": {
+   "x": 8896,
+   "y": 0,
+   "w": 2144,
+   "h": 996,
+   "title": "36 Base em abas, busca",
+   "page": "base"
+  },
+  "base-central.dc.html": {
+   "h": 1249,
+   "page": "base",
+   "title": "37 Base de conhecimento, opção Central (testada)",
+   "w": 2144,
+   "x": 11120,
+   "y": 0
+  },
+  "base-central-busca.dc.html": {
+   "h": 996,
+   "page": "base",
+   "title": "38 Base, busca",
+   "w": 2144,
+   "x": 13344,
+   "y": 0
+  },
+  "base-colecao.dc.html": {
+   "h": 1052,
+   "page": "base",
+   "title": "39 Base, página da coleção",
+   "w": 2144,
+   "x": 15568,
+   "y": 0
+  },
+  "base-item.dc.html": {
+   "h": 2896,
+   "page": "base",
+   "title": "40 Base, página da aula",
+   "w": 2144,
+   "x": 17792,
+   "y": 0
+  },
+  "base-prompt.dc.html": {
+   "h": 1224,
+   "page": "base",
+   "title": "41 Base, página do prompt",
+   "w": 2144,
+   "x": 20016,
+   "y": 0
+  },
+  "base-painel.dc.html": {
+   "h": 996,
+   "page": "base",
+   "title": "42 Base de conhecimento, opção Painel (testada)",
+   "w": 2144,
+   "x": 22240,
+   "y": 0
+  },
+  "base-biblioteca.dc.html": {
+   "h": 1220,
+   "page": "base",
+   "title": "43 Base de conhecimento, biblioteca (primeira versão)",
+   "w": 2144,
+   "x": 24464,
+   "y": 0
+  },
+  "base-pilula.dc.html": {
+   "h": 2896,
+   "page": "base",
+   "title": "44 Base de conhecimento, página de pílula (anterior)",
+   "w": 2144,
+   "x": 26688,
+   "y": 0
+  },
+  "aula.dc.html": {
+   "h": 996,
+   "page": "base",
+   "title": "45 Player da aula",
+   "w": 2144,
+   "x": 28912,
+   "y": 0
+  },
+  "player-full.dc.html": {
+   "h": 996,
+   "page": "base",
+   "title": "46 Player expandido",
+   "w": 2144,
+   "x": 31136,
+   "y": 0
+  },
+  "agentes.dc.html": {
+   "h": 1087,
+   "page": "agentes",
+   "title": "47 Agentes",
+   "w": 2144,
+   "x": 0,
+   "y": 0
+  },
+  "ficha.dc.html": {
+   "h": 1609,
+   "page": "agentes",
+   "title": "48 Ficha do agente",
+   "w": 2144,
+   "x": 2224,
+   "y": 0
+  },
+  "consultor.dc.html": {
+   "h": 1033,
+   "page": "agentes",
+   "title": "49 Consultor, tela central",
+   "w": 2144,
+   "x": 4448,
+   "y": 0
+  },
+  "ab-1.dc.html": {
+   "h": 1119,
+   "page": "agentbuilder",
+   "title": "50 Agent Builder, passo 1",
+   "w": 2144,
+   "x": 0,
+   "y": 0
+  },
+  "ab-2.dc.html": {
+   "h": 996,
+   "page": "agentbuilder",
+   "title": "51 Agent Builder, coloque o agente online",
+   "w": 2144,
+   "x": 2224,
+   "y": 0
+  },
+  "ab-3.dc.html": {
+   "h": 996,
+   "page": "agentbuilder",
+   "title": "52 Agent Builder, identidade",
+   "w": 2144,
+   "x": 4448,
+   "y": 0
+  },
+  "ab-5.dc.html": {
+   "h": 996,
+   "page": "agentbuilder",
+   "title": "53 Agent Builder, ferramentas e skills",
+   "w": 2144,
+   "x": 6672,
+   "y": 0
+  },
+  "ab-8.dc.html": {
+   "h": 996,
+   "page": "agentbuilder",
+   "title": "54 Agent Builder, instalar o Starter Kit",
+   "w": 2144,
+   "x": 8896,
+   "y": 0
+  },
+  "ab-fim.dc.html": {
+   "h": 996,
+   "page": "agentbuilder",
+   "title": "55 Agente configurado",
+   "w": 2144,
+   "x": 11120,
+   "y": 0
+  },
+  "caso.dc.html": {
+   "h": 996,
+   "page": "celebracoes",
+   "title": "56 Caso real",
+   "w": 2144,
+   "x": 0,
+   "y": 0
+  },
+  "checkpoint.dc.html": {
+   "h": 996,
+   "page": "celebracoes",
+   "title": "57 Checkpoint comprovado",
+   "w": 2144,
+   "x": 2224,
+   "y": 0
+  },
+  "marco.dc.html": {
+   "h": 996,
+   "page": "celebracoes",
+   "title": "58 Bloco concluído",
+   "w": 2144,
+   "x": 4448,
+   "y": 0
+  },
+  "aprender-agenda.dc.html": {
+   "h": 1373,
+   "page": "aprender",
+   "title": "59 Mentorias, agenda",
+   "w": 2144,
+   "x": 0,
+   "y": 0
+  },
+  "aprender-handson.dc.html": {
+   "h": 1057,
+   "page": "aprender",
+   "title": "60 Mentorias, hands-on",
+   "w": 2144,
+   "x": 2224,
+   "y": 0
+  },
+  "aprender-mentorias.dc.html": {
+   "h": 1047,
+   "page": "aprender",
+   "title": "61 Mentorias técnicas",
+   "w": 2144,
+   "x": 4448,
+   "y": 0
+  },
+  "comunidade.dc.html": {
+   "h": 996,
+   "page": "comunidade",
+   "title": "62 Comunidade",
+   "w": 2144,
+   "x": 0,
+   "y": 0
+  },
+  "cases.dc.html": {
+   "h": 1366,
+   "page": "comunidade",
+   "title": "63 Cases",
+   "w": 2144,
+   "x": 2224,
+   "y": 0
+  },
+  "case.dc.html": {
+   "h": 1323,
+   "page": "comunidade",
+   "title": "64 Página do case",
+   "w": 2144,
+   "x": 4448,
+   "y": 0
+  },
+  "empresa.dc.html": {
+   "h": 1374,
+   "page": "conta",
+   "title": "65 Empresa",
+   "w": 2144,
+   "x": 0,
+   "y": 0
+  },
+  "conta.dc.html": {
+   "h": 1495,
+   "page": "conta",
+   "title": "66 Conta",
+   "w": 2144,
+   "x": 2224,
+   "y": 0
+  },
+  "suporte.dc.html": {
+   "h": 1748,
+   "page": "conta",
+   "title": "67 Suporte",
+   "w": 2144,
+   "x": 4448,
+   "y": 0
+  },
+  "suporte-chamado.dc.html": {
+   "h": 996,
+   "page": "conta",
+   "title": "68 Abrir um chamado",
+   "w": 2144,
+   "x": 6672,
+   "y": 0
+  },
+  "sair.dc.html": {
+   "h": 996,
+   "page": "conta",
+   "title": "69 Sair da conta",
+   "w": 2144,
+   "x": 8896,
+   "y": 0
+  },
+  "bloq.dc.html": {
+   "h": 1023,
+   "page": "conta",
+   "title": "70 Plano só Formação",
+   "w": 2144,
+   "x": 11120,
+   "y": 0
+  }
+ },
+ "createdOnFiles": {
+  "at": "2026-10-16T18:16:07Z",
+  "v": 1
+ },
+ "designSystems": [],
+ "launch": {
+  "page": "capa",
+  "view": "canvas"
+ },
+ "notes": {
+  "t_acesso": {
+   "x": 0,
+   "y": -300,
+   "text": "Acesso e entrada",
+   "kind": "title1",
+   "maxW": 31056,
+   "page": "acesso"
+  },
+  "t_onboarding": {
+   "x": 0,
+   "y": -300,
+   "text": "Onboarding",
+   "kind": "title1",
+   "maxW": 11040,
+   "page": "onboarding"
+  },
+  "t_inicio": {
+   "x": 0,
+   "y": -300,
+   "text": "Início e Consultor",
+   "kind": "title1",
+   "maxW": 8816,
+   "page": "inicio"
+  },
+  "t_trilha": {
+   "x": 0,
+   "y": -300,
+   "text": "Trilha e Plano",
+   "kind": "title1",
+   "maxW": 6592,
+   "page": "trilha"
+  },
+  "t_trilhav": {
+   "x": 0,
+   "y": -300,
+   "text": "Trilha, versão final e testes",
+   "kind": "title1",
+   "maxW": 11040,
+   "page": "trilhav"
+  },
+  "t_base": {
+   "x": 0,
+   "y": -300,
+   "text": "Base de conhecimento (oficial: abas verticais) e versões testadas",
+   "kind": "title1",
+   "maxW": 33280,
+   "page": "base"
+  },
+  "t_agentes": {
+   "x": 0,
+   "y": -300,
+   "text": "Agentes",
+   "kind": "title1",
+   "maxW": 6592,
+   "page": "agentes"
+  },
+  "t_agentbuilder": {
+   "x": 0,
+   "y": -300,
+   "text": "Agent Builder",
+   "kind": "title1",
+   "maxW": 13264,
+   "page": "agentbuilder"
+  },
+  "t_celebracoes": {
+   "x": 0,
+   "y": -300,
+   "text": "Caso real e celebrações",
+   "kind": "title1",
+   "maxW": 6592,
+   "page": "celebracoes"
+  },
+  "t_aprender": {
+   "x": 0,
+   "y": -300,
+   "text": "Mentorias",
+   "kind": "title1",
+   "maxW": 6592,
+   "page": "aprender"
+  },
+  "t_comunidade": {
+   "x": 0,
+   "y": -300,
+   "text": "Comunidade e Cases",
+   "kind": "title1",
+   "maxW": 6592,
+   "page": "comunidade"
+  },
+  "t_conta": {
+   "x": 0,
+   "y": -300,
+   "text": "Empresa, Conta, suporte e planos",
+   "kind": "title1",
+   "maxW": 13264,
+   "page": "conta"
+  }
+ },
+ "order": [
+  "Main.dc.html",
+  "au-login.dc.html",
+  "au-login-erro.dc.html",
+  "au-bloqueada.dc.html",
+  "au-esqueci.dc.html",
+  "au-enviado.dc.html",
+  "au-nova.dc.html",
+  "au-vencido.dc.html",
+  "au-convite.dc.html",
+  "au-conv-exp.dc.html",
+  "au-conv-usado.dc.html",
+  "au-sem-lugar.dc.html",
+  "au-compra.dc.html",
+  "au-compra-senha.dc.html",
+  "au-ajuda.dc.html",
+  "onb-visao.dc.html",
+  "onb-diag.dc.html",
+  "onb-prep.dc.html",
+  "onb-res.dc.html",
+  "onb-agenda.dc.html",
+  "inicio.dc.html",
+  "inicio-agente.dc.html",
+  "consultor-painel.dc.html",
+  "notificacoes.dc.html",
+  "trilha.dc.html",
+  "trilha-consultor.dc.html",
+  "plano.dc.html",
+  "trilha-vb.dc.html",
+  "trilha-vb2.dc.html",
+  "trilha-vb3.dc.html",
+  "trilha-va.dc.html",
+  "trilha-vc.dc.html",
+  "base-abas.dc.html",
+  "base-abas-aula.dc.html",
+  "base-abas-col.dc.html",
+  "base-abas-drawer.dc.html",
+  "base-abas-busca.dc.html",
+  "base-central.dc.html",
+  "base-central-busca.dc.html",
+  "base-colecao.dc.html",
+  "base-item.dc.html",
+  "base-prompt.dc.html",
+  "base-painel.dc.html",
+  "base-biblioteca.dc.html",
+  "base-pilula.dc.html",
+  "aula.dc.html",
+  "player-full.dc.html",
+  "agentes.dc.html",
+  "ficha.dc.html",
+  "consultor.dc.html",
+  "ab-1.dc.html",
+  "ab-2.dc.html",
+  "ab-3.dc.html",
+  "ab-5.dc.html",
+  "ab-8.dc.html",
+  "ab-fim.dc.html",
+  "caso.dc.html",
+  "checkpoint.dc.html",
+  "marco.dc.html",
+  "aprender-agenda.dc.html",
+  "aprender-handson.dc.html",
+  "aprender-mentorias.dc.html",
+  "comunidade.dc.html",
+  "cases.dc.html",
+  "case.dc.html",
+  "empresa.dc.html",
+  "conta.dc.html",
+  "suporte.dc.html",
+  "suporte-chamado.dc.html",
+  "sair.dc.html",
+  "bloq.dc.html"
+ ],
+ "pages": [
+  {
+   "id": "capa",
+   "name": "Capa"
+  },
+  {
+   "id": "acesso",
+   "name": "Acesso e entrada"
+  },
+  {
+   "id": "onboarding",
+   "name": "Onboarding"
+  },
+  {
+   "id": "inicio",
+   "name": "Início e Consultor"
+  },
+  {
+   "id": "trilha",
+   "name": "Trilha e Plano"
+  },
+  {
+   "id": "trilhav",
+   "name": "Trilha, versão final e testes"
+  },
+  {
+   "id": "base",
+   "name": "Base de conhecimento (oficial: abas verticais) e versões testadas"
+  },
+  {
+   "id": "agentes",
+   "name": "Agentes"
+  },
+  {
+   "id": "agentbuilder",
+   "name": "Agent Builder"
+  },
+  {
+   "id": "celebracoes",
+   "name": "Caso real e celebrações"
+  },
+  {
+   "id": "aprender",
+   "name": "Mentorias"
+  },
+  {
+   "id": "comunidade",
+   "name": "Comunidade e Cases"
+  },
+  {
+   "id": "conta",
+   "name": "Empresa, Conta, suporte e planos"
+  }
+ ],
+ "title": "Pixel AI Hub, telas e regras de negócio"
+}

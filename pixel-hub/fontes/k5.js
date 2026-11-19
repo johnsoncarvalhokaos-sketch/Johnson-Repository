@@ -1,0 +1,68 @@
+/* ===================== Kanban, cartões c18 a c22 (04/11) =====================
+   Referências do Mobbin: Magnific Academy (cursos com módulos à esquerda e conteúdo com CTA à direita), SchoolAI (histórico de sessões
+   com data e "View"), Searchable e hilos (vídeo de boas-vindas no primeiro acesso, "Skip video", "você pode reabrir quando quiser"). */
+/* datas dos hands-on (exemplo: uma quinta por fase, às 19h) e a gravação do último encontro de cada fase (só a fase 1 tem, por ora) */
+const HO_FASES=[{d:"5",m:"nov",w:"Qui",h:"19h",dl:"quinta, 5 de novembro, às 19h"},{d:"12",m:"nov",w:"Qui",h:"19h",dl:"quinta, 12 de novembro, às 19h"},{d:"19",m:"nov",w:"Qui",h:"19h",dl:"quinta, 19 de novembro, às 19h"},{d:"26",m:"nov",w:"Qui",h:"19h",dl:"quinta, 26 de novembro, às 19h"}];
+const HO_GRAV=[{t:"Hands-on: primeira responsabilidade e skills",d:"09/10",dur:"1h24"},null,null,null];
+/* ---------- c18, c19, c20: hands-on e Trilha num bloco só, com a fase como seletor (seletor à esquerda, conteúdo à direita) ---------- */
+function hfBloco(){ const at=hoAtual(); const sel=S.hfSel||at; const n=sel, B=TV_BLOCOS[n-1]||{}, D=HO_FASES[n-1], G=HO_GRAV[n-1]; const atual=n===at, futura=n>at, feita=n<at;
+  const e=atual?(S.hoEst||"antes"):"antes", E=HO_EST[e]; const A=TV_ATUAL, pr=esProgresso();
+  const sel_=`<div class="hf-sel" role="tablist" aria-label="Fases" aria-orientation="vertical">${HO_ENC.map((t,k)=>{ const f=k+1, ok=f<at, cur=f===at;
+    return `<button role="tab" id="hf-t${f}" aria-selected="${f===n}" aria-controls="hf-p" tabindex="${f===n?0:-1}" data-act="hfSel" data-arg="${f}" class="${ok?"hf-ok":""} ${cur?"hf-cur":""}"><span class="hf-n">${ok?u("check"):f}</span><span class="hf-tx"><small>Fase ${f}${cur?", a sua":ok?", concluída":""}</small><b>${esc(t)}</b><em>${esc(HO_FASES[k].w)}, ${esc(HO_FASES[k].d)} ${esc(HO_FASES[k].m)}</em></span></button>`; }).join("")}</div>`;
+  const trilha=atual?`<div class="hf-tr"><div class="hf-trh"><span class="hf-k">Na Trilha</span><b>Etapa ${A.e+1} de ${(TV_BLOCOS[A.b-1]||{et:[]}).et.length}: ${esc(A.pilula)}</b></div><div class="hf-bar"><i style="width:${(pr.f/pr.n*100).toFixed(0)}%"></i></div><div class="hf-trf"><span>${pr.f} de ${pr.n} passos</span><button class="btn btn-g btn-sm" data-act="irTrilha">Continuar a trilha${u("arrow")}</button></div></div>`
+    :feita?`<div class="hf-tr nota"><span class="hf-k">Na Trilha</span><p>Fase concluída. Você pode rever as etapas quando quiser.</p><button class="lnk" data-act="irTrilha">Ver na Trilha${u("chev")}</button></div>`
+    :`<div class="hf-tr nota"><span class="hf-k">Na Trilha</span><p>As etapas desta fase abrem quando a Fase ${n-1} terminar.</p></div>`;
+  const alerta=futura?`<p class="hf-al" role="note"><svg class="u" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5M12 8v.5"/></svg>O ideal é começar a Fase ${n} na Trilha antes deste hands-on. Você pode participar mesmo assim.</p>`:"";
+  const grav=G?`<button class="btn btn-q btn-sm hf-gv" data-act="hfGrav" data-arg="${n}">${u("play")}Assistir à gravação do último encontro<span>${esc(G.d)}, ${esc(G.dur)}</span></button>`:`<span class="hf-gv vz">${u("play")}A gravação do último encontro aparece aqui depois do primeiro hands-on desta fase.</span>`;
+  const ho=`<div class="hf-ho"><div class="ho2-dt hf-dt" aria-label="${esc(D.dl)}"><span>${esc(D.w)}</span><b>${esc(D.d)}</b><span>${esc(D.m)}</span><i>${esc(D.h)}</i></div>
+    <div class="hf-hob"><p class="ho2-st"><span class="ho2-pill ${e}">${e==="aovivo"?"<i></i>":""}${atual?esc(E.st):"Hands-on desta fase"}</span></p><b>Hands-on ao vivo</b><span>Ao vivo, ${esc(D.dl)}. Na sua mão, fase por fase.</span>
+      <div class="hf-hoa"><button class="btn btn-p btn-sm hf-cta" data-act="${atual?E.ac[1]:"hfParticipar"}" data-arg="${n}">${atual?esc(E.ac[0]):"Participar"}${atual&&(e==="perto"||e==="aovivo")?u("arrow"):""}</button>${grav}</div></div></div>`;
+  return `<section class="hf" aria-labelledby="hf-h"><div class="sec-h"><h2 id="hf-h">Sua jornada, fase por fase</h2><button class="lnk" data-act="irAprender">Ver a agenda${u("chev")}</button></div>
+    <div class="hf-c">${sel_}<div class="hf-p" id="hf-p" role="tabpanel" aria-labelledby="hf-t${n}"><p class="hf-eb">Fase ${n}${atual?", a sua fase agora":feita?", concluída":""}</p><h3>${esc(HO_ENC[n-1])}</h3>${B.fim?`<p class="hf-d">Você sai com ${esc(B.fim.charAt(0).toLowerCase()+B.fim.slice(1))}</p>`:""}${alerta}${ho}${trilha}</div></div></section>`; }
+(function(){ const _ti=telaInicio; telaInicio=function(){ let h=_ti();
+  const a=h.indexOf('<section class="ho ho2"'); const c=h.indexOf('<section class="ce'); 
+  if(a>=0){ const fimHo=h.indexOf('</ol></section>',a)+15; h=h.slice(0,a)+hfBloco()+h.slice(fimHo); }
+  const c2=h.indexOf('<section class="ce'); if(c2>=0){ const fim=h.indexOf('</section>',c2)+10; h=h.slice(0,c2)+h.slice(fim); }
+  return h; }; })();
+document.addEventListener("keydown",e=>{ const t=e.target; if(!t||!t.closest||!t.closest(".hf-sel")||!["ArrowDown","ArrowUp"].includes(e.key)) return; e.preventDefault(); const n=Math.max(1,Math.min(4,(S.hfSel||hoAtual())+(e.key==="ArrowDown"?1:-1))); A.hfSel(n); requestAnimationFrame(()=>document.getElementById("hf-t"+n)?.focus()); });
+/* ---------- c22: "Como a Pixel funciona" no primeiro acesso, que pode ser pulado; pulou, vira pendência com dispensar ---------- */
+function bvLer(){ try{ return localStorage.getItem("pixel-bv-nao-mostrar")==="1"; }catch(e){ return false; } }
+function bvModal(){ return `<div class="trv-ov" data-act="bvPular"></div><div class="bv" role="dialog" aria-modal="true" aria-labelledby="bv-t"><button class="ibtn bv-x" data-act="bvPular" aria-label="Fechar">${u("x")}</button>
+  <p class="bv-k">Primeira vez aqui?</p><h2 id="bv-t">Como a Pixel funciona</h2><p class="bv-d">Antes de começar, veja com o Bruno como a plataforma funciona.</p>
+  <button class="hvd-th bv-th" data-act="bvAssistir" aria-label="Assistir ao vídeo Como a Pixel funciona"><span class="hvd-pl">${u("play")}</span></button>
+  <div class="bv-f"><label class="bv-ck"><input type="checkbox" id="bv-ck" ${S.bvNao?"checked":""} onchange="S.bvNao=this.checked"> Não mostrar novamente</label><div class="bv-a"><button class="btn btn-q" data-act="bvPular">Pular por agora</button><button class="btn btn-p" data-act="bvAssistir">${u("play")}Assistir agora</button></div></div>
+  <p class="bv-n">Se pular, o vídeo fica nas suas pendências do Início.</p></div>`; }
+function bvFechar(viu){ S.bvAberto=false; S.bvVisto=true; if(S.bvNao){ try{ localStorage.setItem("pixel-bv-nao-mostrar","1"); }catch(e){} } if(!viu) S.bvPend=true; R(); }
+/* pendências do Início: onboarding e vídeo num grupo só, cada uma com a sua ação e com dispensar */
+function homePend(){ const it=[]; if(!(S.onbOk||S.profile==="membro")) it.push(`<li><span class="pd-ic">${CAL_IC}</span><div><b>Agende o seu onboarding</b><small>Uma conversa com o time Pixel para começar a jornada pelo caminho certo.</small></div><div class="pd-a"><button class="btn btn-g btn-sm" data-act="onbAgendar">Agendar</button><button class="btn btn-q btn-sm" data-act="onbJa">Já agendei</button></div></li>`);
+  if(S.bvPend&&!S.bvDisp) it.push(`<li><span class="pd-ic">${u("play")}</span><div><b>Assista: Como a Pixel funciona</b><small>O vídeo do Bruno que você pulou no primeiro acesso.</small></div><div class="pd-a"><button class="btn btn-g btn-sm" data-act="bvAssistir">Assistir</button><button class="ibtn pd-x" data-act="bvDispensar" aria-label="Dispensar esta pendência">${u("x")}</button></div></li>`);
+  return it.length?`<section class="pd" aria-labelledby="pd-h"><h2 id="pd-h" class="pd-h">Pendências <em>${it.length}</em></h2><ul>${it.join("")}</ul></section>`:""; }
+(function(){ const _ti=telaInicio; telaInicio=function(){ let h=_ti(); h=h.replace(/<section class="hob"[\s\S]*?<\/section>/,""); const k=h.indexOf('<section class="hf"'); const g=h.indexOf('<div class="hgrid hst2"'); const at=g>=0&&g<k?g:k; if(at>=0) h=h.slice(0,at)+homePend()+h.slice(at); return h; }; })();
+(function(){ const _vw=view; view=function(){ const h=_vw(); return S.bvAberto?h+bvModal():h; }; })();
+Object.assign(A,{
+  hfSel:n=>{ S.hfSel=+n; R(); },
+  hfParticipar:n=>aviso(`Abre a sala do hands-on da Fase ${n}. No protótipo, fica só o aviso.`,"prototipo"),
+  hfGrav:n=>{ A.irAprender(); S.apTab="ho"; R(); aviso(`Gravação do último hands-on da Fase ${n}.`,"prototipo"); },
+  bvAssistir:()=>{ const ab=S.bvAberto; S.bvDisp=true; if(ab) bvFechar(true); else R(); aviso("Abre o vídeo do Bruno. No protótipo, o vídeo ainda não está disponível.","prototipo"); },
+  bvPular:()=>bvFechar(false),
+  bvDispensar:()=>{ S.bvDisp=true; R(); },
+  bvPrimeiro:()=>{ try{ localStorage.removeItem("pixel-bv-nao-mostrar"); }catch(e){} S.bvVisto=false; S.bvPend=false; S.bvDisp=false; S.bvNao=false; S.bvAberto=true; if(typeof painel==="function") painel(false); ir("home"); }
+});
+document.addEventListener("keydown",e=>{ if(e.key==="Escape"&&S.bvAberto) bvFechar(false); });
+/* abre no primeiro acesso ao Início, se a pessoa não marcou "Não mostrar novamente" */
+(function(){ const _ir=ir; ir=function(t){ if(t==="home"&&!S.bvVisto&&!S.bvAberto&&!bvLer()) S.bvAberto=true; return _ir.apply(this,arguments); }; })();
+(function(){ const abrir=()=>{ try{ if(S.scr==="home"&&!S.bvVisto&&!bvLer()){ S.bvAberto=true; R(); } }catch(e){} }; if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",()=>setTimeout(abrir,0),{once:true}); else setTimeout(abrir,0); })();
+/* ---------- c21: Mentorias com hands-on e mentorias técnicas separados, cada um com os próximos ao vivo e as gravações ---------- */
+function apHO2(){ const at=hoAtual(); const gr=AP_GR.filter(g=>/^Hands-on/.test(g[0]));
+  return `<div class="ap2"><section class="ap2-s"><h3>Próximos encontros ao vivo</h3><ul class="ap2-l">${HO_ENC.map((t,k)=>{ const D=HO_FASES[k], f=k+1; return `<li class="${f===at?"at":""}"><span class="ap2-dt"><small>${esc(D.w)}</small><b>${esc(D.d)}</b><small>${esc(D.m)}</small></span><div><small>Fase ${f}${f===at?", a sua":""}</small><b>${esc(t)}</b><span>Ao vivo, às ${esc(D.h)}${f>at?". O ideal é começar a fase na Trilha antes.":""}</span></div><button class="btn ${f===at?"btn-p":"btn-g"} btn-sm" data-act="hfParticipar" data-arg="${f}">${f===at?"Adicionar à agenda":"Participar"}</button></li>`; }).join("")}</ul></section>
+    <section class="ap2-s"><h3>Gravações dos hands-on</h3><ul class="ap2-g">${gr.map(([t,d,dur])=>`<li><button class="ce-vid ap-gv" data-act="aulaPorTitulo" data-arg="${esc(t)}"><span class="ce-th big"><span class="ce-play">${u("play")}</span><span class="ce-dur">${esc(dur)}</span></span><span class="ce-vt"><small>${esc(d)}</small><b>${esc(t.replace(/^Hands-on: /,""))}</b></span></button></li>`).join("")}${[2,3,4].map(f=>`<li class="vz"><span>${u("play")}</span><p><b>Fase ${f}</b>A gravação entra aqui depois do primeiro hands-on da fase.</p></li>`).join("")}</ul></section></div>`; }
+function apMT2(){ const ind=S.profile==="individual"; const tot=ind?3:12, usado=ind?1:3.5, livre=tot-usado; const gr=AP_GR.filter(g=>/^Mentoria/.test(g[0]));
+  return `<div class="ap2"><div class="ap-saldo ap2-saldo"><span class="ap-k">Seu saldo de mentoria</span><b class="ap-sn">${String(livre).replace(".",",")} h <small>de ${tot} h ${ind?"no seu plano":"compartilhadas pela empresa"}</small></b><div class="bar"><i style="width:${Math.round(livre/tot*100)}%"></i></div></div>
+    <section class="ap2-s"><h3>Próximos plantões ao vivo</h3><ul class="ap2-l">${AP_MT.map(([t,d,v],k)=>{ const m=d.match(/^([^,]+), (\d+)\/(\d+), às (\d+h)/); const mes=["","jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"]; return `<li><span class="ap2-dt mt"><small>${m?esc(m[1].slice(0,3)):""}</small><b>${m?+m[2]:""}</b><small>${m?mes[+m[3]]:""}</small></span><div><small>Mentoria técnica</small><b>${esc(t)}</b><span>Às ${m?m[4]:""}, 1 hora, ${v} vagas</span></div><button class="btn btn-g btn-sm" data-act="apAgendar" data-arg="${k}">${(S.apMt||[]).includes(k)?`${u("check")}Agendado`:`${u("calendar")}Agendar`}</button></li>`; }).join("")}</ul></section>
+    <section class="ap2-s"><h3>Gravações das mentorias</h3><ul class="ap2-g">${gr.map(([t,d,dur])=>`<li><button class="ce-vid ap-gv" data-act="aulaPorTitulo" data-arg="${esc(t)}"><span class="ce-th big"><span class="ce-play">${u("play")}</span><span class="ce-dur">${esc(dur)}</span></span><span class="ce-vt"><small>${esc(d)}</small><b>${esc(t.replace(/^Mentoria: /,""))}</b></span></button></li>`).join("")}</ul></section></div>`; }
+(function(){ const _ta=telaAprender; telaAprender=function(){ const tab=S.apTab==="mentorias"?"mt":S.apTab==="handson"?"ho":S.apTab||"ho"; const keep=S.apTab; S.apTab="agenda"; let h=_ta(); S.apTab=keep;
+  const tabs=[["ho","Hands-on ao vivo"],["mt","Mentorias técnicas"],["agenda","Agenda completa"]];
+  h=h.replace(/<div class="tabs ap-tabs" role="tablist">[\s\S]*?<\/div>\s*<div class="ap-b">/,`<div class="tabs ap-tabs" role="tablist">${tabs.map(([k,t])=>`<button role="tab" aria-selected="${tab===k}" data-act="apIr" data-arg="${k}">${t}</button>`).join("")}</div>\n      <div class="ap-b">`);
+  if(tab!=="agenda"){ const i=h.indexOf('<div class="ap-b">'), j=h.lastIndexOf('</div>\n    </div></div></div></main></div>'); if(i>=0&&j>i) h=h.slice(0,i)+`<div class="ap-b">${tab==="ho"?apHO2():apMT2()}`+h.slice(j); }
+  return h.replace("Agenda, hands-on, mentorias técnicas e gravações","Hands-on, mentorias técnicas e gravações"); }; })();
+(function(){ const _a=A.apIr; A.apIr=k=>{ if(k==="mentorias"){ S.apTab="mt"; R(); return; } if(k==="ho"||k==="mt"||k==="agenda"){ S.apTab=k; R(); return; } _a(k); }; })();

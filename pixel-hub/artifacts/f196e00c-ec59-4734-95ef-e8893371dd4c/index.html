@@ -1,0 +1,527 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Checklist Pixel 2.0 — Cayo</title>
+<style>
+  /* Layout: single-column timeline of numbered request cards, chronological by send time.
+     Screenshot sits inside the card it was attached to; text-only requests skip the image slot. */
+  :root{
+    --bg:#f3f1ec;
+    --surface:#ffffff;
+    --surface-sunken:#eae7df;
+    --ink:#211f1a;
+    --ink-soft:#5c584e;
+    --line:#ddd8cc;
+    --accent:#0f8a7f;
+    --accent-ink:#ffffff;
+    --accent-soft:#e3f2ef;
+    --hold:#b8742f;
+    --hold-soft:#f6ead9;
+    --done-bg:#eef5ee;
+    --done-line:#bcd8bc;
+    --font-display:'Sora',system-ui,sans-serif;
+    --font-body:'IBM Plex Sans',system-ui,sans-serif;
+    --font-mono:'IBM Plex Mono',ui-monospace,monospace;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#17160f;
+      --surface:#201e17;
+      --surface-sunken:#161509;
+      --ink:#f1efe6;
+      --ink-soft:#b3ae9f;
+      --line:#38352a;
+      --accent:#35c9b8;
+      --accent-ink:#0b1715;
+      --accent-soft:#193330;
+      --hold:#e3a35c;
+      --hold-soft:#2e2414;
+      --done-bg:#16251b;
+      --done-line:#2d4a34;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#17160f;
+    --surface:#201e17;
+    --surface-sunken:#161509;
+    --ink:#f1efe6;
+    --ink-soft:#b3ae9f;
+    --line:#38352a;
+    --accent:#35c9b8;
+    --accent-ink:#0b1715;
+    --accent-soft:#193330;
+    --hold:#e3a35c;
+    --hold-soft:#2e2414;
+    --done-bg:#16251b;
+    --done-line:#2d4a34;
+    color-scheme: dark;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--font-body);
+    padding-left:max(16px, env(safe-area-inset-left,0px));
+    padding-right:max(16px, env(safe-area-inset-right,0px));
+  }
+  .wrap{max-width:760px;margin:0 auto;padding-block:48px 80px}
+
+  header{margin-bottom:36px}
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:12px;
+    letter-spacing:.09em;
+    text-transform:uppercase;
+    color:var(--accent);
+    display:flex;align-items:center;gap:8px;
+    margin-bottom:14px;
+  }
+  .eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent)}
+  h1{
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:clamp(28px,5vw,40px);
+    line-height:1.08;
+    margin:0 0 10px;
+    text-wrap:balance;
+  }
+  .sub{
+    color:var(--ink-soft);
+    font-size:15px;
+    line-height:1.6;
+    max-width:56ch;
+    margin:0;
+  }
+  .meta-row{
+    display:flex;flex-wrap:wrap;gap:10px;
+    margin-top:22px;
+  }
+  .meta-pill{
+    font-family:var(--font-mono);
+    font-size:12px;
+    border:1px solid var(--line);
+    background:var(--surface);
+    color:var(--ink-soft);
+    padding:6px 12px;
+    border-radius:99px;
+    white-space:nowrap;
+  }
+  .meta-pill b{color:var(--ink);font-weight:600}
+
+  .timeline{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+
+  .group{display:flex;flex-direction:column;gap:18px}
+
+  .group-header{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    margin:30px 0 4px;
+  }
+  .group:first-child .group-header{margin-top:0}
+  .group-header .g-index{
+    font-family:var(--font-mono);
+    font-size:12px;
+    color:var(--accent);
+    white-space:nowrap;
+  }
+  .group-header h2{
+    font-family:var(--font-display);
+    font-size:16px;
+    font-weight:600;
+    margin:0;
+    white-space:nowrap;
+  }
+  .group-header .g-count{
+    font-family:var(--font-mono);
+    font-size:11px;
+    color:var(--ink-soft);
+    white-space:nowrap;
+  }
+  .group-header::after{content:"";flex:1;height:1px;background:var(--line);min-width:16px}
+
+  .item{
+    position:relative;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:20px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    transition:opacity .15s ease, border-color .15s ease;
+  }
+  .item.done{
+    background:var(--done-bg);
+    border-color:var(--done-line);
+  }
+  .item.done .item-title{text-decoration:line-through;text-decoration-color:var(--ink-soft)}
+  .item.done .quote,.item.done img{opacity:.55}
+
+  .item-top{
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+  }
+  .num{
+    font-family:var(--font-mono);
+    font-size:12px;
+    color:var(--ink-soft);
+    min-width:42px;
+    padding-top:3px;
+    white-space:nowrap;
+  }
+  .checkbox{
+    appearance:none;
+    width:21px;height:21px;
+    min-width:21px;
+    border-radius:6px;
+    border:1.5px solid var(--line);
+    background:var(--surface-sunken);
+    cursor:pointer;
+    position:relative;
+    margin-top:1px;
+  }
+  .checkbox:checked{
+    background:var(--accent);
+    border-color:var(--accent);
+  }
+  .checkbox:checked::after{
+    content:"";
+    position:absolute;
+    left:6px;top:2px;
+    width:6px;height:11px;
+    border:solid var(--accent-ink);
+    border-width:0 2px 2px 0;
+    transform:rotate(40deg);
+  }
+  .checkbox:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+  .item-body{flex:1;min-width:0}
+  .item-title{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:17px;
+    line-height:1.3;
+    margin:0 0 6px;
+  }
+  .tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+  .tag{
+    font-family:var(--font-mono);
+    font-size:11px;
+    letter-spacing:.03em;
+    padding:3px 8px;
+    border-radius:99px;
+    background:var(--surface-sunken);
+    color:var(--ink-soft);
+  }
+  .tag.time{color:var(--ink)}
+  .tag.hold{background:var(--hold-soft);color:var(--hold)}
+  .tag.shot{background:var(--accent-soft);color:var(--accent)}
+
+  .quote{
+    font-size:14.5px;
+    line-height:1.6;
+    color:var(--ink-soft);
+    border-left:2px solid var(--line);
+    padding-left:12px;
+    margin:0;
+  }
+  .quote cite{
+    display:block;
+    font-style:normal;
+    font-family:var(--font-mono);
+    font-size:11px;
+    color:var(--ink-soft);
+    margin-top:6px;
+    opacity:.7;
+  }
+
+  .shot{
+    border-radius:10px;
+    overflow:hidden;
+    border:1px solid var(--line);
+    background:var(--surface-sunken);
+    line-height:0;
+  }
+  .shot img{display:block;width:100%;height:auto}
+
+  footer{
+    margin-top:44px;
+    padding-top:20px;
+    border-top:1px solid var(--line);
+    font-family:var(--font-mono);
+    font-size:12px;
+    color:var(--ink-soft);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+
+  @media (max-width:520px){
+    .item{padding:16px}
+    h1{font-size:26px}
+  }
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Pixel &amp; Dois Ponto Zero</div>
+    <h1>Pedidos de alteração — Cayo Syllos</h1>
+    <p class="sub">Checklist montado a partir da conversa de hoje no grupo, das 14h54 às 15h27, agrupado por tema da tela. Cada item traz a fala original e, quando enviado, o print que a acompanha.</p>
+    <div class="meta-row">
+      <span class="meta-pill"><b>16 out 2026</b> · 14h54–15h27</span>
+      <span class="meta-pill"><b>6</b> temas</span>
+      <span class="meta-pill"><b>14</b> itens</span>
+      <span class="meta-pill"><b>9</b> com print</span>
+    </div>
+  </header>
+
+  <div class="timeline" id="list">
+
+    <section class="group">
+      <div class="group-header"><span class="g-index">Tema 01</span><h2>Formação e Mentoria</h2><span class="g-count">2 itens</span></div>
+
+      <div class="item" data-id="1">
+        <div class="item-top">
+          <span class="num">14h54</span>
+          <input type="checkbox" class="checkbox" id="c1">
+        </div>
+        <div class="item-body">
+          <div class="tags"><span class="tag">sem print</span></div>
+          <h3 class="item-title">Separar "Formação" de hands-on/mentoria</h3>
+          <blockquote class="quote">"Então, eu só separaria a formação. Ao invés de juntar com hands-on e mentoria, deixar separado. E chamar essa aba de Mentorias talvez. A outra de 'Formação'. Talvez até colocar na trilha como uma tab."<cite>Cayo Syllos, 14h54–14h55</cite></blockquote>
+        </div>
+      </div>
+
+      <div class="item" data-id="2">
+        <div class="item-top">
+          <span class="num">14h56</span>
+          <input type="checkbox" class="checkbox" id="c2">
+        </div>
+        <div class="item-body">
+          <div class="tags"><span class="tag">sem print</span></div>
+          <h3 class="item-title">Formação é vendida à parte: travar as outras abas</h3>
+          <blockquote class="quote">"Simm, até pq não passamos pra vocês, mas temos um plano no qual vendemos ela separadamente. E as outras abas ficam travadas. Aí podemos deixar ela talvez dentro de trilha com uma sub-tab com 'jornada agêntica' e uma com 'aulas'."<cite>Cayo Syllos, 14h56–14h58</cite></blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section class="group">
+      <div class="group-header"><span class="g-index">Tema 02</span><h2>Home e consultor</h2><span class="g-count">1 item</span></div>
+
+      <div class="item" data-id="3">
+        <div class="item-top">
+          <span class="num">15h00</span>
+          <input type="checkbox" class="checkbox" id="c3">
+        </div>
+        <div class="item-body">
+          <div class="tags"><span class="tag">sem print</span></div>
+          <h3 class="item-title">Atalho do consultor no WhatsApp pouco claro; tirar onboarding da home</h3>
+          <blockquote class="quote">"E o atalho para conversar com o consultor no wpp não ficou tão claro pra mim (...) acredito que pode ficar ou na home, logo no HEADER, ou então dentro do painel do consultor. Tiraria da home a parte de onboarding da empresa com horário, pq vamos ter acesso a essa informação — vai estar no Calendly."<cite>Cayo Syllos, 15h00–15h02</cite></blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section class="group">
+      <div class="group-header"><span class="g-index">Tema 03</span><h2>Primeiro acesso do agente (Hermes)</h2><span class="g-count">4 itens</span></div>
+
+      <div class="item" data-id="4">
+        <div class="item-top">
+          <span class="num">15h05</span>
+          <input type="checkbox" class="checkbox" id="c4">
+        </div>
+        <div class="item-body">
+          <div class="tags"><span class="tag shot">print</span></div>
+          <h3 class="item-title">Explicar o que é o Hermes antes de "Coloque o agente online"</h3>
+          <blockquote class="quote">"Passei pra uma pessoa do time testar e passou um feedback que senti também. Faltou uma explicação sobre o que vamos fazer nessa etapa, o que é Hermes, e como que funciona esse processo."<cite>Cayo Syllos, 15h05</cite></blockquote>
+          <div class="shot"><img src="img/01.png" alt="Tela 'Coloque o agente online' com os passos de instalação do Hermes"></div>
+        </div>
+      </div>
+
+      <div class="item" data-id="7">
+        <div class="item-top">
+          <span class="num">15h18</span>
+          <input type="checkbox" class="checkbox" id="c7">
+        </div>
+        <div class="item-body">
+          <div class="tags"><span class="tag">sem print</span></div>
+          <h3 class="item-title">Etapa abriu sem necessidade</h3>
+          <blockquote class="quote">"Aqui só abriu pq eu abri, mas não precisava."<cite>Cayo Syllos, 15h18</cite></blockquote>
+        </div>
+      </div>
+
+      <div class="item" data-id="8">
+        <div class="item-top">
+          <span class="num">15h20</span>
+          <input type="checkbox" class="checkbox" id="c8">
+        </div>
+        <div class="item-body">
+          <div class="tags"><span class="tag shot">print</span></div>
+          <h3 class="item-title">Levar ao onboarding do starter kit em vez de só "testar"</h3>
+          <blockquote class="quote">"Aqui ao invés de apenas 'testar', levar o usuário para seguir o onboarding do starter kit."<cite>Cayo Syllos, 15h20</cite></blockquote>
+          <div class="shot"><img src="img/04.png" alt="Passos 'Importe no Hermes' e 'Teste no Telegram' concluídos"></div>
+        </div>
+      </div>
+
+      <div class="item" data-id="9">
+        <div class="item-top">
+          <span class="num">15h23</span>
+          <input type="checkbox" class="checkbox" id="c9">
+        </div>
+        <div class="item-body">
+          <div class="tags"><span class="tag shot">print</span></div>
+          <h3 class="item-title">Tirar a cara de botão de "A conectar" na ativação das ferramentas</h3>
+          <blockquote class="quote">"Aqui tá com cara de botão para conectar. Tiraria isso e focaria, na última etapa, em explicar pra ele seguir o onboarding do starter kit e seguir."<cite>Cayo Syllos, 15h23</cite></blockquote>
+          <div class="shot"><img src="img/05.png" alt="Tela 'Depois: ativação das ferramentas' com status A conectar"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="group">
+      <div class="group-header"><span class="g-index">Tema 04</span><h2>Ferramentas e Skills</h2><span class="g-count">2 itens</span></div>
+
+      <div class="item" data-id="5">
+        <div class="item-top">
+          <span class="num">15h09</span>
+          <input type="checkbox" class="checkbox" id="c5">
+        </div>
+        <div class="item-body">
+          <div class="tags"><span class="tag shot">print</span></div>
+          <h3 class="item-title">Dividir melhor "Ferramentas" e "Skills"</h3>
+          <blockquote class="quote">"Pessoal clicou no 'adicionar' das skills para adicionar uma ferramenta. Acho que faltou uma divisão mais clara."<cite>Cayo Syllos, 15h09</cite></blockquote>
+          <div class="shot"><img src="img/02.png" alt="Tela com listas de Ferramentas e Skills do agente"></div>
+        </div>
+      </div>
+
+      <div class="item" data-id="6">
+        <div class="item-top">
+          <span class="num">15h14</span>
+          <input type="checkbox" class="checkbox" id="c6">
+        </div>
+        <div class="item-body">
+          <div class="tags"><span class="tag shot">print</span></div>
+          <h3 class="item-title">Modal "Adicionar skills": recomendar com base no definido + opção de pular</h3>
+          <blockquote class="quote">"Aqui vamos deixar as skills recomendadas com base no que ele definiu? Acho melhor pra ele não sair querendo 'ter tudo' e se perder. E talvez com uma opção de 'ver todas' para acessar mais." — "Uma ação de pular aqui também seria bom. Entendo que essa etapa é opcional, certo?"<cite>Cayo Syllos, 15h14–15h15</cite></blockquote>
+          <div class="shot"><img src="img/03.png" alt="Modal Adicionar skills com lista de capacidades extras"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="group">
+      <div class="group-header"><span class="g-index">Tema 05</span><h2>Pixel Chief of Staff (sidebar)</h2><span class="g-count">2 itens</span></div>
+
+      <div class="item" data-id="10">
+        <div class="item-top">
+          <span class="num">15h24</span>
+          <input type="checkbox" class="checkbox" id="c10">
+        </div>
+        <div class="item-body">
+          <div class="tags"><span class="tag shot">print</span></div>
+          <h3 class="item-title">Agente não deveria poder "pausar" nem ficar fixado na lateral</h3>
+          <blockquote class="quote">"E não faz sentido pausar e nem ele ficar na aba lateral pinado."<cite>Cayo Syllos, 15h24</cite></blockquote>
+          <div class="shot"><img src="img/06.png" alt="Card do agente Pixel Chief of Staff com status Pausado"></div>
+        </div>
+      </div>
+
+      <div class="item" data-id="11">
+        <div class="item-top">
+          <span class="num">15h25</span>
+          <input type="checkbox" class="checkbox" id="c11">
+        </div>
+        <div class="item-body">
+          <div class="tags"><span class="tag shot">print</span></div>
+          <h3 class="item-title">Não faz sentido "registrar" um agente que já existe</h3>
+          <blockquote class="quote">"E não faz sentido registrar agente existente."<cite>Cayo Syllos, 15h25</cite></blockquote>
+          <div class="shot"><img src="img/07.png" alt="Menu lateral com Pixel Chief of Staff fixado acima de Início"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="group">
+      <div class="group-header"><span class="g-index">Tema 06</span><h2>Trilha — Rodar num caso real</h2><span class="g-count">3 itens</span></div>
+
+      <div class="item" data-id="12">
+        <div class="item-top">
+          <span class="num">15h26</span>
+          <input type="checkbox" class="checkbox" id="c12">
+        </div>
+        <div class="item-body">
+          <div class="tags"><span class="tag shot">print</span></div>
+          <h3 class="item-title">Explicar o passo "Rodar num caso real"</h3>
+          <blockquote class="quote">"Aqui faltou só a explicação do passo."<cite>Cayo Syllos, 15h26</cite></blockquote>
+          <div class="shot"><img src="img/08.png" alt="Card 'Rodar num caso real', passo 4 de 7, com lembrete e mentoria técnica"></div>
+        </div>
+      </div>
+
+      <div class="item" data-id="13">
+        <div class="item-top">
+          <span class="num">15h26</span>
+          <input type="checkbox" class="checkbox" id="c13">
+        </div>
+        <div class="item-body">
+          <div class="tags"><span class="tag">sem print</span></div>
+          <h3 class="item-title">Trocar o bloco "Lembrete" por algo mais descritivo</h3>
+          <blockquote class="quote">"Ao invés de 'para não esquecer', colocaria apenas um bloco descritivo colocando: 'O que você vai fazer agora'. Acredito que isso já vai ajudar a deixar mais clean."<cite>Cayo Syllos, 15h26 — sobre o card acima</cite></blockquote>
+        </div>
+      </div>
+
+      <div class="item" data-id="14">
+        <div class="item-top">
+          <span class="num">15h27</span>
+          <input type="checkbox" class="checkbox" id="c14" disabled>
+        </div>
+        <div class="item-body">
+          <div class="tags"><span class="tag shot">print</span><span class="tag hold">manter como está</span></div>
+          <h3 class="item-title">Versão detalhada do "Rodar num caso real": manter como está</h3>
+          <blockquote class="quote">"E deixaria da mesma forma aqui (nessa visualização ficou mais confusa)."<cite>Cayo Syllos, 15h27 — sobre uma proposta alternativa de layout</cite></blockquote>
+          <div class="shot"><img src="img/09.png" alt="Versão detalhada do card 'Rodar num caso real' em três colunas"></div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    <span>Extraído do WhatsApp em 16 out 2026</span>
+    <span id="progress">0 de 13 marcados</span>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var boxes = Array.from(document.querySelectorAll('.checkbox:not([disabled])'));
+  var progress = document.getElementById('progress');
+  function key(id){ return 'pixel-checklist-' + id; }
+  function updateProgress(){
+    var done = boxes.filter(function(b){ return b.checked; }).length;
+    progress.textContent = done + ' de ' + boxes.length + ' marcados';
+  }
+  boxes.forEach(function(box){
+    var item = box.closest('.item');
+    try {
+      var saved = localStorage.getItem(key(item.dataset.id));
+      if (saved === '1') { box.checked = true; item.classList.add('done'); }
+    } catch(e) {}
+    box.addEventListener('change', function(){
+      item.classList.toggle('done', box.checked);
+      try { localStorage.setItem(key(item.dataset.id), box.checked ? '1' : '0'); } catch(e) {}
+      updateProgress();
+    });
+  });
+  updateProgress();
+})();
+</script>
+
+</body></html>

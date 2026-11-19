@@ -1,0 +1,24 @@
+/* drawer da skill, com abas */
+.frd{ position:fixed; top:0; right:0; bottom:0; z-index:41; width:min(520px,94vw); display:flex; flex-direction:column; background:#fff; box-shadow:-24px 0 64px -32px rgba(21,22,28,.45); animation:frdIn .24s cubic-bezier(.2,0,0,1) both; }
+@keyframes frdIn{ from{ transform:translateX(24px); opacity:0; } to{ transform:none; opacity:1; } }
+.frd-h{ padding:20px 24px 0; border-bottom:1px solid var(--line); }
+.frd-top{ display:flex; align-items:center; gap:10px; } .frd-k{ font-size:13px; font-weight:600; color:var(--ink-2); } .frd-area{ height:24px; display:inline-flex; align-items:center; padding:0 9px; border-radius:999px; background:var(--sunken); font-size:12.5px; font-weight:600; color:var(--ink-2); }
+.frd-x{ margin-left:auto; width:36px; height:36px; }
+.frd-h h2{ margin:14px 0 18px; font-family:var(--f-d); font-size:24px; line-height:1.15; font-weight:600; letter-spacing:-.02em; text-wrap:balance; }
+.frd-tabs{ display:flex; gap:2px; margin:0 -6px; overflow-x:auto; }
+.frd-tabs button{ position:relative; flex-shrink:0; height:42px; padding:0 12px; border:0; background:none; font:inherit; font-size:14.5px; font-weight:500; color:var(--ink-2); cursor:pointer; border-radius:8px 8px 0 0; white-space:nowrap; }
+.frd-tabs button:hover{ color:var(--ink); } .frd-tabs button[aria-selected="true"]{ color:var(--ink); font-weight:600; } .frd-tabs button[aria-selected="true"]::after{ content:""; position:absolute; left:12px; right:12px; bottom:-1px; height:2px; border-radius:2px; background:var(--ink); }
+.frd-tabs button:focus-visible{ outline:2px solid var(--ink); outline-offset:-2px; }
+.frd-b{ flex:1; overflow-y:auto; padding:24px; }
+.frd-s + .frd-s{ margin-top:28px; } .frd-s h3{ margin:0 0 8px; font-size:13.5px; font-weight:600; color:var(--ink-2); } .frd-s > p{ margin:0; font-size:16px; line-height:1.6; color:var(--ink); text-wrap:pretty; }
+.frd-quando{ padding:14px 16px; border-radius:14px; background:var(--soft); border-left:3px solid var(--brand); font-size:15.5px !important; }
+.frd-long{ font-size:15.5px !important; line-height:1.7 !important; }
+.frd-vz{ margin:0; padding:16px 18px; border:1.5px dashed var(--line-2); border-radius:14px; font-size:14.5px; color:var(--ink-2); }
+.frd-file{ display:grid; grid-template-columns:40px minmax(0,1fr); gap:14px; align-items:center; padding:16px; border:1px solid var(--line); border-radius:14px; } .frd-fi{ width:40px; height:40px; border-radius:12px; background:var(--blue-bg); color:var(--blue-ink); display:grid; place-items:center; } .frd-fi .u{ width:19px; height:19px; }
+.frd-file b{ display:block; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:14.5px; } .frd-file small{ display:block; margin-top:2px; font-size:14px; color:var(--ink-2); }
+.frd-steps{ margin:18px 0 0; padding-left:20px; display:flex; flex-direction:column; gap:8px; } .frd-steps li{ font-size:15px; line-height:1.55; }
+.frd-usos{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px; } .frd-usos button{ display:grid; grid-template-columns:28px minmax(0,1fr) 16px; gap:12px; align-items:center; width:100%; padding:14px 16px; border:1px solid var(--line); border-radius:14px; background:#fff; font:inherit; text-align:left; cursor:pointer; color:var(--ink); } .frd-usos button:hover{ border-color:var(--hover-line); }
+.frd-usos b{ display:block; font-size:15px; } .frd-usos small{ display:block; margin-top:2px; font-size:14px; color:var(--ink-2); } .frd-usos .u{ width:15px; height:15px; color:var(--ink-2); }
+.frd-f{ display:flex; justify-content:flex-end; gap:8px; padding:16px 24px; border-top:1px solid var(--line); background:#fff; } .frd-f .btn{ gap:7px; } .frd-f .btn .u{ width:15px; height:15px; }
+@media (max-width:700px){ .frd{ width:100vw; } .frd-h{ padding:16px 18px 0; } .frd-b{ padding:20px 18px; } .frd-f{ padding:12px 18px; } .frd-f .btn{ flex:1; justify-content:center; } }
+@media (prefers-reduced-motion:reduce){ .frd{ animation:none; } }

@@ -1,0 +1,42 @@
+/* drawer, rodada de craft (03/11). craft-design: hierarquia por tamanho e espaço, sem caixa dentro de caixa, cor só para estado;
+   make-interfaces-feel-better: raios concêntricos, sombra para elevação e borda só para estrutura, números tabulares, alvos de 40 px. */
+.frd2{ width:min(560px,94vw); } .frd2.frd-w{ width:min(640px,94vw); }
+.frd2{ box-shadow:0 0 0 1px rgba(21,22,28,.06),-32px 0 80px -40px rgba(21,22,28,.5); }
+.frd-h2{ padding:18px 28px 0; border-bottom:1px solid var(--line); background:#fff; }
+.frd-bar{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:18px; } .frd-bar span{ font-size:13.5px; font-weight:600; color:var(--ink-2); } .frd-bar .frd-x{ width:40px; height:40px; margin:-6px -10px -6px 0; }
+.frd-id{ display:grid; grid-template-columns:56px minmax(0,1fr); gap:16px; align-items:center; }
+.frd-tile{ width:56px; height:56px; border-radius:16px; display:grid; place-items:center; } .frd-tile.sm{ width:40px; height:40px; border-radius:12px; }
+.frd-skico{ color:var(--blue-ink); display:grid; place-items:center; } .frd-skico .u{ width:26px; height:26px; }
+.frd-id h2{ margin:0; font-family:var(--f-d); font-size:28px; line-height:1.1; font-weight:600; letter-spacing:-.025em; text-wrap:balance; }
+.frd-lede2{ margin:16px 0 0; font-size:16px; line-height:1.6; color:var(--ink-2); text-wrap:pretty; }
+.frd-nums{ display:grid; grid-template-columns:repeat(auto-fit,minmax(96px,1fr)); gap:4px; margin:20px 0 0; padding:14px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.frd-nums div{ display:flex; flex-direction:column-reverse; gap:2px; } .frd-nums dd{ margin:0; font-family:var(--f-d); font-size:24px; line-height:1; font-weight:600; font-variant-numeric:tabular-nums; } .frd-nums dt{ font-size:13px; color:var(--ink-2); }
+.frd-meta{ display:flex; align-items:center; gap:8px; margin:14px 0 0; font-size:14px; color:var(--ink-2); } .frd-meta .u{ width:16px; height:16px; flex-shrink:0; color:var(--ok); }
+.frd2 .frd-tabs{ margin:18px -8px 0; } .frd2 .frd-tabs button{ height:46px; font-size:15px; } .frd2 .frd-tabs em{ margin-left:6px; font-style:normal; font-size:12.5px; font-weight:700; padding:1px 7px; border-radius:999px; background:var(--sunken); color:var(--ink-2); font-variant-numeric:tabular-nums; }
+.frd-b2{ padding:28px; }
+/* responsabilidades e blocos: lista numerada, sem caixas */
+.frd-items{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; }
+.frd-items > li{ display:grid; grid-template-columns:32px minmax(0,1fr); gap:16px; padding:22px 0; border-bottom:1px solid var(--line); } .frd-items > li:first-child{ padding-top:0; } .frd-items > li:last-child{ border-bottom:0; }
+.frd-n{ width:32px; height:32px; border-radius:50%; background:var(--ink); color:#fff; display:grid; place-items:center; font-size:14px; font-weight:700; font-variant-numeric:tabular-nums; }
+.frd-it{ display:flex; align-items:center; flex-wrap:wrap; gap:8px 10px; min-height:32px; } .frd-it b{ font-size:17px; font-weight:600; line-height:1.3; }
+.frd-items > li > div > p{ margin:6px 0 0; font-size:15px; line-height:1.6; color:var(--ink-2); }
+.frd-sks{ list-style:none; margin:14px 0 0; padding:0; display:flex; flex-direction:column; gap:2px; }
+.frd-sk{ display:grid; grid-template-columns:28px minmax(0,1fr) 16px; gap:12px; align-items:start; width:100%; padding:10px 12px; margin:0 -12px; width:calc(100% + 24px); border:0; border-radius:12px; background:none; font:inherit; text-align:left; cursor:pointer; color:var(--ink); transition:background-color .15s; }
+.frd-sk:hover{ background:var(--soft); } .frd-sk.st{ grid-template-columns:28px minmax(0,1fr); cursor:default; } .frd-sk.st:hover{ background:none; } .frd-sk > .u{ width:16px; height:16px; color:var(--ink-2); margin-top:6px; }
+.frd-ski{ width:28px; height:28px; border-radius:8px; background:var(--blue-bg); color:var(--blue-ink); display:grid; place-items:center; } .frd-ski .u{ width:15px; height:15px; }
+.frd-sk b{ display:block; font-size:15px; font-weight:600; line-height:1.35; } .frd-sk small{ display:block; margin-top:3px; font-size:14px; line-height:1.5; color:var(--ink-2); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+.frd-ft{ display:flex; align-items:center; flex-wrap:wrap; gap:8px 12px; margin:12px 0 0; font-size:14px; color:var(--ink-2); }
+.frd-ft .fr-modo{ height:26px; font-size:13px; }
+/* outras abas */
+.frd-b2 .frd-list li{ padding:18px 0; } .frd-b2 .frd-list b{ font-size:16px; } .frd-b2 .frd-list span{ font-size:15px; }
+.frd-rot2{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; } .frd-rot2 li{ display:grid; grid-template-columns:36px minmax(0,1fr); gap:14px; align-items:start; padding:16px 0; border-bottom:1px solid var(--line); } .frd-rot2 li:first-child{ padding-top:0; }
+.frd-rot2 .fr-ri{ width:36px; height:36px; } .frd-rot2 .fr-ri .u{ width:18px; height:18px; } .frd-rot2 b{ display:block; font-size:16px; font-weight:600; } .frd-rot2 small{ display:block; margin-top:3px; font-size:14.5px; line-height:1.5; color:var(--ink-2); }
+.frd-note{ margin:18px 0 0; font-size:14.5px; line-height:1.55; color:var(--ink-2); }
+.frd-b2 .frd-check li, .frd-b2 .frd-num li{ font-size:16px; } .frd-b2 .frd-check, .frd-b2 .frd-num{ gap:18px; }
+.frd-s2 + .frd-s2{ margin-top:32px; } .frd-s2 h3{ margin:0 0 10px; font-size:14px; font-weight:600; color:var(--ink-2); } .frd-s2 > p{ margin:0; font-size:17px; line-height:1.6; color:var(--ink); text-wrap:pretty; }
+.frd-quando2{ padding:16px 18px; border-radius:14px; background:var(--brand-bg); color:var(--ink) !important; font-size:16px !important; }
+.frd-long2{ margin:0; font-size:16px; line-height:1.75; color:var(--ink); text-wrap:pretty; }
+.frd-file2{ display:grid; grid-template-columns:48px minmax(0,1fr); gap:16px; align-items:center; padding:18px; border-radius:16px; background:var(--soft); } .frd-file2 .frd-fi{ width:48px; height:48px; border-radius:12px; background:#fff; } .frd-file2 b{ display:block; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:15.5px; } .frd-file2 small{ display:block; margin-top:3px; font-size:14.5px; color:var(--ink-2); }
+.frd-usos2{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; } .frd-usos2 button{ display:grid; grid-template-columns:40px minmax(0,1fr) 16px; gap:14px; align-items:center; width:100%; padding:14px 12px; margin:0 -12px; width:calc(100% + 24px); border:0; border-radius:14px; background:none; font:inherit; text-align:left; cursor:pointer; color:var(--ink); } .frd-usos2 button:hover{ background:var(--soft); } .frd-usos2 b{ display:block; font-size:16px; } .frd-usos2 small{ display:block; margin-top:2px; font-size:14.5px; color:var(--ink-2); } .frd-usos2 .u{ width:16px; height:16px; color:var(--ink-2); }
+.frd-f2{ padding:16px 28px; border-top:0; box-shadow:0 -1px 0 var(--line),0 -12px 24px -20px rgba(21,22,28,.25); } .frd-f2 .btn{ height:44px; padding:0 18px; font-size:15px; }
+@media (max-width:700px){ .frd2, .frd2.frd-w{ width:100vw; } .frd-h2{ padding:14px 18px 0; } .frd-b2{ padding:22px 18px; } .frd-f2{ padding:12px 18px; } .frd-id h2{ font-size:24px; } .frd-nums{ grid-template-columns:repeat(2,minmax(0,1fr)); } }

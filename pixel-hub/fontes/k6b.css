@@ -1,0 +1,21 @@
+/* agentes prontos como produto */
+.pc-g{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+.pc{ display:flex; flex-direction:column; padding:0; border:0; border-radius:24px; overflow:hidden; background:#fff; box-shadow:0 0 0 1px var(--line),0 12px 30px -26px rgba(21,22,28,.4); font:inherit; text-align:left; cursor:pointer; color:var(--ink); transition:box-shadow .2s, transform .2s cubic-bezier(.2,0,0,1); }
+.pc:hover{ box-shadow:0 0 0 1px var(--hover-line),0 18px 40px -24px rgba(21,22,28,.45); transform:translateY(-2px); } .pc:active{ transform:none; }
+.pc-hero{ position:relative; display:flex; align-items:flex-end; justify-content:space-between; height:132px; padding:20px 24px; background:radial-gradient(120% 140% at 100% 0%,#fff 0,transparent 55%),var(--pc-tint); }
+.pc-ic{ width:76px; height:76px; border-radius:22px; background:#fff; display:grid; place-items:center; box-shadow:0 8px 20px -12px rgba(21,22,28,.35); }
+.pc-tag{ align-self:flex-start; height:28px; display:inline-flex; align-items:center; padding:0 12px; border-radius:999px; background:var(--ink); color:#fff; font-size:13px; font-weight:650; }
+.pc-b{ display:flex; flex-direction:column; gap:6px; padding:20px 24px 0; } .pc-b > b{ font-family:var(--f-d); font-size:22px; font-weight:600; letter-spacing:-.015em; } .pc-d{ font-size:15px; line-height:1.55; color:var(--ink-2); }
+.pc-st{ display:flex; gap:20px; margin-top:10px; padding-top:14px; border-top:1px solid var(--line); } .pc-st > span{ display:flex; flex-direction:column; font-size:13px; color:var(--ink-2); } .pc-st b{ font-family:var(--f-d); font-size:20px; font-weight:600; color:var(--ink); font-variant-numeric:tabular-nums; }
+.pc-f{ display:flex; align-items:center; justify-content:space-between; margin-top:auto; padding:18px 24px 20px; font-size:14.5px; font-weight:600; } .pc-f .u{ width:16px; height:16px; transition:transform .15s; } .pc:hover .pc-f .u{ transform:translateX(3px); }
+/* Segundo Cérebro: bloco próprio, horizontal, sem cara de agente */
+.scb{ display:grid; grid-template-columns:64px minmax(0,1fr) auto; gap:20px; align-items:center; width:100%; padding:24px; border:0; border-radius:20px; background:linear-gradient(110deg,var(--soft),#fff 65%); box-shadow:0 0 0 1px var(--line); font:inherit; text-align:left; cursor:pointer; color:var(--ink); transition:box-shadow .2s; }
+.scb:hover{ box-shadow:0 0 0 1px var(--hover-line),0 10px 24px -18px rgba(21,22,28,.4); }
+.scb-ic{ width:64px; height:64px; border-radius:18px; background:#fff; box-shadow:0 0 0 1px var(--line); display:grid; place-items:center; color:var(--ink); } .scb-ic .u{ width:30px; height:30px; stroke-width:1.6; }
+.scb-b > b{ display:block; font-size:18px; font-weight:600; } .scb-b > span{ display:block; margin-top:4px; font-size:14.5px; line-height:1.55; color:var(--ink-2); max-width:70ch; }
+.scb-z{ display:flex !important; gap:6px; margin-top:12px !important; } .scb-z span{ height:26px; display:inline-flex; align-items:center; padding:0 10px; border-radius:999px; background:#fff; box-shadow:0 0 0 1px var(--line); font-size:13px; font-weight:600; color:var(--ink); }
+/* templates iniciais: mais simples, com etiqueta */
+.tpl-tag{ display:inline-flex !important; align-items:center; height:22px; margin:4px 0 2px; padding:0 8px; border-radius:7px; background:var(--sunken); font-size:12px !important; font-weight:650; color:var(--ink-2) !important; white-space:nowrap; width:max-content; }
+.fz-acb > span:not(.tpl-tag){ margin-top:0 !important; }
+.fz-ac .fz-aic{ background:var(--sunken) !important; }
+@media (max-width:900px){ .pc-g{ grid-template-columns:minmax(0,1fr); } .scb{ grid-template-columns:48px minmax(0,1fr); } .scb .fz-vd{ display:none; } .scb-ic{ width:48px; height:48px; } }

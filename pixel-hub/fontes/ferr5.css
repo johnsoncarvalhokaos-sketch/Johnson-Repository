@@ -1,0 +1,16 @@
+/* c02: submenu da Trilha no menu */
+.ni-subs{ display:flex; flex-direction:column; gap:1px; margin:2px 0 4px 26px; padding-left:12px; border-left:1px solid var(--line); }
+.ni-sub{ display:flex; align-items:center; height:34px; padding:0 10px; border:0; border-radius:9px; background:none; font:inherit; font-size:14px; font-weight:500; color:var(--ink-2); text-align:left; cursor:pointer; }
+.ni-sub:hover{ background:rgba(21,22,28,.05); color:var(--ink); } .ni-sub.on{ color:var(--ink); font-weight:600; background:#fff; box-shadow:0 0 0 1px var(--line),0 1px 2px rgba(21,22,28,.05); }
+.side.rail:not(.aberto) .ni-subs{ display:none; } .side-open .side .ni-subs, .side-open .ni-subs{ display:flex; }
+.tv-tabs, .tr-tw{ display:none !important; }
+.tv > .bk5, .tv > .tvb, .bk2w .bk2{ margin-top:8px; }
+/* c07: página própria do template e da skill */
+.fr-pgw{ max-width:880px !important; }
+.fr-cr{ display:flex; align-items:center; flex-wrap:wrap; gap:6px; margin:0 0 18px; font-size:14px; color:var(--ink-2); } .fr-cr .lnk{ font-size:14px; padding:0; } .fr-cr .u{ width:13px; height:13px; } .fr-cr-at{ color:var(--ink); font-weight:600; }
+.frd.frd-pg{ position:static; width:auto !important; max-width:none; box-shadow:0 0 0 1px var(--line),0 12px 32px -24px rgba(21,22,28,.3) !important; border-radius:22px; overflow:hidden; animation:none !important; }
+.frd-pg .frd-h2{ padding:26px 36px 0; } .frd-pg .frd-b2{ padding:32px 36px; overflow:visible; } .frd-pg .frd-f2{ position:sticky; bottom:0; padding:16px 36px; }
+.frd-pg .frd-id h2{ font-size:34px; } .frd-pg .frd-tile{ width:64px; height:64px; border-radius:18px; } .frd-pg .frd-id{ grid-template-columns:64px minmax(0,1fr); }
+.frd-pg .frd-bar .frd-x .u{ display:none; } .frd-pg .frd-bar .frd-x::after{ content:"Voltar"; font-size:14px; font-weight:600; color:var(--ink-2); } .frd-pg .frd-bar .frd-x{ width:auto; padding:0 10px; }
+.frd-pgb{ width:40px; height:40px; margin:-6px 0; margin-left:auto; } .frd-bar .frd-pgb + .frd-x{ margin-left:0; } .frd-pgb .u{ width:17px; height:17px; }
+@media (max-width:700px){ .frd-pg .frd-h2{ padding:20px 18px 0; } .frd-pg .frd-b2{ padding:22px 18px; } .frd-pg .frd-f2{ padding:12px 18px; } .frd-pg .frd-id h2{ font-size:26px; } }

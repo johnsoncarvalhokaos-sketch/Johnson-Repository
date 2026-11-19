@@ -1,0 +1,23 @@
+/* Agende o seu onboarding: faixa discreta (Xero), não compete com o próximo passo */
+.hob{ display:grid; grid-template-columns:40px minmax(0,1fr) auto; gap:14px; align-items:center; margin:0 0 32px; padding:14px 16px 14px 18px; border-radius:16px; background:#fff; box-shadow:0 0 0 1px var(--line); }
+.hob-ic{ width:40px; height:40px; border-radius:12px; background:var(--sunken); display:grid; place-items:center; color:var(--ink); } .hob-ic .u{ width:19px; height:19px; }
+.hob-b b{ display:block; font-size:15.5px; font-weight:600; } .hob-b p{ margin:2px 0 0; font-size:14px; color:var(--ink-2); line-height:1.45; }
+.hob-a{ display:flex; gap:4px; }
+/* vídeo do Bruno */
+.hvd{ margin-top:40px; } .hvd-c{ display:grid; grid-template-columns:220px minmax(0,1fr); gap:20px; align-items:center; width:100%; padding:12px; border:0; border-radius:18px; background:#fff; box-shadow:0 0 0 1px var(--line); font:inherit; text-align:left; cursor:pointer; color:var(--ink); transition:box-shadow .2s; }
+.hvd-c:hover{ box-shadow:0 0 0 1px var(--hover-line,#B9BBC6),0 10px 24px -18px rgba(21,22,28,.4); }
+.hvd-th{ aspect-ratio:16/9; border-radius:12px; background:radial-gradient(120% 120% at 80% 10%,#3A2A55 0,#15161C 60%); display:grid; place-items:center; }
+.hvd-pl{ width:46px; height:46px; border-radius:50%; background:rgba(255,255,255,.92); color:var(--ink); display:grid; place-items:center; transition:transform .15s cubic-bezier(.2,0,0,1); } .hvd-pl .u{ width:18px; height:18px; margin-left:2px; } .hvd-c:hover .hvd-pl{ transform:scale(1.06); }
+.hvd-tx small{ font-size:13.5px; font-weight:600; color:var(--ink-2); } .hvd-tx b{ display:block; margin-top:2px; font-size:17px; font-weight:600; } .hvd-tx span{ display:block; margin-top:4px; font-size:14.5px; line-height:1.5; color:var(--ink-2); max-width:56ch; }
+/* trava do Novo agente */
+.agsel.bloq{ color:var(--ink-2); } .agsel-lk{ margin-left:auto; display:inline-grid; place-items:center; color:var(--ink-2); } .agsel-lk .u{ width:15px; height:15px; }
+.side.rail:not(.aberto) .agsel-lk{ display:none; }
+.addb.bloq{ color:var(--ink-2); } .addb.bloq .u{ width:14px; height:14px; }
+.trv-ov{ position:fixed; inset:0; z-index:70; background:rgba(21,22,28,.32); animation:trvF .18s ease both; }
+.trv{ position:fixed; z-index:71; left:50%; top:50%; transform:translate(-50%,-50%); width:min(420px,calc(100vw - 32px)); padding:28px; border-radius:22px; background:#fff; box-shadow:0 24px 60px -24px rgba(21,22,28,.5),0 0 0 1px rgba(21,22,28,.05); text-align:center; animation:trvIn .22s cubic-bezier(.2,0,0,1) both; }
+@keyframes trvF{ from{ opacity:0; } } @keyframes trvIn{ from{ opacity:0; transform:translate(-50%,-48%) scale(.98); } }
+.trv-ic{ width:52px; height:52px; margin:0 auto 14px; border-radius:16px; background:var(--sunken); display:grid; place-items:center; color:var(--ink); } .trv-ic .u{ width:24px; height:24px; }
+.trv h2{ margin:0; font-family:var(--f-d); font-size:22px; font-weight:600; letter-spacing:-.015em; text-wrap:balance; } .trv p{ margin:8px 0 0; font-size:15px; line-height:1.55; color:var(--ink-2); text-wrap:pretty; }
+.trv-a{ display:flex; flex-direction:column; gap:6px; margin-top:22px; } .trv-a .btn{ width:100%; justify-content:center; }
+@media (max-width:700px){ .hob{ grid-template-columns:40px minmax(0,1fr); } .hob-a{ grid-column:1/-1; } .hvd-c{ grid-template-columns:minmax(0,1fr); } }
+@media (prefers-reduced-motion:reduce){ .trv, .trv-ov{ animation:none; } }

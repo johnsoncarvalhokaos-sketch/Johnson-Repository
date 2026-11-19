@@ -1,0 +1,16 @@
+/* c28: azul marca a fase atual ("agora"); o laranja fica para outros elementos */
+:root{ --agora:#1F4FCC; --agora-bg:#E8EFFF; --agora-forte:#2E6BFF; }
+.hf-eb, .hf-sel button.hf-cur .hf-tx small, .tvb-eb, .es-eb, .es-stepk2, .es-stepk span, .ce-h small{ color:var(--agora) !important; }
+.hf-sel button.hf-cur .hf-n{ background:var(--agora) !important; }
+.hf-bar i, .es-cbar i b, .es-prog i b{ background:var(--agora-forte) !important; }
+.es-stepk i b.at, .ho2-fs li.at .ho2-n, .es-p.at .es-n, .es-pl.at .es-n{ background:var(--agora) !important; }
+.tvb-e.atual .tvb-d, .tvb-e.atual > i, .tvb-e.atual::after{ background:var(--agora-forte) !important; border-color:var(--agora-forte) !important; }
+.ap2-l li.at .ap2-dt{ background:var(--agora-bg) !important; } .ap2-l li.at .ap2-dt small:first-child, .ap2-l li.at > div small{ color:var(--agora) !important; }
+.hp:not(.feito) .hp-b small{ color:var(--brand-ink); }
+/* c27: ícones das abas internas neutros, para não brigar com as cores dos agentes */
+.bk5-t .bk5-ic, .bk5-t > span:first-child:not(:only-child), .bk5-t [class*="tic"], .bk5-t > i{ background:var(--sunken) !important; color:var(--ink-2) !important; }
+.bk5-t .u{ color:var(--ink-2) !important; } .bk5-t.on .u{ color:var(--ink) !important; }
+/* c30: ícone de skill neutro e a área como etiqueta colorida */
+.fz-sci, .frd-ski, .fr-si{ background:var(--sunken) !important; color:var(--ink) !important; }
+.frd-skico{ color:var(--ink) !important; } .fsp .frd-tile, .frd2 .frd-tile[style*="blue-bg"]{ background:var(--sunken) !important; }
+.atag{ display:inline-flex; align-items:center; gap:6px; height:24px; padding:0 9px; border-radius:999px; background:#fff; box-shadow:0 0 0 1px var(--line); font-size:12.5px; font-weight:600; color:var(--ink-2); white-space:nowrap; } .atag i{ width:7px; height:7px; border-radius:50%; flex-shrink:0; }
