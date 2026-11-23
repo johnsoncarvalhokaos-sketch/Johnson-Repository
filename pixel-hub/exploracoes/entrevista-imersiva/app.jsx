@@ -32,8 +32,6 @@ const PASSOS = [
   { id: "conta", parte: 2, tipo: "conta", q: "Fiz a conta com o que você me contou. Confere?" },
 ];
 
-/* um envelope de fala a partir do texto que está surgindo: vogal abre, espaço e pontuação fecham */
-function nivelDaFala(ch) { if (!ch) return 0; if (/[.,!?:]/.test(ch)) return 0.05; if (/\s/.test(ch)) return 0.18; return /[aeiouáéíóúâêôãõ]/i.test(ch) ? 0.85 : 0.55; }
 
 function Presenca({ tipo, estado, nivel, emocao, size }) {
   const comum = { state: estado, level: nivel, emotion: emocao, size, theme: "light", calm: 0.35, "aria-label": "Consultor Pixel AI" };
@@ -69,16 +67,16 @@ function App() {
   const getNivel = useMemo(() => () => nivel.current, []);
   useEffect(() => { let raf; const loop = () => { tecla.current *= 0.9; if (estado === "listening") nivel.current = Math.min(1, tecla.current); raf = requestAnimationFrame(loop); }; raf = requestAnimationFrame(loop); return () => cancelAnimationFrame(raf); }, [estado]);
 
-  /* a fala surge letra a letra; o anel acompanha */
+  /* a fala aparece de uma vez, num fade; o anel "fala" por um instante junto (pedido de 23/11: o letra a letra demorava) */
   useEffect(() => {
     if (estado !== "speaking") return;
-    if (RM) { setVis(total); nivel.current = 0; setEstado(i >= PASSOS.length ? "idle" : "listening"); return; }
-    if (vis >= total) { nivel.current = 0; const t = setTimeout(() => { setEstado(i >= PASSOS.length ? "idle" : "listening"); campo.current?.focus(); }, 250); return () => clearTimeout(t); }
-    const all = fala.eco + fala.q, ch = all[vis];
-    nivel.current = nivelDaFala(ch);
-    const t = setTimeout(() => setVis(v => v + 1), /[.!?]/.test(ch) ? 260 : /,/.test(ch) ? 140 : 24);
-    return () => clearTimeout(t);
-  }, [estado, vis, total]);
+    setVis(total);
+    const fim = () => { nivel.current = 0; setEstado(i >= PASSOS.length ? "idle" : "listening"); campo.current?.focus(); };
+    if (RM) { fim(); return; }
+    const t0 = performance.now(); let raf;
+    const loop = now => { const t = (now - t0) / 1000; nivel.current = Math.max(0, (.55 + .35 * Math.sin(t * 17) * Math.sin(t * 5.3)) * (1 - t / 1.1)); if (t < .9) raf = requestAnimationFrame(loop); else fim(); };
+    raf = requestAnimationFrame(loop); return () => cancelAnimationFrame(raf);
+  }, [estado, total]);
 
   function dizer(eco, q, prox) {
     setFala({ eco: eco ? eco + " " : "", q }); setVis(0); setI(prox); setEstado("speaking");
@@ -152,7 +150,7 @@ function App() {
             </div>
           ) : (
             <>
-              <div className="ei-fala" aria-hidden="true"><span className="eco">{(fala.eco + fala.q).slice(0, Math.min(vis, fala.eco.length))}</span><span>{(fala.eco + fala.q).slice(fala.eco.length, vis)}</span>{dizendo && <i className="ei-cursor"></i>}</div>
+              <div className="ei-fala" key={fala.eco + fala.q} aria-hidden="true"><span className="eco">{(fala.eco + fala.q).slice(0, Math.min(vis, fala.eco.length))}</span><span>{(fala.eco + fala.q).slice(fala.eco.length, vis)}</span></div>
               <p className="ei-sr" aria-live="polite">{estado !== "speaking" || !dizendo ? fala.eco + fala.q : ""}</p>
 
               {i < PASSOS.length && !dizendo && estado !== "processing" && (
