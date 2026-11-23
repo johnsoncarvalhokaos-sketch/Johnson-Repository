@@ -114,7 +114,7 @@ function App() {
   const horas = (() => { const f = FREQ.find(x => x[0] === (r.ritmo || ritmo).freq), t = TEMPO.find(x => x[0] === (r.ritmo || ritmo).tempo); return f && t ? Math.round(f[1] * t[1]) : null; })();
   const legenda = { idle: i < 0 ? "Pronto quando você quiser" : "Entrevista concluída", speaking: "O Consultor está falando", listening: "Ouvindo você", processing: "Juntando com o que você já disse" }[estado];
   const parte = i < 0 ? -1 : i >= PASSOS.length ? 3 : passo.parte;
-  const TEMAS = [["princ", "Processo principal", "o processo principal", 4], ["proc", "Rotinas que se repetem", "as rotinas", 0], ["areas", "Áreas que mais pesam", "as áreas", 3], ["ferr", "Ferramentas", "as ferramentas", 1], ["ia", "IA hoje", "a IA hoje", 2]]; // o último número: a etapa que preenche o tema
+  const TEMAS = [["princ", "Processo", "o processo principal", 4], ["proc", "Rotinas", "as rotinas", 0], ["areas", "Áreas que mais pesam", "as áreas", 3], ["ferr", "Ferramentas", "as ferramentas", 1], ["ia", "IA hoje", "a IA hoje", 2]]; // o último número: a etapa que preenche o tema
   const cheio = k => Array.isArray(mem[k]) ? mem[k].length > 0 : !!mem[k], vazios = TEMAS.filter(([k]) => !cheio(k)), faltam = vazios.filter(t => i <= t[3]), nTemas = TEMAS.length - vazios.length;
   /* cada tema é um accordion; fica aberto só um: o que recebeu algo por último ou, sem isso, o primeiro preenchido */
   const abertoEf = aberto === undefined || (aberto && !cheio(aberto)) ? (TEMAS.find(([k]) => cheio(k)) || [])[0] : aberto;
@@ -212,13 +212,13 @@ function App() {
               </button>
             : <div className="ei-mem-t"><div className="ei-mem-tt"><h2>O que eu já entendi</h2><small>{nTemas} de {TEMAS.length} temas</small></div></div>}
           <div className="ei-mem-c" id="ei-mem-c" role="group" tabIndex={0} aria-label="O que eu já entendi, em detalhe">
-            {sec("princ", "Processo principal", horas != null ? `≈ ${horas} h por mês` : "1 processo", <><p className="ei-pt">{mem.princ}</p>{(rit.freq || rit.tempo) && <p className="ei-pm">{[rit.freq, rit.tempo && rit.tempo.toLowerCase() + " cada vez"].filter(Boolean).join(" · ")}</p>}{horas != null && <p className="ei-ph"><b>≈ {horas} h</b><span>por mês na mesa</span></p>}</>)}
-            {sec("proc", "Rotinas que se repetem", plural(mem.proc.length, "rotina", "rotinas"), <ul className="ei-rot">{mem.proc.map(x => <li key={x}>{x}</li>)}</ul>)}
+            {sec("princ", "Processo", horas != null ? `≈ ${horas} h/mês` : "1 processo", <>{horas != null && <p className="ei-ph"><b>≈ {horas} h</b><span>por mês</span></p>}<p className="ei-pt">{mem.princ}</p>{(rit.freq || rit.tempo) && <p className="ei-pm">{[rit.freq, rit.tempo && rit.tempo.toLowerCase() + " cada vez"].filter(Boolean).join(" · ")}</p>}</>)}
+            {sec("proc", "Rotinas", plural(mem.proc.length, "rotina", "rotinas"), <ul className="ei-rot">{mem.proc.map(x => <li key={x}>{x}</li>)}</ul>)}
             {sec("areas", "Áreas que mais pesam", plural(mem.areas.length, "área", "áreas"), <div className="ei-tags">{mem.areas.map(x => <em key={x} className="ei-tag a">{x}</em>)}</div>)}
             {sec("ferr", "Ferramentas", plural(mem.ferr.length, "ferramenta", "ferramentas"), <div className="ei-tags">{mem.ferr.map(x => <em key={x} className="ei-tag">{x}</em>)}</div>)}
             {sec("ia", "IA hoje", ["Ainda não usa", "De vez em quando", "Todo dia", "Já tem agentes"][IA.indexOf(mem.ia)] || mem.ia, <p className="ei-pv">{mem.ia}</p>)}
-            {faltam.length > 0 && <p className="ei-falta">{nTemas ? "Ainda vamos falar de: " : "Vou anotando aqui o que você contar: "}{faltam.map(t => t[2]).join(", ").replace(/, ([^,]*)$/, " e $1")}.</p>}
-            <p className="ei-nota">Exploração com dados de exemplo. O reconhecimento no texto é simulado.</p>
+            {!nTemas && <p className="ei-falta">Vou anotando aqui o que você contar.</p>}
+            <p className="ei-nota">Dados de exemplo.</p>
           </div>
         </aside>
       </main>
