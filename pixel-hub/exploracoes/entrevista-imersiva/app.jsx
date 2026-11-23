@@ -6,6 +6,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { VoiceRing, VoiceOrb } from "voice-ring";
 
+const PASSO_PALAVRA = 28; // ms entre o começo de uma palavra e o da seguinte
 const RM = typeof matchMedia === "function" && matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /* o que a demonstração reconhece no texto (exemplo: num produto real, quem extrai é o modelo) */
@@ -62,6 +63,8 @@ function App() {
   const passo = PASSOS[i];
   const total = fala.eco.length + fala.q.length;
   const dizendo = estado === "speaking" && vis < total;
+  /* a fala entra palavra a palavra, cada uma num fade curto que se sobrepõe à seguinte */
+  const palavras = useMemo(() => [...fala.eco.split(/\s+/).filter(Boolean).map(t => ({ t, eco: true })), ...fala.q.split(/\s+/).filter(Boolean).map(t => ({ t }))], [fala]);
 
   /* o anel lê este getter a cada quadro: fala do Consultor, digitação da pessoa ou silêncio */
   const getNivel = useMemo(() => () => nivel.current, []);
@@ -74,7 +77,8 @@ function App() {
     const fim = () => { nivel.current = 0; setEstado(i >= PASSOS.length ? "idle" : "listening"); campo.current?.focus(); };
     if (RM) { fim(); return; }
     const t0 = performance.now(); let raf;
-    const loop = now => { const t = (now - t0) / 1000; nivel.current = Math.max(0, (.55 + .35 * Math.sin(t * 17) * Math.sin(t * 5.3)) * (1 - t / 1.1)); if (t < .9) raf = requestAnimationFrame(loop); else fim(); };
+    const dur = (palavras.length * PASSO_PALAVRA + 700) / 1000; // o anel fala enquanto as palavras entram
+    const loop = now => { const t = (now - t0) / 1000, env = Math.sin(Math.min(1, t / dur) * Math.PI); nivel.current = Math.max(0, env * (.5 + .22 * Math.sin(t * 9) + .12 * Math.sin(t * 3.7))); if (t < dur) raf = requestAnimationFrame(loop); else fim(); };
     raf = requestAnimationFrame(loop); return () => cancelAnimationFrame(raf);
   }, [estado, total]);
 
@@ -150,7 +154,7 @@ function App() {
             </div>
           ) : (
             <>
-              <div className="ei-fala" key={fala.eco + fala.q} aria-hidden="true"><span className="eco">{(fala.eco + fala.q).slice(0, Math.min(vis, fala.eco.length))}</span><span>{(fala.eco + fala.q).slice(fala.eco.length, vis)}</span></div>
+              <div className="ei-fala" key={fala.eco + fala.q} aria-hidden="true">{palavras.map((w, k) => <span key={k}><span className={"ei-w" + (w.eco ? " eco" : "")} style={{ animationDelay: `${k * PASSO_PALAVRA}ms` }}>{w.t}</span>{" "}</span>)}</div>
               <p className="ei-sr" aria-live="polite">{estado !== "speaking" || !dizendo ? fala.eco + fala.q : ""}</p>
 
               {i < PASSOS.length && !dizendo && estado !== "processing" && (
