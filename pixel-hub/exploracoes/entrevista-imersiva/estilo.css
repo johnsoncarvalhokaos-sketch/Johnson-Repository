@@ -102,12 +102,20 @@ button{ font:inherit; color:inherit; cursor:pointer; }
 .ei-mem-tt b,.ei-mem-tt h2{ margin:0; font-family:var(--f-d); font-size:16.5px; line-height:1.2; font-weight:600; letter-spacing:0; }
 .ei-mem-tt small{ font-size:12.5px; color:var(--muted); font-variant-numeric:tabular-nums; }
 .ei-mem-c{ min-height:0; overflow-y:auto; display:flex; flex-direction:column; padding:4px 20px 20px; }
-.ei-g{ padding-block:16px; border-top:1px solid var(--line); }
-.ei-g-h{ display:flex; align-items:center; gap:8px; margin-bottom:8px; }
-.ei-g h3{ margin:0; font-family:var(--f-s); font-size:12.5px; line-height:1.4; font-weight:600; color:var(--muted); }
+.ei-g{ padding-block:4px; border-top:1px solid var(--line); }
+/* cabeçalho do accordion: nome do tema à esquerda, resumo e seta à direita quando fechado */
+.ei-g h3.ei-g-h{ margin:0; }
+.ei-ac{ display:flex; align-items:center; gap:8px; width:100%; min-height:44px; padding:0; border:0; background:none; text-align:left; font-family:var(--f-s); font-size:12.5px; line-height:1.4; font-weight:600; color:var(--muted); }
+.ei-ac:hover .ei-ac-n, .ei-g.on .ei-ac-n{ color:var(--ink); }
+.ei-ac-n{ flex:none; transition:color .15s; }
+.ei-ac-r{ min-width:0; margin-left:auto; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:13px; font-weight:500; color:var(--ink-2); font-variant-numeric:tabular-nums; }
+.ei-ac .ei-chev{ width:16px; height:16px; margin-left:0; color:var(--muted); }
+.ei-ac .ei-ac-n + .ei-chev, .ei-ac .ei-agora + .ei-chev{ margin-left:auto; }
+.ei-ac[aria-expanded="false"] .ei-chev{ transform:rotate(180deg); }
+.ei-ac-c{ padding-bottom:12px; animation:entra .4s cubic-bezier(.2,.7,.2,1) both; }
 .ei-agora{ padding:0 8px; border-radius:999px; background:var(--blue-bg); color:var(--blue-ink); font-size:12px; line-height:20px; font-weight:600; animation:entra .4s both; }
 /* o único cartão do painel: é o processo que vira o primeiro agente */
-.ei-g.ei-princ{ margin-bottom:4px; padding:16px; border-top:0; border-radius:16px; background:var(--bg); box-shadow:0 0 0 1px var(--line),0 8px 20px -16px rgba(21,22,28,.3); }
+.ei-g.ei-princ{ margin-bottom:4px; padding:4px 16px; border-top:0; border-radius:16px; background:var(--bg); box-shadow:0 0 0 1px var(--line),0 8px 20px -16px rgba(21,22,28,.3); }
 .ei-g.ei-princ + .ei-g{ border-top:0; }
 .ei-pt{ margin:0; font-size:15px; line-height:1.4; font-weight:600; color:var(--ink); display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
 .ei-pm{ margin:8px 0 0; font-size:13px; color:var(--muted); }
@@ -123,7 +131,7 @@ button{ font:inherit; color:inherit; cursor:pointer; }
 .ei-nota{ margin:12px 0 0; font-size:12.5px; color:var(--muted); }
 @keyframes entra{ from{ opacity:0; transform:translateY(6px); filter:blur(3px) } }
 .ei-chev{ flex:none; width:20px; height:20px; margin-left:auto; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; transition:transform .2s; }
-.ei-mem.aberta .ei-chev{ transform:rotate(180deg); }
+.ei-mem.aberta .ei-mem-t .ei-chev{ transform:rotate(180deg); }
 .ei-mem-ult{ min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:13px; color:var(--ink-2); }
 
 @media (max-width:900px){
