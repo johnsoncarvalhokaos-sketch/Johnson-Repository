@@ -101,8 +101,8 @@ function App() {
     if (p.id === "ferr") { guardar("ferr", valor, true); eco = `${valor.length} ferramentas no mapa.`; }
     if (p.id === "ia") { guardar("ia", valor); eco = /Ainda não|vez em quando/.test(valor) ? "Bom ponto de partida: dá para avançar rápido." : "Você já tem uma base boa para começar."; }
     if (p.id === "areas") { guardar("areas", valor); eco = valor.length > 1 ? `${valor[0]} e mais ${valor.length - 1}. Vamos olhar um processo de perto.` : `${valor[0]}. Vamos olhar um processo de perto.`; }
-    if (p.id === "processo") { guardar("princ", String(valor).split(/(?<=[.!?])\s/)[0]); guardar("ferr", achar(valor, FERR)); eco = "Esse eu entendi bem."; }
-    if (p.id === "ritmo") eco = "Pronto, tenho os números.";
+    if (p.id === "processo") { guardar("ferr", achar(valor, FERR)); guardar("princ", String(valor).split(/(?<=[.!?])\s/)[0]); eco = "Esse eu entendi bem."; }
+    if (p.id === "ritmo") { eco = "Pronto, tenho os números."; setAberto("princ"); setNovo(n => [...new Set(n.concat("princ"))]); setTimeout(() => setNovo(n => n.filter(x => x !== "princ")), 1600); }
     const prox = i + 1;
     setTimeout(() => {
       if (prox >= PASSOS.length) { dizer("", "Seu Plano está montado. Ele já começa por esse processo.", prox); return; }
@@ -121,7 +121,7 @@ function App() {
   const plural = (n, um, varios) => n === 1 ? "1 " + um : n + " " + varios;
   const rit = r.ritmo || ritmo, sec = (k, n, resumo, corpo) => cheio(k) && <section key={k} className={"ei-g" + (k === "princ" ? " ei-princ" : "") + (abertoEf === k ? " on" : "")}>
     <h3 className="ei-g-h"><button className="ei-ac" aria-expanded={abertoEf === k} aria-controls={"ei-ac-" + k} onClick={() => setAberto(abertoEf === k ? "" : k)}>
-      <span className="ei-ac-n">{n}</span>{novo.includes(k) && <span className="ei-agora" aria-hidden="true">agora</span>}
+      <span className="ei-ac-n">{n}</span>{abertoEf !== k && <span className="ei-sr">: </span>}{novo.includes(k) && <span className="ei-agora" aria-hidden="true">agora</span>}
       {abertoEf !== k && <span className="ei-ac-r">{resumo}</span>}
       <svg className="ei-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 14.5 12 9l5.5 5.5" /></svg></button></h3>
     <div className="ei-ac-c" id={"ei-ac-" + k} hidden={abertoEf !== k}>{corpo}</div></section>;
@@ -216,7 +216,7 @@ function App() {
             {sec("proc", "Rotinas que se repetem", plural(mem.proc.length, "rotina", "rotinas"), <ul className="ei-rot">{mem.proc.map(x => <li key={x}>{x}</li>)}</ul>)}
             {sec("areas", "Áreas que mais pesam", plural(mem.areas.length, "área", "áreas"), <div className="ei-tags">{mem.areas.map(x => <em key={x} className="ei-tag a">{x}</em>)}</div>)}
             {sec("ferr", "Ferramentas", plural(mem.ferr.length, "ferramenta", "ferramentas"), <div className="ei-tags">{mem.ferr.map(x => <em key={x} className="ei-tag">{x}</em>)}</div>)}
-            {sec("ia", "IA hoje", mem.ia, <p className="ei-pv">{mem.ia}</p>)}
+            {sec("ia", "IA hoje", ["Ainda não usa", "De vez em quando", "Todo dia", "Já tem agentes"][IA.indexOf(mem.ia)] || mem.ia, <p className="ei-pv">{mem.ia}</p>)}
             {faltam.length > 0 && <p className="ei-falta">{nTemas ? "Ainda vamos falar de: " : "Vou anotando aqui o que você contar: "}{faltam.map(t => t[2]).join(", ").replace(/, ([^,]*)$/, " e $1")}.</p>}
             <p className="ei-nota">Exploração com dados de exemplo. O reconhecimento no texto é simulado.</p>
           </div>
