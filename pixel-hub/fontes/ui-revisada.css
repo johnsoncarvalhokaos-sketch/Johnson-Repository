@@ -565,5 +565,6 @@ body.ui-rev[data-scr="trilha"] .tc-tabs button[aria-selected="true"], body.ui-re
 body.ui-rev :where(.tpl-tag, .frd-bk, .pc-tag, .hf-tag, .cc2-tag, .bk8-tag, .cw-chip){ height:auto !important; min-height:24px; padding:4px 12px !important; line-height:16px !important; gap:4px; box-sizing:border-box; }
 body.ui-rev .cw-chip{ font-size:var(--t-cap) !important; font-weight:600 !important; }
 html body.ui-rev[data-scr] .tpl-tag, html body.ui-rev[data-scr] .frd-bk, html body.ui-rev[data-scr] .pc-tag, html body.ui-rev[data-scr] .hf-tag, html body.ui-rev[data-scr] .cc2-tag, html body.ui-rev[data-scr] .bk8-tag, html body.ui-rev[data-scr] .cw-chip{ line-height:16px !important; }
-body.ui-rev :where(.pill, .mj-st){ height:auto !important; padding:4px 12px !important; gap:4px; box-sizing:border-box; }
+html body.ui-rev[data-scr] .hf-ho .hf2-b .ho2-pill, html body.ui-rev[data-scr] .hf-ho .hf2-l .ho2-pill, html body.ui-rev[data-scr] .hf2-l .ho2-pill{ height:auto !important; padding:4px 12px !important; line-height:16px !important; }
+body.ui-rev :where(.pill, .mj-st, .scb-z > span){ height:auto !important; padding:4px 12px !important; gap:4px; box-sizing:border-box; }
 </style>
