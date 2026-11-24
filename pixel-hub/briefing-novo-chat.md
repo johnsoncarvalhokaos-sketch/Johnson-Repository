@@ -408,3 +408,8 @@ Tudo em `legado/` (fundamentos de design antigos, Design System v1.1, mapeamento
   - Pendentes da análise: "Seus agentes" virou cartão (o estado vazio mantém a borda tracejada); no Plano, as seções 4 a 7 viraram accordions, um aberto por vez (Oportunidades aberto no começo), com o botão dentro do título e o foco preservado.
   - Revisado por um revisor independente: 12 pontos e 2 vazamentos de escopo corrigidos. Tudo atrás de "Sistema visual: Revisado | Anterior". Publicado nos dois links.
   - Não coberto: a aba "Conteúdo complementar" da Trilha e a página de detalhe de Ferramentas; tamanhos de ícone (há ícones de 13 a 30 px; a regra pede 16/24/32) ficaram para uma próxima rodada.
+- **24/11: terceira rodada da revisão de UI (o que faltou da segunda).**
+  - Trilha › Conteúdo complementar: de 15 para 7 combinações de tipo (6 no celular). Página e gaveta de template e de skill em Ferramentas: de 18 para 9. Vista de skills: de 13 para 8.
+  - Ícones nessas telas só em 16, 20, 24 e 32 px (a biblioteca Pixel Icons tem 20; a regra do curso pede 16/24/32). Antes iam de 12 a 26 px.
+  - Revisado por um revisor independente: a gaveta agora segue a página (tabs 16, título 24 na coluna estreita), as duas buscas com raio 12 e texto 16, tabs com 500 e a selecionada com 600, o número da fase da Trilha com 12/600. Sem vazamento para outras telas nem para "Anterior".
+  - Fica de fora: o selo de notificações do topo (11 px, branco no laranja, 3,1:1) e o mascote (proporção própria, fora da escala de ícones).

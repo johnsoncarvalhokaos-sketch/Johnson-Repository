@@ -490,6 +490,25 @@ body.ui-rev[data-scr="aprender"] .cal2-tb .ibtn svg.u{ width:20px !important; he
 body.ui-rev[data-scr="aprender"] .cal2-tb .ibtn.cal2-nx svg.u{ width:20px !important; height:20px !important; }
 body.ui-rev[data-scr="plano"] .page .ob-note svg.u{ width:16px !important; height:16px !important; }
 body.ui-rev[data-scr="plano"] .pls .pl-note svg.u{ width:16px !important; height:16px !important; }
+/* correções da terceira rodada (revisor independente): a gaveta segue a página; buscas iguais; ícones na escala; tabs 500/600 */
+body.ui-rev[data-scr="ferramentas"] :where(.frd .frd-tabs button){ font-size:var(--t-body) !important; font-weight:500 !important; line-height:1.5 !important; }
+body.ui-rev[data-scr="ferramentas"] :where(.frd-tabs button[aria-selected="true"]){ font-weight:600 !important; }
+body.ui-rev[data-scr="ferramentas"] :where(.frd .frd-bar span){ font-size:var(--t-meta) !important; font-weight:600 !important; line-height:1.45 !important; }
+body.ui-rev[data-scr="ferramentas"] :where(aside.frd .frd-id h2){ font-size:var(--t-num) !important; line-height:1.2 !important; }
+body.ui-rev[data-scr="trilha"] :where(.bk5-g .bk5-t span){ font-weight:500 !important; }
+body.ui-rev[data-scr="trilha"] :where(.bk5-g .bk5-t.on span){ font-weight:600 !important; }
+body.ui-rev[data-scr="trilha"] :where(.bk6-bh .tv-mbn){ font-size:var(--t-cap) !important; font-weight:600 !important; }
+body.ui-rev[data-scr="trilha"] .bk5-top .bk2-bq, body.ui-rev[data-scr="ferramentas"] .fz-bar .fr-bq.fz-bq{ border-radius:var(--r-in) !important; }
+body.ui-rev[data-scr="trilha"] .bk2-bq input, body.ui-rev[data-scr="ferramentas"] .fz-bq input{ font-size:var(--t-body) !important; }
+@media (max-width:480px){ body.ui-rev[data-scr="ferramentas"] :where(.fz-bar .fz-seg button){ font-size:var(--t-meta) !important; white-space:nowrap !important; } }
+body.ui-rev[data-scr="ferramentas"] :where(.frd-tri svg, .frd-ski svg, .frd-f .btn svg.u, .fr-cr svg, .frd-check li svg){ width:16px !important; height:16px !important; }
+body.ui-rev[data-scr="ferramentas"] :where(.frd-pgb svg, .frd-x svg, .fr-ri svg, .frd-fi svg){ width:20px !important; height:20px !important; }
+body.ui-rev[data-scr="ferramentas"] :where(.frd-skico svg){ width:24px !important; height:24px !important; }
+body.ui-rev[data-scr="ferramentas"] :where(.frd-num li>span){ font-size:var(--t-cap) !important; font-weight:600 !important; }
+body.ui-rev[data-scr="ferramentas"] .frd-check li, body.ui-rev[data-scr="ferramentas"] .frd-it{ column-gap:12px !important; }
+body.ui-rev[data-scr="ferramentas"] .frd-check li{ gap:12px !important; }
+body.ui-rev[data-scr="ferramentas"] :where(.frd-usos2 button){ border-radius:var(--r-in) !important; }
+
 /* ---- correções da segunda rodada (24/11): datas, tabs, títulos e selos com um papel só ---- */
 body.ui-rev[data-scr="ferramentas"] .fz-fl button span{ font-weight:400 !important; } body.ui-rev[data-scr="ferramentas"] .fz-fl button.on span{ font-weight:600 !important; }
 body.ui-rev[data-scr="aprender"] .ap2-l .ap2-dt b, body.ui-rev[data-scr="aprender"] .ap2-dt b{ font-size:var(--t-num) !important; line-height:1.1 !important; }
