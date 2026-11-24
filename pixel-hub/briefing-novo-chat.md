@@ -402,3 +402,9 @@ Tudo em `legado/` (fundamentos de design antigos, Design System v1.1, mapeamento
   - nos Ajustes, "Sistema visual: Revisado (padrão) | Anterior", para comparar.
   - Revisado por um revisor independente: 15 pontos corrigidos (papéis trocados, selos em dois tamanhos, raios invertidos, borda dupla nos cartões do Plano, botões fora da página afetados, estados não cobertos).
   - Ainda não feito, da análise: o topo de resumo no Plano (destino, resultado e estágio maiores, o resto compacto ou em accordions) e "Seus agentes" em cartão, com ação mais clara. As outras telas (Trilha, Ferramentas, Mentorias) ainda não passaram pela revisão.
+- **24/11: segunda rodada da revisão de UI (skill review-craftdesign: tipografia, cores e luz, imagens e ícones, layout e padrões).**
+  - P1, contraste: o cinza de apoio `#7A7C88` dava 4,15:1 no branco e 3,77:1 no cinza claro (abaixo de AA). Com a revisão ligada, ele vira `#6B6E79` (5,1:1, 4,9:1 e 4,6:1). Vale para o produto inteiro.
+  - P2: Trilha, Ferramentas e skills e Mentorias entraram no sistema (tipos 30/24/20/16/14/12, espaços em múltiplos de 4, raios 20/12/10). De 23 a 28 combinações de tipo por tela, ficaram 8 a 10. Tabs com 500 e a selecionada com 600; datas, selos e durações com um tamanho só.
+  - Pendentes da análise: "Seus agentes" virou cartão (o estado vazio mantém a borda tracejada); no Plano, as seções 4 a 7 viraram accordions, um aberto por vez (Oportunidades aberto no começo), com o botão dentro do título e o foco preservado.
+  - Revisado por um revisor independente: 12 pontos e 2 vazamentos de escopo corrigidos. Tudo atrás de "Sistema visual: Revisado | Anterior". Publicado nos dois links.
+  - Não coberto: a aba "Conteúdo complementar" da Trilha e a página de detalhe de Ferramentas; tamanhos de ícone (há ícones de 13 a 30 px; a regra pede 16/24/32) ficaram para uma próxima rodada.
