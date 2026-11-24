@@ -21,7 +21,7 @@ body.ui-rev[data-scr="plano"] .pl-tabs{ gap:24px; }
 body.ui-rev[data-scr="plano"] .pl-tabs button{ font-size:var(--t-meta); }
 body.ui-rev[data-scr="plano"] .pl-eq .btn-sm, body.ui-rev[data-scr="plano"] .pl-rs .btn-sm{ font-size:var(--t-meta); }
 .pl-eq .pls-h .muted{ font-size:14px; font-weight:600; }
-.pl-eq .pill{ font-size:14px !important; font-weight:500 !important; }
+body.ui-rev[data-scr="plano"] .pl-eq .pl-eqt .pill, body.ui-rev[data-scr="plano"] .pl-eq .pl-l .pill, .pl-eq .pill{ font-size:var(--t-meta) !important; font-weight:500 !important; line-height:1.45 !important; }
 .pl-eq .pl-eqt{ display:flex; flex-wrap:wrap; gap:8px; }
 
 </style>
