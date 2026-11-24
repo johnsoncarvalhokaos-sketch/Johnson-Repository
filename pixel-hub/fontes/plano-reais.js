@@ -12,6 +12,8 @@
 .pl-rsf .pl-rsi{ position:relative; flex:0 1 160px; }
 .pl-rsf .pl-rsi span{ position:absolute; left:12px; top:50%; transform:translateY(-50%); font-size:14px; color:var(--muted); pointer-events:none; }
 .pl-rsf .inp{ margin:0; height:40px; padding-left:36px; font-size:16px; }
+.pl-rsf .inp{ border-radius:12px; }
+
 </style>
 <script>
 const plBRL=n=>"R$ "+Math.round(n).toLocaleString("pt-BR");

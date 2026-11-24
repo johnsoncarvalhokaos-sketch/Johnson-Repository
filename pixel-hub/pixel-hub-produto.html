@@ -8495,6 +8495,8 @@ document.addEventListener("keydown",e=>{ const t=e.target; if(!t||t.getAttribute
 .pl-rsf .pl-rsi{ position:relative; flex:0 1 160px; }
 .pl-rsf .pl-rsi span{ position:absolute; left:12px; top:50%; transform:translateY(-50%); font-size:14px; color:var(--muted); pointer-events:none; }
 .pl-rsf .inp{ margin:0; height:40px; padding-left:36px; font-size:16px; }
+.pl-rsf .inp{ border-radius:12px; }
+
 </style>
 <script>
 const plBRL=n=>"R$ "+Math.round(n).toLocaleString("pt-BR");
@@ -8530,6 +8532,13 @@ document.addEventListener("keydown",e=>{ if(e.key==="Enter"&&e.target&&e.target.
 .pl-eq .pl-dest small{ font-size:14px; line-height:1.45; color:var(--muted); }
 .pl-eq .mtr i{ opacity:1; background:var(--line); }
 .pl-eq .mtr i.p{ background:var(--ok); }
+/* correções do checker: tabs, botões, contador e selos iguais ao "Seu plano" */
+body.ui-rev[data-scr="plano"] .pl-tabs{ gap:24px; }
+body.ui-rev[data-scr="plano"] .pl-tabs button{ font-size:var(--t-meta); }
+body.ui-rev[data-scr="plano"] .pl-eq .btn-sm, body.ui-rev[data-scr="plano"] .pl-rs .btn-sm{ font-size:var(--t-meta); }
+.pl-eq .pls-h .muted{ font-size:14px; font-weight:600; }
+.pl-eq .pill{ font-size:14px !important; font-weight:500 !important; }
+
 </style>
 <script>
 /* exemplo: a entrevista da Carla, no mesmo formato que entProcs() devolve */

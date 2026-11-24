@@ -16,6 +16,13 @@
 .pl-eq .pl-dest small{ font-size:14px; line-height:1.45; color:var(--muted); }
 .pl-eq .mtr i{ opacity:1; background:var(--line); }
 .pl-eq .mtr i.p{ background:var(--ok); }
+/* correções do checker: tabs, botões, contador e selos iguais ao "Seu plano" */
+body.ui-rev[data-scr="plano"] .pl-tabs{ gap:24px; }
+body.ui-rev[data-scr="plano"] .pl-tabs button{ font-size:var(--t-meta); }
+body.ui-rev[data-scr="plano"] .pl-eq .btn-sm, body.ui-rev[data-scr="plano"] .pl-rs .btn-sm{ font-size:var(--t-meta); }
+.pl-eq .pls-h .muted{ font-size:14px; font-weight:600; }
+.pl-eq .pill{ font-size:14px !important; font-weight:500 !important; }
+
 </style>
 <script>
 /* exemplo: a entrevista da Carla, no mesmo formato que entProcs() devolve */
