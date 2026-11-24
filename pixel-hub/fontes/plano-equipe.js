@@ -22,6 +22,7 @@ body.ui-rev[data-scr="plano"] .pl-tabs button{ font-size:var(--t-meta); }
 body.ui-rev[data-scr="plano"] .pl-eq .btn-sm, body.ui-rev[data-scr="plano"] .pl-rs .btn-sm{ font-size:var(--t-meta); }
 .pl-eq .pls-h .muted{ font-size:14px; font-weight:600; }
 .pl-eq .pill{ font-size:14px !important; font-weight:500 !important; }
+.pl-eq .pl-eqt{ display:flex; flex-wrap:wrap; gap:8px; }
 
 </style>
 <script>
@@ -36,11 +37,11 @@ function plEquipe(){ const m=empMembros(); let red=[.3,.5]; try{ red=v4Compute()
 function plEquipeTela(){ const eq=plEquipe(), red=eq[0]?eq[0].red:[.3,.5], feitas=eq.filter(x=>x.feita);
   const procs=feitas.flatMap(x=>x.procs.map(p=>Object.assign({quem:x.nome,exemplo:x.exemplo},p)));
   const tot=procs.reduce((s,p)=>s+(p.h||0),0), lo=Math.max(1,Math.round(tot*red[0])), hi=Math.max(lo+1,Math.round(tot*red[1]));
-  const dec=stTag("dec","Informado na entrevista"), ex=pill("Exemplo","idle"), nm=n=>esc(String(n).split(" ")[0]);
+  const temEx=feitas.some(x=>x.exemplo), dec=stTag("dec","Informado na entrevista"), ex=pill("Exemplo","idle"), selos=(est)=>`<div class="pl-eqt">${est?pill("Estimativa","wait"):""}${temEx?pill("Inclui exemplo","idle"):""}</div>`, nm=n=>esc(String(n).split(" ")[0]);
   const reais=S.custoH&&tot?`<small>Em reais: ${plBRL(lo*S.custoH)}–${plBRL(hi*S.custoH).replace("R$ ","")} por mês, com a hora a ${plBRL(S.custoH)}.</small>`:"";
   const topo=`<div class="pl-top">
-    <div class="pl-c"><span class="pl-k">Entrevistas</span><b class="pl-big">${feitas.length} de ${eq.length} <small>concluídas</small></b><div class="mtr" role="img" aria-label="${feitas.length} de ${eq.length} entrevistas concluídas">${eq.map(x=>`<i class="${x.feita?"p":""}"></i>`).join("")}</div><p>${eq.length-feitas.length?`Falta${eq.length-feitas.length>1?"m":""} ${eq.length-feitas.length}. O plano da empresa fica mais preciso a cada entrevista.`:"Toda a equipe já contou a sua rotina."}</p></div>
-    <div class="pl-c pl-dest"><span class="pl-k">Horas de volta, somando a equipe</span>${tot?`<b class="pl-big">${lo}–${hi} h por mês</b><div class="pl-res2"><small>nos ${procs.length} processos que a equipe contou, com a mesma regra do seu Plano</small>${reais}</div><div class="pl-ft">${pill("Estimativa","wait")}</div>`:`<b class="pl-big">Ainda sem horas</b><p>As horas aparecem quando alguém contar um processo na entrevista.</p>`}</div>
+    <div class="pl-c"><span class="pl-k">Entrevistas</span><b class="pl-big">${feitas.length} de ${eq.length} <small>concluídas</small></b><div class="mtr" role="img" aria-label="${feitas.length} de ${eq.length} entrevistas concluídas">${eq.map(x=>`<i class="${x.feita?"p":""}"></i>`).join("")}</div>${selos(false)}<p>${eq.length-feitas.length?`Falta${eq.length-feitas.length>1?"m":""} ${eq.length-feitas.length}. O plano da empresa fica mais preciso a cada entrevista.`:"Toda a equipe já contou a sua rotina."}</p></div>
+    <div class="pl-c pl-dest"><span class="pl-k">Horas de volta, somando a equipe</span>${tot?`<b class="pl-big">${lo}–${hi} h por mês</b><div class="pl-res2"><small>nos ${procs.length} processos que a equipe contou, com a mesma regra do seu Plano</small>${reais}</div>${selos(true)}`:`<b class="pl-big">Ainda sem horas</b><p>As horas aparecem quando alguém contar um processo na entrevista.</p>`}</div>
   </div>`;
   const pessoas=plSec(1,"Pessoas",`<ul class="pl-l pl-p">${eq.map(x=>`<li><span class="pl-dot ${x.feita?"ok":""}"></span><span><b>${esc(x.nome)}${x.eu?" (você)":""}</b><em>${x.feita&&!x.procs.length&&!x.ferr.length?"Entrevista feita":x.feita?`Entrevista feita: ${x.procs.length===1?"1 processo":x.procs.length+" processos"}, ${x.ferr.length===1?"1 ferramenta":x.ferr.length+" ferramentas"}`:x.pend?"Convite enviado; ainda não entrou no Hub":"Ainda não fez a entrevista"}</em></span>${x.exemplo?ex:x.feita?dec:x.eu?`<button class="btn btn-g btn-sm" data-act="irEntrevista">Fazer a minha</button>`:`<button class="btn btn-g btn-sm" data-act="plLembrar" data-arg="${esc(x.nome)}">Lembrar</button>`}</li>`).join("")}</ul>`);
   const areas={}; procs.forEach(p=>{ const k=p.area||"Sem área definida"; (areas[k]=areas[k]||[]).push(p); });

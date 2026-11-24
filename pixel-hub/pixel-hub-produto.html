@@ -8390,7 +8390,7 @@ body.ui-rev[data-scr="entrevista"] .askc .ent-tags{ display:grid !important; gri
 @media (max-width:640px){ body.ui-rev[data-scr="entrevista"] .askc .ent-tags{ grid-template-columns:minmax(0,1fr); } }
 body.ui-rev[data-scr="entrevista"] .ent-op{ display:flex; align-items:center; gap:12px; min-height:40px; padding:8px; border:0; border-radius:var(--r-in); background:transparent; font:inherit; font-size:var(--t-meta); font-weight:500; line-height:1.45; color:var(--ink); text-align:left; cursor:pointer; transition:background-color .15s; }
 body.ui-rev[data-scr="entrevista"] .ent-op:hover{ background:var(--sunken); }
-body.ui-rev[data-scr="entrevista"] .ent-op:focus-visible{ outline:2px solid var(--ink); outline-offset:-2px; }
+body.ui-rev[data-scr="entrevista"] .ent-op:focus-visible{ outline:2px solid var(--brand); outline-offset:-2px; }
 body.ui-rev[data-scr="entrevista"] .ent-op.on{ background:var(--sunken); }
 body.ui-rev[data-scr="entrevista"] .ent-cb{ display:grid; place-items:center; width:20px; height:20px; flex:none; border:1.5px solid var(--line-2); border-radius:6px; background:#fff; transition:background-color .15s, border-color .15s; }
 body.ui-rev[data-scr="entrevista"] .ent-op:hover .ent-cb{ border-color:var(--hover-line,#B9BBC6); }
@@ -8409,7 +8409,7 @@ body.ui-rev[data-scr="entrevista"] .askc-em .topts, body.ui-rev[data-scr="entrev
 body.ui-rev[data-scr="entrevista"] .askc-em .topt .box, body.ui-rev[data-scr="entrevista"] .askc-em .aopt .box{ min-height:40px !important; padding:8px !important; border-color:transparent !important; box-shadow:none !important; background:transparent !important; border-radius:var(--r-in) !important; transition:background-color .15s; }
 body.ui-rev[data-scr="entrevista"] .askc-em .topt:hover .box, body.ui-rev[data-scr="entrevista"] .askc-em .aopt:hover .box,
 body.ui-rev[data-scr="entrevista"] .askc-em .topt input:checked ~ .box, body.ui-rev[data-scr="entrevista"] .askc-em .aopt input:checked ~ .box{ background:var(--sunken) !important; }
-body.ui-rev[data-scr="entrevista"] .askc-em .topt input:focus-visible ~ .box, body.ui-rev[data-scr="entrevista"] .askc-em .aopt input:focus-visible ~ .box{ outline:2px solid var(--ink) !important; outline-offset:-2px !important; }
+body.ui-rev[data-scr="entrevista"] .askc-em .topt input:focus-visible ~ .box, body.ui-rev[data-scr="entrevista"] .askc-em .aopt input:focus-visible ~ .box{ outline:2px solid var(--brand) !important; outline-offset:-2px !important; }
 body.ui-rev[data-scr="entrevista"] .askc-em .topt b, body.ui-rev[data-scr="entrevista"] .askc-em .aopt b{ font-size:var(--t-meta) !important; font-weight:500 !important; line-height:1.45 !important; }
 body.ui-rev[data-scr="entrevista"] .askc-em .topt .kn{ width:20px !important; height:20px !important; border-radius:6px !important; font-size:var(--t-cap) !important; background:#fff !important; box-shadow:inset 0 0 0 1px var(--line-2); }
 body.ui-rev[data-scr="entrevista"] .askc-em .lnk{ font-size:var(--t-meta) !important; }
@@ -8465,12 +8465,12 @@ Object.assign(A,{ plAc:n=>{ S.plAc=S.plAc===n||(S.plAc===undefined&&n==="4")?"":
 </script>
 <style>
 /* ===================== Acessibilidade: foco e selo (24/11), achados da verificação de hover e foco =====================
-   O anel segue o padrão do produto (2 px, tinta). */
-.bk2-bq:focus-within, .fr-bq:focus-within{ outline:2px solid var(--ink); outline-offset:2px; }
+   O anel segue o padrão global do produto (:focus-visible, 2 px, var(--brand)). */
+.bk2-bq:focus-within, .fr-bq:focus-within{ outline:2px solid var(--brand); outline-offset:2px; }
 .bk2-bq input:focus, .fr-bq input:focus{ outline:none; }
-.frd-usos button:focus-visible, .frd-usos2 button:focus-visible{ outline:2px solid var(--ink); outline-offset:2px; }
-/* selo de notificações: branco no laranja da marca dava 3,1:1; no laranja da ação dá 4,9:1 */
-.pd-bell .bdgn{ background:#C9420C; font-size:12px !important; font-weight:600; }
+.frd-usos button:focus-visible, .frd-usos2 button:focus-visible{ outline:2px solid var(--brand); outline-offset:2px; }
+/* selo de notificações: branco no laranja da marca dava 3,1:1; no laranja de status (--brand-ink, o dos selos "Estimativa") dá 5,2:1 */
+.pd-bell .bdgn{ background:var(--brand-ink); font-size:12px !important; font-weight:600; }
 </style>
 <script>
 /* tabs com tabindex móvel: as setas, Home e End levam à tab vizinha e a ativam (antes, só a tab aberta era alcançável pelo teclado) */
@@ -8538,6 +8538,7 @@ body.ui-rev[data-scr="plano"] .pl-tabs button{ font-size:var(--t-meta); }
 body.ui-rev[data-scr="plano"] .pl-eq .btn-sm, body.ui-rev[data-scr="plano"] .pl-rs .btn-sm{ font-size:var(--t-meta); }
 .pl-eq .pls-h .muted{ font-size:14px; font-weight:600; }
 .pl-eq .pill{ font-size:14px !important; font-weight:500 !important; }
+.pl-eq .pl-eqt{ display:flex; flex-wrap:wrap; gap:8px; }
 
 </style>
 <script>
@@ -8552,11 +8553,11 @@ function plEquipe(){ const m=empMembros(); let red=[.3,.5]; try{ red=v4Compute()
 function plEquipeTela(){ const eq=plEquipe(), red=eq[0]?eq[0].red:[.3,.5], feitas=eq.filter(x=>x.feita);
   const procs=feitas.flatMap(x=>x.procs.map(p=>Object.assign({quem:x.nome,exemplo:x.exemplo},p)));
   const tot=procs.reduce((s,p)=>s+(p.h||0),0), lo=Math.max(1,Math.round(tot*red[0])), hi=Math.max(lo+1,Math.round(tot*red[1]));
-  const dec=stTag("dec","Informado na entrevista"), ex=pill("Exemplo","idle"), nm=n=>esc(String(n).split(" ")[0]);
+  const temEx=feitas.some(x=>x.exemplo), dec=stTag("dec","Informado na entrevista"), ex=pill("Exemplo","idle"), selos=(est)=>`<div class="pl-eqt">${est?pill("Estimativa","wait"):""}${temEx?pill("Inclui exemplo","idle"):""}</div>`, nm=n=>esc(String(n).split(" ")[0]);
   const reais=S.custoH&&tot?`<small>Em reais: ${plBRL(lo*S.custoH)}–${plBRL(hi*S.custoH).replace("R$ ","")} por mês, com a hora a ${plBRL(S.custoH)}.</small>`:"";
   const topo=`<div class="pl-top">
-    <div class="pl-c"><span class="pl-k">Entrevistas</span><b class="pl-big">${feitas.length} de ${eq.length} <small>concluídas</small></b><div class="mtr" role="img" aria-label="${feitas.length} de ${eq.length} entrevistas concluídas">${eq.map(x=>`<i class="${x.feita?"p":""}"></i>`).join("")}</div><p>${eq.length-feitas.length?`Falta${eq.length-feitas.length>1?"m":""} ${eq.length-feitas.length}. O plano da empresa fica mais preciso a cada entrevista.`:"Toda a equipe já contou a sua rotina."}</p></div>
-    <div class="pl-c pl-dest"><span class="pl-k">Horas de volta, somando a equipe</span>${tot?`<b class="pl-big">${lo}–${hi} h por mês</b><div class="pl-res2"><small>nos ${procs.length} processos que a equipe contou, com a mesma regra do seu Plano</small>${reais}</div><div class="pl-ft">${pill("Estimativa","wait")}</div>`:`<b class="pl-big">Ainda sem horas</b><p>As horas aparecem quando alguém contar um processo na entrevista.</p>`}</div>
+    <div class="pl-c"><span class="pl-k">Entrevistas</span><b class="pl-big">${feitas.length} de ${eq.length} <small>concluídas</small></b><div class="mtr" role="img" aria-label="${feitas.length} de ${eq.length} entrevistas concluídas">${eq.map(x=>`<i class="${x.feita?"p":""}"></i>`).join("")}</div>${selos(false)}<p>${eq.length-feitas.length?`Falta${eq.length-feitas.length>1?"m":""} ${eq.length-feitas.length}. O plano da empresa fica mais preciso a cada entrevista.`:"Toda a equipe já contou a sua rotina."}</p></div>
+    <div class="pl-c pl-dest"><span class="pl-k">Horas de volta, somando a equipe</span>${tot?`<b class="pl-big">${lo}–${hi} h por mês</b><div class="pl-res2"><small>nos ${procs.length} processos que a equipe contou, com a mesma regra do seu Plano</small>${reais}</div>${selos(true)}`:`<b class="pl-big">Ainda sem horas</b><p>As horas aparecem quando alguém contar um processo na entrevista.</p>`}</div>
   </div>`;
   const pessoas=plSec(1,"Pessoas",`<ul class="pl-l pl-p">${eq.map(x=>`<li><span class="pl-dot ${x.feita?"ok":""}"></span><span><b>${esc(x.nome)}${x.eu?" (você)":""}</b><em>${x.feita&&!x.procs.length&&!x.ferr.length?"Entrevista feita":x.feita?`Entrevista feita: ${x.procs.length===1?"1 processo":x.procs.length+" processos"}, ${x.ferr.length===1?"1 ferramenta":x.ferr.length+" ferramentas"}`:x.pend?"Convite enviado; ainda não entrou no Hub":"Ainda não fez a entrevista"}</em></span>${x.exemplo?ex:x.feita?dec:x.eu?`<button class="btn btn-g btn-sm" data-act="irEntrevista">Fazer a minha</button>`:`<button class="btn btn-g btn-sm" data-act="plLembrar" data-arg="${esc(x.nome)}">Lembrar</button>`}</li>`).join("")}</ul>`);
   const areas={}; procs.forEach(p=>{ const k=p.area||"Sem área definida"; (areas[k]=areas[k]||[]).push(p); });
