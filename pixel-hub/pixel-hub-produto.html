@@ -8374,6 +8374,46 @@ body.ui-rev[data-scr="ferramentas"] .frd-check li, body.ui-rev[data-scr="ferrame
 body.ui-rev[data-scr="ferramentas"] .frd-check li{ gap:12px !important; }
 body.ui-rev[data-scr="ferramentas"] :where(.frd-usos2 button){ border-radius:var(--r-in) !important; }
 
+/* ---- bloco de pergunta da entrevista (24/11): formato do Emergent, dentro da conversa ----
+   Antes: fundo pêssego #FFF8F4 e borda #FFD5C3, a única superfície quente numa tela de cinzas frios; os chips brancos de borda fria
+   e o Enviar desativado (tinta a 45% sobre o pêssego, um cinza amarronzado) ficavam sujos sobre ele.
+   Agora: cartão branco, cabeçalho cinza com o Consultor, opções em linhas com caixa de marcar, rodapé com divisória.
+   O laranja fica só na identidade do Consultor. */
+body.ui-rev[data-scr="entrevista"] .askc{ background:#fff !important; border:1px solid var(--line-2) !important; border-radius:var(--r-card) !important; padding:0 20px 16px !important; gap:12px !important; overflow:hidden; box-shadow:0 1px 2px rgba(21,22,28,.04), 0 8px 24px -12px rgba(21,22,28,.12) !important; }
+body.ui-rev[data-scr="entrevista"] .askc:not(.askc-em){ padding-top:20px !important; }
+body.ui-rev[data-scr="entrevista"] .askc-h{ display:flex; align-items:center; gap:8px; margin:0 -20px 4px; padding:12px 20px; background:var(--soft); border-bottom:1px solid var(--line); font-size:var(--t-meta); font-weight:500; line-height:1.45; color:var(--ink-2); }
+body.ui-rev[data-scr="entrevista"] .askc-h .px{ width:16px !important; height:auto; flex:none; }
+body.ui-rev[data-scr="entrevista"] .askc .ask-q{ font-size:var(--t-body) !important; font-weight:600 !important; line-height:1.5 !important; }
+body.ui-rev[data-scr="entrevista"] .askc .ent-sub{ font-size:var(--t-meta) !important; line-height:1.45 !important; margin-top:-8px !important; }
+/* várias escolhas: linhas com caixa de marcar, duas colunas no desktop */
+body.ui-rev[data-scr="entrevista"] .askc .ent-tags{ display:grid !important; grid-template-columns:repeat(2,minmax(0,1fr)); gap:4px 8px !important; margin:0 -8px; }
+@media (max-width:640px){ body.ui-rev[data-scr="entrevista"] .askc .ent-tags{ grid-template-columns:minmax(0,1fr); } }
+body.ui-rev[data-scr="entrevista"] .ent-op{ display:flex; align-items:center; gap:12px; min-height:40px; padding:8px; border:0; border-radius:var(--r-in); background:transparent; font:inherit; font-size:var(--t-meta); font-weight:500; line-height:1.45; color:var(--ink); text-align:left; cursor:pointer; transition:background-color .15s; }
+body.ui-rev[data-scr="entrevista"] .ent-op:hover{ background:var(--sunken); }
+body.ui-rev[data-scr="entrevista"] .ent-op:focus-visible{ outline:2px solid var(--agora-forte,#2E6BFF); outline-offset:-2px; }
+body.ui-rev[data-scr="entrevista"] .ent-op.on{ background:var(--sunken); }
+body.ui-rev[data-scr="entrevista"] .ent-cb{ display:grid; place-items:center; width:20px; height:20px; flex:none; border:1.5px solid var(--line-2); border-radius:6px; background:#fff; transition:background-color .15s, border-color .15s; }
+body.ui-rev[data-scr="entrevista"] .ent-op:hover .ent-cb{ border-color:var(--hover-line,#B9BBC6); }
+body.ui-rev[data-scr="entrevista"] .ent-cb .u{ width:16px; height:16px; opacity:0; color:#fff; }
+body.ui-rev[data-scr="entrevista"] .ent-op.on .ent-cb{ background:var(--ink); border-color:var(--ink); }
+body.ui-rev[data-scr="entrevista"] .ent-op.on .ent-cb .u{ opacity:1; }
+/* rodapé: corrigir à esquerda; contagem e ação à direita */
+body.ui-rev[data-scr="entrevista"] .askc .ask-b{ display:flex !important; align-items:center; justify-content:flex-end; gap:12px !important; margin:4px -20px 0; padding:12px 20px 0; border-top:1px solid var(--line); }
+body.ui-rev[data-scr="entrevista"] .askc .ask-b .lnk{ order:0; margin:0 auto 0 -6px !important; font-size:var(--t-meta) !important; }
+body.ui-rev[data-scr="entrevista"] .askc .ask-b .ask-c{ order:1; font-size:var(--t-meta) !important; }
+body.ui-rev[data-scr="entrevista"] .askc .ask-b .btn{ order:2; flex:none !important; margin:0 !important; }
+body.ui-rev[data-scr="entrevista"] .askc .btn:disabled{ opacity:1 !important; background:var(--sunken) !important; color:#9A9CA6 !important; }
+
+/* escolha única e "até duas": as mesmas linhas, sem contorno; o número continua como atalho de teclado */
+body.ui-rev[data-scr="entrevista"] .askc-em .topts, body.ui-rev[data-scr="entrevista"] .askc-em .aopts{ gap:4px 8px !important; margin:0 -8px !important; }
+body.ui-rev[data-scr="entrevista"] .askc-em .topt .box, body.ui-rev[data-scr="entrevista"] .askc-em .aopt .box{ min-height:40px !important; padding:8px !important; border-color:transparent !important; box-shadow:none !important; background:transparent !important; border-radius:var(--r-in) !important; transition:background-color .15s; }
+body.ui-rev[data-scr="entrevista"] .askc-em .topt:hover .box, body.ui-rev[data-scr="entrevista"] .askc-em .aopt:hover .box,
+body.ui-rev[data-scr="entrevista"] .askc-em .topt input:checked ~ .box, body.ui-rev[data-scr="entrevista"] .askc-em .aopt input:checked ~ .box{ background:var(--sunken) !important; }
+body.ui-rev[data-scr="entrevista"] .askc-em .topt input:focus-visible ~ .box, body.ui-rev[data-scr="entrevista"] .askc-em .aopt input:focus-visible ~ .box{ outline:2px solid var(--agora-forte,#2E6BFF) !important; outline-offset:-2px !important; }
+body.ui-rev[data-scr="entrevista"] .askc-em .topt b, body.ui-rev[data-scr="entrevista"] .askc-em .aopt b{ font-size:var(--t-meta) !important; font-weight:500 !important; line-height:1.45 !important; }
+body.ui-rev[data-scr="entrevista"] .askc-em .topt .kn{ width:20px !important; height:20px !important; border-radius:6px !important; font-size:var(--t-cap) !important; background:#fff !important; box-shadow:inset 0 0 0 1px var(--line-2); }
+body.ui-rev[data-scr="entrevista"] .askc-em .lnk{ font-size:var(--t-meta) !important; }
+
 /* ---- correções da segunda rodada (24/11): datas, tabs, títulos e selos com um papel só ---- */
 body.ui-rev[data-scr="ferramentas"] .fz-fl button span{ font-weight:400 !important; } body.ui-rev[data-scr="ferramentas"] .fz-fl button.on span{ font-weight:600 !important; }
 body.ui-rev[data-scr="aprender"] .ap2-l .ap2-dt b, body.ui-rev[data-scr="aprender"] .ap2-dt b{ font-size:var(--t-num) !important; line-height:1.1 !important; }
@@ -8405,6 +8445,23 @@ Object.assign(A,{ uiRevModo:v=>{ S.uiRev=v; R(); aviso(v==="ant"?"Sistema visual
     const itens=(body.match(/<li/g)||[]).length, on=ab===n, id="pl-acc-"+n;
     return `<section class="pls pl-ac"><div class="pls-h"><span class="pls-n">${n}</span><h2 class="pl-ach"><button class="pl-acb" aria-expanded="${on}" aria-controls="${id}" data-act="plAc" data-arg="${n}">${t}<span class="pl-acr">${itens===1?"1 item":itens+" itens"}</span>${u("chev")}</button></h2></div><div class="pl-acc" id="${id}" ${on?"":"hidden"}>${body}</div></section>`; }); }; })();
 Object.assign(A,{ plAc:n=>{ S.plAc=S.plAc===n||(S.plAc===undefined&&n==="4")?"":n; R(); document.querySelector(`[data-act="plAc"][data-arg="${n}"]`)?.focus(); } }); // o R() recria o botão: o foco volta para ele
+</script>
+<script>
+/* ===================== Bloco de pergunta da entrevista no formato do Emergent, dentro da conversa (24/11) =====================
+   Referência: Emergent (Mobbin), "Agent has questions for you": cabeçalho discreto, corpo branco, opções em linhas com caixa
+   de marcar, rodapé com a navegação à esquerda e a ação à direita. Aqui ele fica na conversa, como mensagem do Consultor.
+   Só com "Sistema visual: Revisado"; o estilo está em <style id="ui-rev">. */
+(function(){ const _p=pergunta; pergunta=function(){ let h=_p();
+  if(S.scr!=="entrevista"||S.uiRev==="ant"||!S.v||S.v.done||h.indexOf('<div class="askc">')<0) return h;
+  h=h.replace('<div class="askc">',`<div class="askc askc-em"><div class="askc-h">${px("hub",16)}<span>O Consultor tem uma pergunta para você</span></div>`);
+  /* várias escolhas: linhas com caixa de marcar no lugar dos chips */
+  const ck=u("check");
+  h=h.replace(/<button class="ob2-ch ?(on)?" aria-pressed="(true|false)" data-act="entTag" data-arg="([^"]*)">([\s\S]*?)<\/button>/g,(m,on,pr,arg,txt)=>
+    `<button class="ent-op${on?" on":""}" aria-pressed="${pr}" data-act="entTag" data-arg="${arg}"><span class="ent-cb" aria-hidden="true">${ck}</span>${txt.split(ck).join("")}</button>`);
+  /* "Corrigir a resposta anterior" vai para o rodapé, à esquerda, quando há rodapé */
+  const cm=h.match(/<button class="lnk" data-act="desfazer">[\s\S]*?<\/button>/);
+  if(cm&&h.indexOf('<div class="ask-b">')>=0){ h=h.replace(cm[0],"").replace('<div class="ask-b">',`<div class="ask-b">${cm[0]}`); }
+  return h; }; })();
 </script>
 </body>
 </html>

@@ -413,3 +413,9 @@ Tudo em `legado/` (fundamentos de design antigos, Design System v1.1, mapeamento
   - Ícones nessas telas só em 16, 20, 24 e 32 px (a biblioteca Pixel Icons tem 20; a regra do curso pede 16/24/32). Antes iam de 12 a 26 px.
   - Revisado por um revisor independente: a gaveta agora segue a página (tabs 16, título 24 na coluna estreita), as duas buscas com raio 12 e texto 16, tabs com 500 e a selecionada com 600, o número da fase da Trilha com 12/600. Sem vazamento para outras telas nem para "Anterior".
   - Fica de fora: o selo de notificações do topo (11 px, branco no laranja, 3,1:1) e o mascote (proporção própria, fora da escala de ícones).
+- **24/11: bloco de pergunta da entrevista no formato do Emergent, dentro da conversa.**
+  - Problema (pedido do Johnson): o bloco pêssego `#FFF8F4` com borda `#FFD5C3` era a única superfície quente numa tela de cinzas frios. Os chips brancos de borda fria e o Enviar desativado (tinta a 45% sobre o pêssego, um cinza amarronzado) ficavam sujos sobre ele.
+  - Referências do Mobbin: Emergent (a escolhida pelo Johnson), Unify e n8n. As três usam um cartão neutro e põem cor só na ação.
+  - Agora: cartão branco com contorno `--line-2` e sombra leve; cabeçalho cinza "O Consultor tem uma pergunta para você", com o mascote (o laranja fica só nele); opções em linhas com caixa de marcar, em duas colunas no desktop; rodapé com divisória, "Corrigir" à esquerda e contagem e Enviar à direita; Enviar desativado em cinza sólido. Escolha única no mesmo formato de linha, com o número como atalho.
+  - Bloco em `fontes/entrevista-bloco.js` (marcação) e em `fontes/ui-revisada.css` (estilo). Só com "Sistema visual: Revisado"; "Anterior" mostra o pêssego.
+  - Verificação de hover e foco nas telas da terceira rodada: nada piorou em relação ao "Anterior". Já vinham de antes: as buscas sem anel de foco próprio, as tabs da página de template fora da ordem do Tab e "Abrir" na gaveta de skill sem foco visível.
