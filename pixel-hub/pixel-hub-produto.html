@@ -7990,15 +7990,35 @@ body.ui-rev[data-scr="home"] .page .emptyb, body.ui-rev[data-scr="plano"] .page 
 body.ui-rev[data-scr="home"] .page .agr.vazio, body.ui-rev[data-scr="plano"] .page .agr.vazio{ border-radius:var(--r-in) !important; }
 body.ui-rev[data-scr="home"] .page .hp.feito, body.ui-rev[data-scr="plano"] .page .hp.feito{ border-radius:var(--r-card) !important; }
 body.ui-rev[data-scr="home"] .hgrid .hcard, body.ui-rev[data-scr="plano"] .hgrid .hcard{ border-radius:var(--r-in) !important; }
-body.ui-rev[data-scr="home"] .pl-top .pl-c.pl-dest, body.ui-rev[data-scr="plano"] .pl-top .pl-c.pl-dest{ border-radius:var(--r-card) !important; box-shadow:0 0 0 1px var(--line) !important; }
-body.ui-rev[data-scr="home"] .pl-top .pl-c, body.ui-rev[data-scr="plano"] .pl-top .pl-c{ border-radius:var(--r-card) !important; box-shadow:0 0 0 1px var(--line) !important; }
+body.ui-rev[data-scr="home"] .pl-top .pl-c.pl-dest, body.ui-rev[data-scr="plano"] .pl-top .pl-c.pl-dest{ border-radius:var(--r-card) !important; box-shadow:none !important; }
+body.ui-rev[data-scr="home"] .pl-top .pl-c, body.ui-rev[data-scr="plano"] .pl-top .pl-c{ border-radius:var(--r-card) !important; box-shadow:none !important; }
 body.ui-rev[data-scr="home"] .page .pls, body.ui-rev[data-scr="plano"] .page .pls{ border-radius:var(--r-card) !important; }
 body.ui-rev[data-scr="home"] .pl-2 .pls, body.ui-rev[data-scr="plano"] .pl-2 .pls{ border-radius:var(--r-card) !important; }
 body.ui-rev[data-scr="home"] .pl-c .pl-res, body.ui-rev[data-scr="plano"] .pl-c .pl-res{ border-radius:var(--r-in) !important; }
 body.ui-rev[data-scr="home"] .pl-ag .pl-agh, body.ui-rev[data-scr="plano"] .pl-ag .pl-agh{ border-radius:var(--r-in) !important; }
 body.ui-rev[data-scr="home"] .pls .pl-lb, body.ui-rev[data-scr="plano"] .pls .pl-lb{ border-radius:var(--r-in) !important; }
-body.ui-rev[data-scr="home"] .btn, body.ui-rev[data-scr="plano"] .btn{ border-radius:10px !important; }
+body.ui-rev[data-scr="home"] .page .btn, body.ui-rev[data-scr="plano"] .page .btn{ border-radius:10px !important; }
 @media (max-width:700px){ body.ui-rev[data-scr="home"] .page .phd h1, body.ui-rev[data-scr="plano"] .page .phd h1{ font-size:24px !important; } }
+
+/* ---- correções da revisão (24/11): papéis, selos, raios e estados que a primeira passada não cobria ---- */
+body.ui-rev[data-scr="home"] .emptyb h1.ent-vzh, body.ui-rev[data-scr="plano"] .emptyb h1.ent-vzh{ font-family:var(--f-d) !important; font-size:var(--t-num) !important; font-weight:600 !important; line-height:1.2 !important; letter-spacing:-0.02em !important; }
+body.ui-rev[data-scr="home"] .pd .pd-h em, body.ui-rev[data-scr="plano"] .pd .pd-h em{ font-size:var(--t-cap) !important; font-weight:600 !important; }
+body.ui-rev[data-scr="home"] .hf-ho .hf2-b .ho2-pill, .hf2-l .ho2-pill, body.ui-rev[data-scr="plano"] .hf-ho .hf2-b .ho2-pill, .hf2-l .ho2-pill{ font-size:var(--t-cap) !important; font-weight:600 !important; line-height:1.4 !important; }
+body.ui-rev[data-scr="home"] .hf-ho .ho2-dt b, body.ui-rev[data-scr="plano"] .hf-ho .ho2-dt b{ font-family:var(--f-d) !important; font-size:var(--t-page) !important; line-height:1 !important; }
+body.ui-rev[data-scr="home"] .pl-ag .pl-agh b, body.ui-rev[data-scr="plano"] .pl-ag .pl-agh b{ font-size:var(--t-body) !important; }
+body.ui-rev[data-scr="home"] .pls .pl-ag .pl-l em, .pls .pl-l em, body.ui-rev[data-scr="plano"] .pls .pl-ag .pl-l em, .pls .pl-l em{ font-size:var(--t-meta) !important; }
+body.ui-rev[data-scr="home"] .agr .btn.btn-g.btn-sm, body.ui-rev[data-scr="plano"] .agr .btn.btn-g.btn-sm{ font-size:var(--t-meta) !important; font-weight:500 !important; }
+body.ui-rev[data-scr="home"] .stg, body.ui-rev[data-scr="plano"] .stg{ font-size:var(--t-cap) !important; font-weight:600 !important; line-height:1.4 !important; }
+body.ui-rev[data-scr="home"] .pill, body.ui-rev[data-scr="plano"] .pill{ font-size:var(--t-cap) !important; font-weight:600 !important; }
+body.ui-rev[data-scr="home"] .hf2-f .lnk.hf2-gv, body.ui-rev[data-scr="plano"] .hf2-f .lnk.hf2-gv{ font-weight:500 !important; }
+body.ui-rev[data-scr="home"] .hf-tr .hf-k, body.ui-rev[data-scr="plano"] .hf-tr .hf-k{ font-size:var(--t-cap) !important; font-weight:600 !important; }
+body.ui-rev[data-scr="home"] .hf-tr p, .hf-al, .hf-al p, .hf-tr .lnk, body.ui-rev[data-scr="plano"] .hf-tr p, .hf-al, .hf-al p, .hf-tr .lnk{ font-size:var(--t-meta) !important; line-height:1.45 !important; }
+body.ui-rev[data-scr="home"] .pl-cp q, body.ui-rev[data-scr="plano"] .pl-cp q{ font-size:var(--t-meta) !important; line-height:1.45 !important; }
+body.ui-rev[data-scr="home"] .sec-h .addb, body.ui-rev[data-scr="plano"] .sec-h .addb{ font-size:var(--t-meta) !important; font-weight:500 !important; border-radius:10px !important; }
+body.ui-rev[data-scr="home"] .pl-px li > span:first-child, body.ui-rev[data-scr="plano"] .pl-px li > span:first-child{ font-size:var(--t-cap) !important; font-weight:600 !important; }
+body.ui-rev[data-scr="home"] .hgrid .hcard, .page .agr, body.ui-rev[data-scr="plano"] .hgrid .hcard, .page .agr{ border-radius:var(--r-card) !important; }
+body.ui-rev[data-scr="home"] .hf-p .hf-ho.hf2, .hf-sel button, .pl-leg2, body.ui-rev[data-scr="plano"] .hf-p .hf-ho.hf2, .hf-sel button, .pl-leg2{ border-radius:var(--r-in) !important; }
+@media (max-width:700px){ :root{ --t-num:20px; } }
 </style>
 <script>
 /* Revisão de UI (24/11): liga as regras de <style id="ui-rev"> pela classe ui-rev no body. Padrão: revisado. */

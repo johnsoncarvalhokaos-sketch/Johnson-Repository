@@ -396,3 +396,9 @@ Tudo em `legado/` (fundamentos de design antigos, Design System v1.1, mapeamento
   - Bloco em `fontes/plano-entrevista.js`. Revisado por um revisor independente em duas rodadas. Publicado nos dois links.
   - Em "Interface: Limpa" (o padrão), o Plano esconde o texto secundário das linhas (o `em`), então os detalhes "Da sua entrevista: …" só aparecem em "Interface: Atual". As horas do "Resultado esperado" aparecem nos dois modos.
   - Falta no c43: o valor em R$ (precisa da base de custo por hora). c41 e c44 seguem pendentes.
+- **24/11: revisão de UI do Início e do Plano (skills Design Sense e Tipografia CraftDesign).** Análise em 4 camadas e pelos 10 princípios, com valores medidos. Depois, a etapa Definir virou uma camada de tokens aplicada às duas telas (`fontes/ui-revisada.css` e `.js`):
+  - escala de tipos: 30 (título da página), 24 (destaques), 20 (títulos de seção), 16 (corpo e itens), 14 (apoio, rótulos, botões), 12 (legendas e selos); pesos 400, 500 e 600. O Início caiu de 21 para 9 combinações de tamanho e peso;
+  - espaços só em múltiplos de 4; raios 20 (cartões), 12 (blocos internos) e 10 (botões); cartões com contorno de 1 px, sem sombra; o próximo passo continua sendo o único destaque;
+  - nos Ajustes, "Sistema visual: Revisado (padrão) | Anterior", para comparar.
+  - Revisado por um revisor independente: 15 pontos corrigidos (papéis trocados, selos em dois tamanhos, raios invertidos, borda dupla nos cartões do Plano, botões fora da página afetados, estados não cobertos).
+  - Ainda não feito, da análise: o topo de resumo no Plano (destino, resultado e estágio maiores, o resto compacto ou em accordions) e "Seus agentes" em cartão, com ação mais clara. As outras telas (Trilha, Ferramentas, Mentorias) ainda não passaram pela revisão.
