@@ -7,6 +7,9 @@ import { createRoot } from "react-dom/client";
 import { VoiceRing, VoiceOrb } from "voice-ring";
 
 const PASSO_PALAVRA = 28; // ms entre o começo de uma palavra e o da seguinte
+/* dentro do protótipo do Hub (tweak "Entrevista: Imersiva"), a página recebe __EMBED e o nome, e avisa o Hub ao sair e ao terminar */
+const EMB = typeof window !== "undefined" && !!window.__EMBED, NOME = (typeof window !== "undefined" && window.__NOME) || "";
+const avisarHub = msg => { try { parent.postMessage({ px: "entrevista-imersiva", ...msg }, "*"); } catch (e) {} };
 const RM = typeof matchMedia === "function" && matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /* o que a demonstração reconhece no texto (exemplo: num produto real, quem extrai é o modelo) */
@@ -138,6 +141,7 @@ function App() {
       <header className="ei-top">
         <span className="ei-logo"><svg className="px" viewBox="0 0 40 46" aria-hidden="true" style={{ width: 22 }}><rect className="px-h" x="15" y="0" width="10" height="10" rx="3" /><rect className="px-b" x="0" y="12" width="40" height="34" rx="12" /><g className="px-e"><rect x="10.5" y="21.5" width="6" height="13" rx="3" /><rect x="23.5" y="21.5" width="6" height="13" rx="3" /></g></svg><b>Entrevista com o Consultor</b></span>
         <ol className="ei-partes" aria-label="Partes da entrevista">{PARTES.map((n, k) => <li key={n} className={k < parte ? "ok" : k === parte ? "at" : ""} aria-current={k === parte ? "step" : undefined}><i></i><span>{n}</span></li>)}</ol>
+        {EMB && <button className="ei-lnk ei-sair" onClick={() => avisarHub({ acao: "sair" })}>Fazer depois</button>}
         <div className="ei-seg" role="group" aria-label="Presença do Consultor (exploração)">{[["ring", "Anel"], ["mono", "Anel mono"], ["pixel", "Pixel"]].map(([k, n]) => <button key={k} aria-pressed={tipo === k} onClick={() => setTipo(k)}>{n}</button>)}</div>
       </header>
 
@@ -148,7 +152,7 @@ function App() {
 
           {i < 0 ? (
             <div className="ei-abre">
-              <h1>Vamos conversar sobre o seu trabalho</h1>
+              <h1>{NOME ? `${NOME}, vamos conversar sobre o seu trabalho` : "Vamos conversar sobre o seu trabalho"}</h1>
               <p>Uns 15 minutos, só por texto. Você escreve do seu jeito e eu vou mostrando o que entendi. No fim, você confere a conta antes de virar plano.</p>
               <button className="ei-btn jornada" onClick={() => dizer("", PASSOS[0].q, 0)}>Começar a entrevista</button>
             </div>
@@ -196,7 +200,7 @@ function App() {
               {i >= PASSOS.length && !dizendo && (
                 <div className="ei-fim">
                   <p>O Plano já tem a sua rotina, {mem.ferr.length} ferramentas, {mem.areas.length} áreas e o primeiro processo para virar agente{horas != null ? `, com cerca de ${horas} h por mês na mesa` : ""}.</p>
-                  <div className="ei-row"><a className="ei-btn jornada" href="https://claude.ai/artifact/N58xZ5eyVrZHReRKUvym59" target="_blank" rel="noopener">Abrir o protótipo do Hub</a><button className="ei-lnk" onClick={() => { setI(-1); setEstado("idle"); setR({}); setMem({ ferr: [], areas: [], proc: [], ia: "", princ: "" }); setConversa([]); setRitmo({ freq: "", tempo: "" }); setUlt(""); setNovo([]); setMemAberta(false); setAberto(undefined); setFala({ eco: "", q: "" }); }}>Recomeçar</button></div>
+                  <div className="ei-row">{EMB ? <button className="ei-btn jornada" onClick={() => avisarHub({ acao: "fim", dados: { ...mem, rotina: r.rotina || "", processo: r.processo || "", ritmo: r.ritmo || ritmo } })}>Abrir o Plano Agêntico</button> : <a className="ei-btn jornada" href="https://claude.ai/artifact/N58xZ5eyVrZHReRKUvym59" target="_blank" rel="noopener">Abrir o protótipo do Hub</a>}<button className="ei-lnk" onClick={() => { setI(-1); setEstado("idle"); setR({}); setMem({ ferr: [], areas: [], proc: [], ia: "", princ: "" }); setConversa([]); setRitmo({ freq: "", tempo: "" }); setUlt(""); setNovo([]); setMemAberta(false); setAberto(undefined); setFala({ eco: "", q: "" }); }}>Recomeçar</button></div>
                 </div>
               )}
               {conversa.length > 1 && <button className="ei-lnk ei-ver" aria-expanded={verConversa} aria-controls="ei-conv" onClick={() => setVerConversa(v => !v)}>{verConversa ? "Esconder a conversa" : "Ver a conversa"}</button>}

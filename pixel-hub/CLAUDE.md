@@ -8,6 +8,7 @@ Protótipo navegável em HTML de arquivo único da plataforma Pixel AI Hub. Esta
 - `artifacts/14a3f57a-3141-46b5-8063-a9e1139f35da/index.html` — protótipo completo (abre no onboarding), com o produto embutido em base64. O bloco `<style id="pxi-casca">` … `<script id="pxi-casca-js">` é do onboarding; o embed preserva.
 - `home/pixel-hub-produto-home.html` — versão que abre direto no Início (gerada).
 - `fontes/embed.py` — gera as duas versões acima a partir do produto.
+- `fontes/imersiva.py` — embute a entrevista imersiva (`exploracoes/entrevista-imersiva`, `npm run build` gera `embed.html`) no produto, como versão em teste; rodar antes do `embed.py` quando a exploração mudar.
 - `fontes/*.js|css` — cópias dos blocos acrescentados (referência).
 - `fontes/icones/` — biblioteca Pixel Icons: `icons.py` (geometria), `v2.py` (estilo atual, gera `icons2.json`), `mascaras.py` (recortes por máscara; `python3 mascaras.py` roda o autoteste), `build.py` (gera `pixel-icons.html`).
 - `artifacts/*-your-edit`, `legado/`, `pixel-hub-prototipo*.html` — histórico; não usar como guia.

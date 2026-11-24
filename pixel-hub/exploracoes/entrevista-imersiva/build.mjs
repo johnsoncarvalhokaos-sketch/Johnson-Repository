@@ -14,4 +14,6 @@ const html = `<title>Entrevista imersiva</title>
 <script>${js}</script>
 `;
 writeFileSync("index.html", html);
+// versão para dentro do protótipo do Hub: documento completo, com __EMBED (o produto embute este arquivo)
+writeFileSync("embed.html", `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><script>window.__EMBED=1</script><style>body{margin:0}</style>${html}</html>`);
 console.log("index.html", (html.length / 1024).toFixed(0) + " KB");

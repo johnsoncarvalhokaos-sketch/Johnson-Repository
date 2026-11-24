@@ -27,6 +27,7 @@ button{ font:inherit; color:inherit; cursor:pointer; }
 .ei-partes li{ display:flex; flex-direction:column; gap:6px; width:112px; font-size:12.5px; color:var(--muted); }
 .ei-partes i{ display:block; height:4px; border-radius:2px; background:var(--line-2); transition:background .4s; }
 .ei-partes li.ok i{ background:var(--ink); } .ei-partes li.at i{ background:var(--blue-ink); } .ei-partes li.at{ color:var(--ink); font-weight:600; }
+.ei-sair{ font-size:14px; }
 .ei-seg{ display:inline-flex; padding:4px; border-radius:12px; background:rgba(255,255,255,.7); box-shadow:0 0 0 1px var(--line); }
 .ei-seg button{ height:32px; padding:0 12px; border:0; border-radius:8px; background:none; font-size:13px; font-weight:500; color:var(--ink-2); }
 .ei-seg button[aria-pressed="true"]{ background:var(--bg); color:var(--ink); box-shadow:0 1px 2px rgba(21,22,28,.12); }
