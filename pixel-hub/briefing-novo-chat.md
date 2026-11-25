@@ -429,4 +429,10 @@ Tudo em `legado/` (fundamentos de design antigos, Design System v1.1, mapeamento
 - **25/11: c06 tratado como feito no protótipo.** A tela de skills em Ferramentas já tem o que o card pede: cartões, filtro por área e busca por nome ou objetivo. As 149 skills reais estão no catálogo do Agent Builder, no produto. O protótipo mostra 11 como amostra, com a nota "No protótipo aparecem 11 das 149 skills do catálogo do Agent Builder". Para ter as 149 aqui, basta um export (nome, área, descrição).
 - **25/11: pesos de fonte com três papéis.** No Início havia 5 pesos (400, 500, 550, 600, 700) e 45% do texto em 600. Agora o 600 fica só nos títulos e nos nomes de item. O 500 vai para sobretítulos, tags, nomes das fases na lista, "Ver detalhes", contadores e o item ativo do menu. O 400 fica no corpo, no apoio e na data. O 700 só no logotipo, e o 550 e o 650 saíram. Elementos em 600: Início 37 → 15, Plano 34 → 18, Ferramentas 69 → 23. Só com "Sistema visual: Revisado".
 - **25/11: entrevista imersiva:** o título agora usa Funnel Display 16/600 e fica alinhado ao centro do corpo do Pixel; a antena fica para fora da linha. **Play:** corpo tingido na biblioteca, sem margem extra (ajuste óptico pelo centro de massa) e com 20 px no vídeo de boas-vindas. **Login:** subtítulo sem viúva.
+- **25/11: quatro tamanhos no Início e sem caixa contornada dentro de caixa contornada.**
+  - Tamanhos no Início: 30 no título da página, 20 nas seções e nos títulos de cartão, 16 no corpo e nos itens, 14 nos rótulos, no menu e nas tags. No celular: 24, 20, 16 e 14.
+  - As tags agora têm um tamanho só em todo o sistema: texto 14, altura 28.
+  - Contornos: medidos 11 casos de caixa contornada dentro de caixa contornada, mais os botões secundários contornados dentro de cartões contornados. Agora o contorno fica só no cartão de fora. O que está dentro se separa por preenchimento (cinza-claro sobre branco, branco sobre o degradê do hands-on) ou por sombra (a fase selecionada).
+  - Botões secundários viraram tonais: fundo cinza-claro, sem contorno. Campos de formulário mantêm o contorno.
+  - Tudo só com "Sistema visual: Revisado".
 
