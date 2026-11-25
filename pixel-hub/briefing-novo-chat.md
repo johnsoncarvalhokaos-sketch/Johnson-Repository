@@ -435,4 +435,12 @@ Tudo em `legado/` (fundamentos de design antigos, Design System v1.1, mapeamento
   - Contornos: medidos 11 casos de caixa contornada dentro de caixa contornada, mais os botões secundários contornados dentro de cartões contornados. Agora o contorno fica só no cartão de fora. O que está dentro se separa por preenchimento (cinza-claro sobre branco, branco sobre o degradê do hands-on) ou por sombra (a fase selecionada).
   - Botões secundários viraram tonais: fundo cinza-claro, sem contorno. Campos de formulário mantêm o contorno.
   - Tudo só com "Sistema visual: Revisado".
+- **25/11: entrevista imersiva alinhada ao sistema revisado.**
+  - Cinza de apoio `#6B6E79` (o anterior, `#7A7C88`, ficava abaixo de AA).
+  - Tamanhos só da escala. Antes havia 12,5, 13, 15, 16,5 e 22 e um título de 44; agora: título de abertura 30, ou 24 no celular; fala 30, ou 24; títulos do painel 20; corpo 16; apoio e botões de seleção 14; legendas 12.
+  - Pesos 400/500/600; saiu o 550. A parte atual da entrevista fica em 600.
+  - Tags 14/500 com 28 de altura, como no Hub.
+  - Corrigida uma rolagem lateral no celular: a linha de respostas passava 57 px da tela.
+  - Sem contorno dentro de contorno: nenhum caso encontrado.
+  - O título já estava ajustado (Funnel Display 16/600, com alinhamento óptico ao Pixel).
 

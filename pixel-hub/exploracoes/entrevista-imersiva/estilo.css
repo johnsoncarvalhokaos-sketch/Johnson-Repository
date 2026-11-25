@@ -157,3 +157,24 @@ button{ font:inherit; color:inherit; cursor:pointer; }
 .ei-logo{ gap:10px; }
 .ei-logo b{ font-family:var(--f-d,"Funnel Display"),system-ui,sans-serif; font-size:16px; font-weight:600; line-height:1.25; letter-spacing:-.01em; color:var(--ink,#15161C); }
 .ei-logo .px{ width:24px !important; margin-top:-7.2px; }
+
+/* ===== alinhamento com o sistema revisado do Hub (25/11) =====
+   Contraste do cinza de apoio (AA), tamanhos só da escala (30/24/20/16/14/12), pesos 400/500/600, tags 14/500 com 28 de altura,
+   e a linha de respostas sem rolagem lateral no celular. */
+:root{ --muted:#6B6E79; }
+.ei-partes li{ font-size:12px; }
+.ei-partes li.at{ font-weight:600; }
+.ei-seg button{ font-size:14px; }
+.ei-leg{ font-size:14px; }
+.ei-abre h1{ font-size:30px; line-height:1.15; letter-spacing:-.02em; }
+.ei-abre p{ font-size:16px; line-height:1.5; }
+.ei-fala{ font-size:30px; }
+.ei-vivo{ font-size:14px; max-width:100%; min-width:0; }
+.ei-vivo em,.ei-tag{ font-size:14px; line-height:20px; font-weight:500; }
+.ei-btn{ font-size:16px; }
+.ei-mem-tt b,.ei-mem-tt h2{ font-size:20px; line-height:1.3; letter-spacing:-.01em; }
+.ei-mem-tt small{ font-size:12px; }
+.ei-falta{ font-size:14px; }
+.ei-nota{ font-size:12px; }
+.ei-palco{ min-width:0; max-width:100%; }
+@media (max-width:720px){ .ei-abre h1{ font-size:24px; } .ei-fala{ font-size:24px; } }
