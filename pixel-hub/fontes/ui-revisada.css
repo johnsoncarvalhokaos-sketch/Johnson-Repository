@@ -631,4 +631,14 @@ html body.ui-rev.ui-rev.ui-rev[data-scr="entrevista"] .ent-vz{ font-size:var(--t
 html body.ui-rev.ui-rev.ui-rev[data-scr="entrevista"] .ent-pr b{ font-size:var(--t-body) !important; font-weight:600 !important; line-height:1.4 !important; }
 html body.ui-rev.ui-rev.ui-rev[data-scr="entrevista"] .ent-pr small{ font-size:var(--t-meta) !important; line-height:1.45 !important; }
 html body.ui-rev.ui-rev.ui-rev[data-scr="entrevista"] .ent-sec .cw-chip{ font-size:var(--t-meta) !important; }
+/* ---- progresso no painel sem laranja (25/11, opção A escolhida pelo Johnson) ----
+   Antes, a seção que mudava piscava em laranja por 2,2 s a cada resposta. Agora: o conteúdo novo entra com fade e subida curta;
+   a seção com conteúdo ganha um ✓ verde ao lado do título. Nenhum fundo muda de cor. */
+html body.ui-rev.ui-rev.ui-rev[data-scr="entrevista"] .ent-sec.flash{ animation:none !important; }
+html body.ui-rev.ui-rev.ui-rev[data-scr="entrevista"] .ent-sec.flash > :not(.lbl){ animation:entEntra .45s cubic-bezier(.2,.7,.2,1) both; }
+html body.ui-rev.ui-rev.ui-rev[data-scr="entrevista"] .ent-sec > .lbl::after{ content:none; }
+html body.ui-rev.ui-rev.ui-rev[data-scr="entrevista"] .ent-sec:not(:has(.ent-vz)) > .lbl::after{ content:""; order:1; width:14px; height:14px; flex:none; background:var(--ok); -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.6 9.6 17.2 19 7.4' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat; mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.6 9.6 17.2 19 7.4' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat; }
+html body.ui-rev.ui-rev.ui-rev[data-scr="entrevista"] .ent-sec > .lbl em{ order:2; }
+@keyframes entEntra{ from{ opacity:0; transform:translateY(6px); } }
+@media (prefers-reduced-motion:reduce){ html body.ui-rev.ui-rev.ui-rev[data-scr="entrevista"] .ent-sec.flash > :not(.lbl){ animation:none; } }
 </style>

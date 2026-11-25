@@ -444,3 +444,4 @@ Tudo em `legado/` (fundamentos de design antigos, Design System v1.1, mapeamento
   - Sem contorno dentro de contorno: nenhum caso encontrado.
   - O título já estava ajustado (Funnel Display 16/600, com alinhamento óptico ao Pixel).
 
+- **25/11: progresso do painel das entrevistas sem laranja (opção A).** Nas duas entrevistas, em conversa e imersiva, saíram a piscada laranja da seção atualizada, as etiquetas laranja de área e a etiqueta "agora". O conteúdo novo entra com fade e uma subida de 6 px; a seção com conteúdo ganha um ✓ verde (`--ok`) ao lado do título. Na imersiva, o destaque do processo deixou de ser um cartão com contorno e passou a usar o fundo `--soft`. Também: hierarquia dos cartões do painel da entrevista em conversa (título 14/600 em tinta, metadado 12 em cinza, conteúdo 16).
