@@ -613,6 +613,4 @@ html body.ui-rev.ui-rev.ui-rev[data-scr] .hf2 .ho2-dt{ box-shadow:0 6px 16px -10
 html body.ui-rev.ui-rev.ui-rev[data-scr] .tv-ped2 .tv-cp{ border-color:transparent !important; box-shadow:none !important; background:#fff !important; }
 html body.ui-rev.ui-rev.ui-rev[data-scr] .hf2 .hf-cta{ border-color:transparent !important; box-shadow:0 1px 2px rgba(21,22,28,.08) !important; }
 html body.ui-rev.ui-rev.ui-rev[data-scr] .hf2 .hf-cta:hover:not(:disabled){ background:var(--soft) !important; }
-/* cartão do primeiro passo com fundo neutro (25/11, comentário do Johnson): branco com o contorno dos outros cartões; o laranja fica só no botão */
-html body.ui-rev.ui-rev.ui-rev[data-scr] section.hp.hp3{ background:#fff !important; background-image:none !important; box-shadow:0 0 0 1px var(--line) !important; }
 </style>
