@@ -56,7 +56,7 @@ add('baixar','Ações',SL('M4 15v2.4A2.6 2.6 0 0 0 6.6 20h10.8a2.6 2.6 0 0 0 2.6
 add('ampliar','Ações',PL('M14 4h6v6')+PL('M20 4l-6.5 6.5')+PL('M10 20H4v-6')+PL('M4 20l6.5-6.5'),'Abrir em página')
 add('externo','Ações',SL('M10 5H7a3 3 0 0 0-3 3v9a3 3 0 0 0 3 3h9a3 3 0 0 0 3-3v-3')+PL('M14 4h6v6')+PL('M20 4l-8.5 8.5'),'Links para fora')
 add('opcoes','Ações',C('p',5.5,12,1.9)+C('p',12,12,1.9)+C('p',18.5,12,1.9),'Menus de mais opções')
-add('play','Ações',P('M8 5.4v13.2a1 1 0 0 0 1.52.85l10.6-6.6a1 1 0 0 0 0-1.7L9.52 4.55A1 1 0 0 0 8 5.4z'),'Aulas, vídeos')
+add('play','Ações',S('M8 5.4v13.2a1 1 0 0 0 1.52.85l10.6-6.6a1 1 0 0 0 0-1.7L9.52 4.55A1 1 0 0 0 8 5.4z'),'Aulas, vídeos')
 add('compartilhar','Ações',C('p',18,5.5,2.6)+C('p',6,12,2.6)+C('p',18,18.5,2.6)+SL('M8.3 10.8l7.4-4.1')+SL('M8.3 13.2l7.4 4.1'),'Compartilhar')
 add('sair','Ações',SL('M10 4H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h3')+PL('M10 12h10')+PL('M16 8l4 4-4 4'),'Sair da conta')
 # ---------- Estados ----------

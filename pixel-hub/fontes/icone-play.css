@@ -1,0 +1,9 @@
+<style>
+/* ===================== Play: ajuste óptico e estilo da biblioteca (25/11) =====================
+   O desenho do play (Pixel Icons) já vem deslocado para a direita no quadro de 24: o centro de massa do triângulo fica no centro.
+   Os contêineres ainda somavam 1 a 5 px de margem à esquerda, e o triângulo ficava à direita (no vídeo de boas-vindas,
+   massa a 1,2 px e caixa a 2,5 px do centro). Sem a margem, a massa fica a 0,2 px. Corpo tingido a 12%, como os outros ícones
+   de forma fechada da biblioteca (editar, buscar, enviar). */
+svg.u:has(> path[d^="M8 5.4v13.2"]){ margin-left:0 !important; }
+.hvd-pl .u{ width:20px !important; height:20px !important; }
+</style>
