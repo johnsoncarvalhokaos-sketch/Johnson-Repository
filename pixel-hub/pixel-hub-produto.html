@@ -8481,6 +8481,21 @@ html body.ui-rev.ui-rev.ui-rev[data-scr] .hf2 .hf-cta{ border-color:transparent 
 html body.ui-rev.ui-rev.ui-rev[data-scr] .hf2 .hf-cta:hover:not(:disabled){ background:var(--soft) !important; }
 /* hands-on (25/11, pedido do Johnson): volta o degradê; o cartão se separa do de fora por sombra suave, sem contorno */
 html body.ui-rev.ui-rev.ui-rev[data-scr] .hf-c .hf-ho.hf2{ box-shadow:0 1px 2px rgba(21,22,28,.05), 0 12px 28px -18px rgba(21,22,28,.28) !important; }
+/* ---- painel "O que eu já entendi": hierarquia entre título e conteúdo (25/11) ----
+   Medido: rótulo 12,5/550 cinza e conteúdo vazio 13/400 cinza, quase iguais; conteúdo preenchido 13,5. Referências: Otter AI (título
+   da seção em tinta e peso, conteúdo regular abaixo) e Linear (metadado cinza à direita). Agora: título do cartão 14/600 em tinta;
+   metadado 12/500 cinza à direita; conteúdo 16/400 em tinta (nome em 600); vazio 14/400 cinza; 8 px entre título e conteúdo. */
+html body.ui-rev.ui-rev.ui-rev[data-scr="entrevista"] .ent-cap-h b{ font-size:var(--t-sec) !important; line-height:1.3 !important; }
+html body.ui-rev.ui-rev.ui-rev[data-scr="entrevista"] .ent-cap-h small{ font-size:var(--t-meta) !important; line-height:1.45 !important; margin-top:4px !important; }
+html body.ui-rev.ui-rev.ui-rev[data-scr="entrevista"] .ent-cap li{ font-size:var(--t-meta) !important; }
+html body.ui-rev.ui-rev.ui-rev[data-scr="entrevista"] .ent-sec{ gap:8px !important; padding:16px !important; }
+html body.ui-rev.ui-rev.ui-rev[data-scr="entrevista"] .ent-sec > .lbl{ font-size:var(--t-meta) !important; font-weight:600 !important; line-height:1.45 !important; color:var(--ink) !important; text-transform:none !important; letter-spacing:0 !important; }
+html body.ui-rev.ui-rev.ui-rev[data-scr="entrevista"] .ent-sec > .lbl em{ font-size:var(--t-cap) !important; font-weight:500 !important; color:var(--muted) !important; }
+html body.ui-rev.ui-rev.ui-rev[data-scr="entrevista"] .ent-eu{ font-size:var(--t-body) !important; line-height:1.5 !important; color:var(--ink) !important; }
+html body.ui-rev.ui-rev.ui-rev[data-scr="entrevista"] .ent-vz{ font-size:var(--t-meta) !important; line-height:1.45 !important; color:var(--muted) !important; }
+html body.ui-rev.ui-rev.ui-rev[data-scr="entrevista"] .ent-pr b{ font-size:var(--t-body) !important; font-weight:600 !important; line-height:1.4 !important; }
+html body.ui-rev.ui-rev.ui-rev[data-scr="entrevista"] .ent-pr small{ font-size:var(--t-meta) !important; line-height:1.45 !important; }
+html body.ui-rev.ui-rev.ui-rev[data-scr="entrevista"] .ent-sec .cw-chip{ font-size:var(--t-meta) !important; }
 </style>
 <script>
 /* Revisão de UI (24/11): liga as regras de <style id="ui-rev"> pela classe ui-rev no body. Padrão: revisado. */
