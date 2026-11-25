@@ -614,6 +614,6 @@ html body.ui-rev.ui-rev.ui-rev[data-scr] .hf2 .ho2-dt{ box-shadow:0 6px 16px -10
 html body.ui-rev.ui-rev.ui-rev[data-scr] .tv-ped2 .tv-cp{ border-color:transparent !important; box-shadow:none !important; background:#fff !important; }
 html body.ui-rev.ui-rev.ui-rev[data-scr] .hf2 .hf-cta{ border-color:transparent !important; box-shadow:0 1px 2px rgba(21,22,28,.08) !important; }
 html body.ui-rev.ui-rev.ui-rev[data-scr] .hf2 .hf-cta:hover:not(:disabled){ background:var(--soft) !important; }
-/* hands-on com fundo neutro (25/11, pedido do Johnson): sai o degradê colorido; cinza-claro para a data, a tag e o botão brancos se destacarem */
-html body.ui-rev.ui-rev.ui-rev[data-scr] .hf-ho.hf2{ background:var(--sunken) !important; background-image:none !important; }
+/* hands-on (25/11, pedido do Johnson): volta o degradê; o cartão se separa do de fora por sombra suave, sem contorno */
+html body.ui-rev.ui-rev.ui-rev[data-scr] .hf-c .hf-ho.hf2{ box-shadow:0 1px 2px rgba(21,22,28,.05), 0 12px 28px -18px rgba(21,22,28,.28) !important; }
 </style>
