@@ -1967,6 +1967,7 @@ body.em-produto > *:not(#produto):not(script){ display:none !important; }
 .au-c{ width:min(400px,100%); display:flex; flex-direction:column; gap:14px; }
 .au-c h1{ margin:0; font-family:var(--f-d); font-size:30px; line-height:1.12; font-weight:600; letter-spacing:-.025em; } .au-c h1:focus{ outline:0; }
 .au-sub{ margin:-6px 0 4px; font-size:15px; line-height:1.5; color:var(--ink-2); } .au-sub b{ color:var(--ink); font-weight:600; }
+.au-sub{ text-wrap:balance; } /* sem viúva: as duas linhas com o mesmo peso (24/11) */
 .au-full{ width:100%; justify-content:center; height:46px; font-size:15px; gap:8px; } .au-full .au-glogo{ width:18px; height:18px; object-fit:contain; margin-right:2px; } .au-full .u{ width:17px; height:17px; }
 .au-ou{ display:flex; align-items:center; gap:12px; font-size:12.5px; color:var(--muted); } .au-ou::before, .au-ou::after{ content:""; flex:1; height:1px; background:var(--line); }
 .au-f{ display:flex; flex-direction:column; gap:6px; } .au-f label{ font-size:13.5px; font-weight:600; }
@@ -2564,7 +2565,7 @@ function auMsg(tipo,t,d){ return `<div class="au-msg ${tipo}" role="${tipo==="er
 function auEstado(ic,cor,t,d,acoes){ return `<div class="au-est"><span class="au-ei ${cor}">${AU_IC[ic]}</span><h1 id="focus-h" tabindex="-1">${t}</h1><p class="au-sub">${d}</p><div class="au-ac">${acoes}</div></div>`; }
 function telaAuth(){ const v=S.au||"login"; let b="";
   if(v==="login"){ const n=S.auTent||0;
-    b=`<h1 id="focus-h" tabindex="-1">Entrar no Pixel AI Hub</h1><p class="au-sub">Use o e-mail da sua compra ou do convite que você recebeu.</p>
+    b=`<h1 id="focus-h" tabindex="-1">Entrar no Pixel AI Hub</h1><p class="au-sub">Entre com o e-mail da sua compra ou do convite que você recebeu.</p>
       ${S.auAviso?auMsg(S.auAviso[0],S.auAviso[1],S.auAviso[2]):""}
       <button class="btn btn-g au-full" data-act="auGoogle"><img class="au-glogo" src="${AU_G}" alt="">Continuar com Google</button><div class="au-ou"><span>ou</span></div>
       ${auCampo("email","E-mail","email",{ic:"mail",ph:"voce@empresa.com.br",ac:"email"})}
