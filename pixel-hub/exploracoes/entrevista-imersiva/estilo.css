@@ -151,3 +151,9 @@ button{ font:inherit; color:inherit; cursor:pointer; }
 }
 @media (max-width:520px){ .ei-seg button{ padding:0 8px; } .ei-logo b{ display:none; } }
 @media (prefers-reduced-motion:reduce){ *{ animation:none !important; transition:none !important; } }
+
+/* título (25/11): com cara de título, sem disputar com a conversa: Funnel Display 16/600. Alinhamento óptico com o Pixel:
+   a antena fica para fora da linha, e o centro do corpo do Pixel coincide com o centro do texto (antes o texto ficava 3,3 px acima). */
+.ei-logo{ gap:10px; }
+.ei-logo b{ font-family:var(--f-d,"Funnel Display"),system-ui,sans-serif; font-size:16px; font-weight:600; line-height:1.25; letter-spacing:-.01em; color:var(--ink,#15161C); }
+.ei-logo .px{ width:24px !important; margin-top:-7.2px; }
