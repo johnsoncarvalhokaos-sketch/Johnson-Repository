@@ -30,7 +30,7 @@ html body .pl-eq .eq-n b{ font-weight:500; color:var(--ink); }
     <p class="eq-n">${falta.length?`Falta${falta.length>1?"m":""} <b>${esc(lista(falta.map(x=>x.nome)))}</b>. O plano da empresa fica mais preciso a cada entrevista.`:"Toda a equipe já fez a entrevista."}</p></div>`;
   const c2=tot?`<div class="eq-c"><div class="eq-hd"><span class="eq-k">Horas de volta da equipe</span>${ex}</div>
     <div class="eq-v">${lo}–${hi} h por mês ${pill("Estimativa","wait")}</div>
-    ${S.custoH?`<div class="eq-s">${plBRL(lo*S.custoH)}–${plBRL(hi*S.custoH).replace("R$ ","")} por mês <span>· hora a ${plBRL(S.custoH)}</span></div>`:""}
+    ${S.custoH?`<div class="eq-s">${plBRL(lo*S.custoH)}–${plBRL(hi*S.custoH).replace("R$ ","")} por mês<span>, com a hora a ${plBRL(S.custoH)}</span></div>`:""}
     <p class="eq-n">Soma dos ${procs.length===1?"processo":procs.length+" processos"} que a equipe contou, com a mesma regra do seu Plano.</p></div>`
    :`<div class="eq-c"><div class="eq-hd"><span class="eq-k">Horas de volta da equipe</span></div><div class="eq-v">Ainda sem horas</div><p class="eq-n">As horas aparecem quando alguém contar um processo na entrevista.</p></div>`;
   h=h.slice(0,a)+`<div class="eq-top">${c1}${c2}</div>`+h.slice(b);
