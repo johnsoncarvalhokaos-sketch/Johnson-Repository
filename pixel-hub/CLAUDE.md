@@ -9,7 +9,7 @@ Protótipo navegável em HTML de arquivo único da plataforma Pixel AI Hub. Esta
 - `home/pixel-hub-produto-home.html` — versão que abre direto no Início (gerada).
 - `fontes/embed.py` — gera as duas versões acima a partir do produto.
 - `fontes/imersiva.py` — embute a entrevista imersiva (`exploracoes/entrevista-imersiva`, `npm run build` gera `embed.html`) no produto, como versão em teste; rodar antes do `embed.py` quando a exploração mudar.
-- `fontes/*.js|css` — cópias dos blocos acrescentados (referência). `fontes/ui-revisada.css` é o `<style id="ui-rev">` inteiro (Sistema visual: Revisado | Anterior); `fontes/entrevista-bloco.js` dá o formato do bloco de pergunta da entrevista. `fontes/plano-equipe.js` (Plano › Equipe, c41), `fontes/plano-reais.js` (R$ com o custo da hora, c43), `fontes/a11y.js` (foco e selo).
+- `fontes/*.js|css` — cópias dos blocos acrescentados (referência). `fontes/ui-revisada.css` é o `<style id="ui-rev">` inteiro (Sistema visual: Revisado | Anterior); `fontes/entrevista-bloco.js` dá o formato do bloco de pergunta da entrevista. `fontes/plano-equipe.js` (Plano › Equipe, c41), `fontes/plano-reais.js` (R$ com o custo da hora, c43), `fontes/a11y.js` (foco e selo). `fontes/plano-v2.js` (Plano versão 2 com "Por onde começar", c44; "Anterior" nos Ajustes).
 - `fontes/icones/` — biblioteca Pixel Icons: `icons.py` (geometria), `v2.py` (estilo atual, gera `icons2.json`), `mascaras.py` (recortes por máscara; `python3 mascaras.py` roda o autoteste), `build.py` (gera `pixel-icons.html`).
 - `artifacts/*-your-edit`, `legado/`, `pixel-hub-prototipo*.html` — histórico; não usar como guia.
 
