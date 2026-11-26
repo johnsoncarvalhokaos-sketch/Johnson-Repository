@@ -1,7 +1,7 @@
 <!-- imersiva:inicio -->
 <style>
 /* ===================== Entrevista imersiva como versão em teste (24/11) =====================
-   Ajustes › Versões em teste › Entrevista: Conversa (padrão) | Imersiva. A imersiva é a exploração de 19/11
+   Ajustes › Versões em teste › Entrevista: Imersiva (padrão desde 26/11) | Conversa. A imersiva é a exploração de 19/11
    (exploracoes/entrevista-imersiva), embutida aqui: abre em tela cheia sobre o Hub e, no fim, o resultado vai para o Plano. */
 .ent-im{ position:fixed; inset:0; z-index:100; background:#fff; }
 .ent-im iframe{ display:block; width:100%; height:100%; border:0; }
@@ -14,7 +14,7 @@ function entImDoc(){ const bin=atob(ENT_IM_B64), bytes=new Uint8Array(bin.length
   return new TextDecoder("utf-8").decode(bytes).replace("window.__EMBED=1","window.__EMBED=1;window.__NOME="+JSON.stringify(nome).replace(/</g,"\\u003c")); }
 
 /* a tela cheia fica fora do #app: o R() do Hub não a recria, então a conversa não se perde */
-function entImSync(){ const on=S.scr==="entrevista"&&S.entV==="imersiva"&&!(S.ent&&S.ent.done); let el=document.getElementById("ent-im"); const app=document.getElementById("app");
+function entImSync(){ const on=S.scr==="entrevista"&&(S.entV||"imersiva")==="imersiva"&&!(S.ent&&S.ent.done); let el=document.getElementById("ent-im"); const app=document.getElementById("app");
   if(on&&!el){ el=document.createElement("div"); el.id="ent-im"; el.className="ent-im"; const f=document.createElement("iframe"); f.title="Entrevista com o Consultor"; f.srcdoc=entImDoc(); el.appendChild(f); document.body.appendChild(el); setTimeout(()=>f.focus(),60); }
   if(!on&&el) el.remove(); if(app) app.inert=on; }
 (function(){ const _R=R; R=function(){ const r=_R.apply(this,arguments); entImSync(); return r; }; })();
@@ -34,9 +34,9 @@ window.addEventListener("message",e=>{ const f=document.querySelector("#ent-im i
 /* a opção nos Ajustes, logo depois de "Banner da entrevista" */
 (function(){ const h=[...document.querySelectorAll(".tz2-s h3")].find(x=>x.textContent.trim()==="Versões em teste"); if(!h) return;
   const row=document.createElement("div"); row.className="tz2-row";
-  row.innerHTML='<span class="tz2-l">Entrevista</span><div class="tz2-seg" role="group" style="--n:2"><button data-act="entVersao" data-arg="conversa">Conversa (padrão)</button><button data-act="entVersao" data-arg="imersiva">Imersiva</button></div><small class="tz2-hint">Imersiva é a exploração de 19/11: tela cheia, com o anel como presença do Consultor. O resultado vai para o Plano.</small>';
+  row.innerHTML='<span class="tz2-l">Entrevista</span><div class="tz2-seg" role="group" style="--n:2"><button data-act="entVersao" data-arg="imersiva">Imersiva (padrão)</button><button data-act="entVersao" data-arg="conversa">Conversa</button></div><small class="tz2-hint">Imersiva, a principal desde 26/11: tela cheia, com o anel como presença do Consultor. Conversa: a entrevista no chat do Hub, com o painel ao lado. As duas levam o resultado para o Plano.</small>';
   const prim=h.parentElement.querySelector(".tz2-row"); if(prim) prim.after(row); else h.after(row); })();
-Object.assign(A,{ entVersao:v=>{ S.entV=v; R(); aviso(v==="imersiva"?"Entrevista imersiva ligada: abra a entrevista pelo Início ou pelo Plano.":"Entrevista em conversa, a versão padrão.","prototipo"); } });
-(function(){ const _r=rotularFechar; rotularFechar=function(){ _r(); document.querySelectorAll('[data-act="entVersao"]').forEach(b=>b.setAttribute("aria-pressed",String((S.entV||"conversa")===b.dataset.arg))); }; })();
+Object.assign(A,{ entVersao:v=>{ S.entV=v; R(); aviso(v==="imersiva"?"Entrevista imersiva, a versão principal.":"Entrevista em conversa: abra a entrevista pelo Início ou pelo Plano.","prototipo"); } });
+(function(){ const _r=rotularFechar; rotularFechar=function(){ _r(); document.querySelectorAll('[data-act="entVersao"]').forEach(b=>b.setAttribute("aria-pressed",String((S.entV||"imersiva")===b.dataset.arg))); }; })();
 </script>
 <!-- imersiva:fim -->
