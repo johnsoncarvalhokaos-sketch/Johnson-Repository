@@ -69,7 +69,7 @@ function App() {
   const [novo, setNovo] = useState([]); // seções que acabaram de receber algo
   const [aberto, setAberto] = useState(undefined); // accordion aberto; "" = todos fechados pela pessoa
   const [ult, setUlt] = useState("");
-  const [tipo, setTipo] = useState("ring");
+  const [tipo, setTipo] = useState("pixel"); // padrão desde 26/11: o orbe pixelado
   const [conversa, setConversa] = useState([]);
   const [verConversa, setVerConversa] = useState(false);
   const [memAberta, setMemAberta] = useState(false);
@@ -157,7 +157,7 @@ function App() {
         <span className="ei-logo"><svg className="px" viewBox="0 0 40 46" aria-hidden="true" style={{ width: 22 }}><rect className="px-h" x="15" y="0" width="10" height="10" rx="3" /><rect className="px-b" x="0" y="12" width="40" height="34" rx="12" /><g className="px-e"><rect x="10.5" y="21.5" width="6" height="13" rx="3" /><rect x="23.5" y="21.5" width="6" height="13" rx="3" /></g></svg><b>Entrevista com o Consultor</b></span>
         <ol className="ei-partes" aria-label="Partes da entrevista">{PARTES.map((n, k) => <li key={n} className={k < parte ? "ok" : k === parte ? "at" : ""} aria-current={k === parte ? "step" : undefined}><i></i><span>{n}</span></li>)}</ol>
         {EMB && <button className="ei-lnk ei-sair" onClick={() => avisarHub({ acao: "sair" })}>Fazer depois</button>}
-        <div className="ei-seg" role="group" aria-label="Presença do Consultor (exploração)">{[["ring", "Anel"], ["mono", "Anel mono"], ["pixel", "Pixel"]].map(([k, n]) => <button key={k} aria-pressed={tipo === k} onClick={() => setTipo(k)}>{n}</button>)}</div>
+        <div className="ei-seg" role="group" aria-label="Presença do Consultor (exploração)">{[["pixel", "Pixel"], ["ring", "Anel"], ["mono", "Anel mono"]].map(([k, n]) => <button key={k} aria-pressed={tipo === k} onClick={() => setTipo(k)}>{n}</button>)}</div>
       </header>
 
       <main className="ei-m">
