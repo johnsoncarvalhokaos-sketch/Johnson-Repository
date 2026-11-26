@@ -5,6 +5,17 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { VoiceRing, VoiceOrb } from "voice-ring";
+import MARCAS from "./marcas.json";
+
+/* logos reais das ferramentas (Simple Icons, CC0) e ícones de área da biblioteca Pixel Icons, 16 px, ao lado do nome (26/11) */
+function Marca({ n }) {
+  const f = MARCAS.ferr[n], a = MARCAS.areas[n];
+  if (a) return <svg className="ei-mc ar" viewBox="0 0 24 24" aria-hidden="true" style={{ color: a[1] }} dangerouslySetInnerHTML={{ __html: MARCAS.icones[a[0]] || "" }} />;
+  if (!f) return null;
+  if (f.tipo === "icone") return <svg className="ei-mc" viewBox="0 0 24 24" aria-hidden="true" dangerouslySetInnerHTML={{ __html: MARCAS.icones[f.k] || "" }} />;
+  const um = (m, k) => <svg key={k} className="ei-mc" viewBox="0 0 24 24" aria-hidden="true"><path fill={m.hex} d={m.path} /></svg>;
+  return f.tipo === "par" ? <span className="ei-mc-par">{f.itens.map(um)}</span> : um(f, 0);
+}
 
 const PASSO_PALAVRA = 28; // ms entre o começo de uma palavra e o da seguinte
 /* dentro do protótipo do Hub (tweak "Entrevista: Imersiva"), a página recebe __EMBED e o nome, e avisa o Hub ao sair e ao terminar */
@@ -117,7 +128,7 @@ function App() {
   }
 
   const horas = (() => { const f = FREQ.find(x => x[0] === (r.ritmo || ritmo).freq), t = TEMPO.find(x => x[0] === (r.ritmo || ritmo).tempo); return f && t ? Math.round(f[1] * t[1]) : null; })();
-  const legenda = { idle: i < 0 ? "Pronto quando você quiser" : "Entrevista concluída", speaking: "O Consultor está falando", listening: "Ouvindo você", processing: "Juntando com o que você já disse" }[estado];
+  const legenda = { idle: i < 0 ? "Pronto quando você quiser" : "Entrevista concluída", speaking: "O Consultor está falando", listening: "Aguardando sua resposta", processing: "Juntando com o que você já disse" }[estado];
   const parte = i < 0 ? -1 : i >= PASSOS.length ? 3 : passo.parte;
   const TEMAS = [["princ", "Processo", "o processo principal", 4], ["proc", "Rotinas", "as rotinas", 0], ["areas", "Áreas que mais pesam", "as áreas", 3], ["ferr", "Ferramentas", "as ferramentas", 1], ["ia", "IA hoje", "a IA hoje", 2]]; // o último número: a etapa que preenche o tema
   const cheio = k => Array.isArray(mem[k]) ? mem[k].length > 0 : !!mem[k], vazios = TEMAS.filter(([k]) => !cheio(k)), faltam = vazios.filter(t => i <= t[3]), nTemas = TEMAS.length - vazios.length;
@@ -173,11 +184,11 @@ function App() {
                       </div>
                     </div>
                     {aoVivo && (aoVivo.ferr.length + aoVivo.areas.length + aoVivo.proc.length > 0) && (
-                      <p className="ei-vivo" aria-live="polite"><span>Estou entendendo:</span>{aoVivo.proc.map(x => <em key={x} className="p">{x}</em>)}{aoVivo.ferr.map(x => <em key={x}>{x}</em>)}{aoVivo.areas.map(x => <em key={x} className="a">{x}</em>)}</p>
+                      <p className="ei-vivo" aria-live="polite"><span>Estou entendendo:</span>{aoVivo.proc.map(x => <em key={x} className="p">{x}</em>)}{aoVivo.ferr.map(x => <em key={x}><Marca n={x} />{x}</em>)}{aoVivo.areas.map(x => <em key={x} className="a"><Marca n={x} />{x}</em>)}</p>
                     )}
                   </>)}
                   {passo.tipo === "tags" && (<>
-                    <div className="ei-chips" role="group" aria-label={passo.q}>{passo.ops.map(o => <button key={o} className="ei-ch" aria-pressed={sel.includes(o)} onClick={() => setSel(s => s.includes(o) ? s.filter(x => x !== o) : s.concat(o))}>{o}</button>)}</div>
+                    <div className="ei-chips" role="group" aria-label={passo.q}>{passo.ops.map(o => <button key={o} className="ei-ch" aria-pressed={sel.includes(o)} onClick={() => setSel(s => s.includes(o) ? s.filter(x => x !== o) : s.concat(o))}><Marca n={o} />{o}</button>)}</div>
                     <button className="ei-btn" disabled={!sel.length} onClick={() => responder(sel)}>Continuar</button>
                   </>)}
                   {passo.tipo === "escolha" && <div className="ei-ops" role="group" aria-label={passo.q}>{passo.ops.map(o => <button key={o} className="ei-op" onClick={() => responder(o)}>{o}</button>)}</div>}
@@ -220,8 +231,8 @@ function App() {
           <div className="ei-mem-c" id="ei-mem-c" role="group" tabIndex={0} aria-label="O que eu já entendi, em detalhe">
             {sec("princ", "Processo", horas != null ? `≈ ${horas} h/mês` : "1 processo", <>{horas != null && <p className="ei-ph"><b>≈ {horas} h</b><span>por mês</span></p>}<p className="ei-pt">{mem.princ}</p>{(rit.freq || rit.tempo) && <p className="ei-pm">{[rit.freq, rit.tempo && rit.tempo.toLowerCase() + " cada vez"].filter(Boolean).join(" · ")}</p>}</>)}
             {sec("proc", "Rotinas", plural(mem.proc.length, "rotina", "rotinas"), <ul className="ei-rot">{mem.proc.map(x => <li key={x}>{x}</li>)}</ul>)}
-            {sec("areas", "Áreas que mais pesam", plural(mem.areas.length, "área", "áreas"), <div className="ei-tags">{mem.areas.map(x => <em key={x} className="ei-tag a">{x}</em>)}</div>)}
-            {sec("ferr", "Ferramentas", plural(mem.ferr.length, "ferramenta", "ferramentas"), <div className="ei-tags">{mem.ferr.map(x => <em key={x} className="ei-tag">{x}</em>)}</div>)}
+            {sec("areas", "Áreas que mais pesam", plural(mem.areas.length, "área", "áreas"), <div className="ei-tags">{mem.areas.map(x => <em key={x} className="ei-tag a"><Marca n={x} />{x}</em>)}</div>)}
+            {sec("ferr", "Ferramentas", plural(mem.ferr.length, "ferramenta", "ferramentas"), <div className="ei-tags">{mem.ferr.map(x => <em key={x} className="ei-tag"><Marca n={x} />{x}</em>)}</div>)}
             {sec("ia", "IA hoje", ["Ainda não usa", "De vez em quando", "Todo dia", "Já tem agentes"][IA.indexOf(mem.ia)] || mem.ia, <p className="ei-pv">{mem.ia}</p>)}
             {!nTemas && <p className="ei-falta">Vou anotando aqui o que você contar.</p>}
             <p className="ei-nota">Dados de exemplo.</p>

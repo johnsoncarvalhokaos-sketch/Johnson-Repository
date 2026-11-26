@@ -188,3 +188,8 @@ button{ font:inherit; color:inherit; cursor:pointer; }
   -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.6 9.6 17.2 19 7.4' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;
           mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.6 9.6 17.2 19 7.4' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat; }
 .ei-g.ei-princ{ background:var(--soft); box-shadow:none; }
+
+/* logos e ícones ao lado do nome (26/11): 16 px, na mesma linha; o texto continua em tinta */
+.ei-mc{ width:16px; height:16px; flex:none; }
+.ei-mc-par{ display:inline-flex; gap:2px; flex:none; }
+.ei-ch, .ei-tag, .ei-vivo em{ display:inline-flex; align-items:center; gap:8px; }
