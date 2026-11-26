@@ -146,6 +146,10 @@ function App() {
 
   function digitar(e) { setTxt(e.target.value); tecla.current = Math.min(1, tecla.current + 0.45); if (estado === "speaking" && !dizendo) setEstado("listening"); }
 
+  /* no Hub, ao terminar, a pessoa vai sozinha para o Plano: a tela "Seu Plano está montado" fica 1,6 s e o Hub abre o Plano (26/11) */
+  const foiProPlano = useRef(false);
+  useEffect(() => { if (!EMB || i < PASSOS.length || foiProPlano.current) return; const t = setTimeout(() => { foiProPlano.current = true; avisarHub({ acao: "fim", dados: { ...mem, rotina: r.rotina || "", processo: r.processo || "", ritmo: r.ritmo || ritmo } }); }, 1600); return () => clearTimeout(t); }, [i]);
+
   return (
     <div className="ei">
       <div className="ei-haze" aria-hidden="true"></div>
@@ -210,7 +214,7 @@ function App() {
               )}
               {i >= PASSOS.length && !dizendo && (
                 <div className="ei-fim">
-                  <p>O Plano já tem a sua rotina, {mem.ferr.length} ferramentas, {mem.areas.length} áreas e o primeiro processo para virar agente{horas != null ? `, com cerca de ${horas} h por mês na mesa` : ""}.</p>
+                  <p>{EMB ? "Abrindo o seu Plano Agêntico… " : ""}O Plano já tem a sua rotina, {mem.ferr.length} ferramentas, {mem.areas.length} áreas e o primeiro processo para virar agente{horas != null ? `, com cerca de ${horas} h por mês na mesa` : ""}.</p>
                   <div className="ei-row">{EMB ? <button className="ei-btn jornada" onClick={() => avisarHub({ acao: "fim", dados: { ...mem, rotina: r.rotina || "", processo: r.processo || "", ritmo: r.ritmo || ritmo } })}>Abrir o Plano Agêntico</button> : <a className="ei-btn jornada" href="https://claude.ai/artifact/N58xZ5eyVrZHReRKUvym59" target="_blank" rel="noopener">Abrir o protótipo do Hub</a>}<button className="ei-lnk" onClick={() => { setI(-1); setEstado("idle"); setR({}); setMem({ ferr: [], areas: [], proc: [], ia: "", princ: "" }); setConversa([]); setRitmo({ freq: "", tempo: "" }); setUlt(""); setNovo([]); setMemAberta(false); setAberto(undefined); setFala({ eco: "", q: "" }); }}>Recomeçar</button></div>
                 </div>
               )}

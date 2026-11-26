@@ -24,6 +24,13 @@
 .pl-v2 .p2-reg li.ok::before{ background:var(--ink); }
 .pl-v2 .p2-reg li.at::before{ background:var(--agora,#1F4FCC); }
 .pl-v2 .p2-reg li.at{ color:var(--ink); font-weight:600; }
+/* semáforo de volta (26/11, pedido do Johnson): as mesmas cores do medidor anterior; estágios passados e o atual cheios,
+   os próximos a 22%; o atual com o contorno em tinta */
+.pl-v2 .p2-reg li:nth-child(1)::before{ background:#F04438; } .pl-v2 .p2-reg li:nth-child(2)::before{ background:#F79009; }
+.pl-v2 .p2-reg li:nth-child(3)::before{ background:#EAAA08; } .pl-v2 .p2-reg li:nth-child(4)::before{ background:#66C61C; }
+.pl-v2 .p2-reg li:nth-child(5)::before{ background:#12875A; }
+.pl-v2 .p2-reg li:not(.ok):not(.at)::before{ opacity:.22; }
+.pl-v2 .p2-reg li.at::before{ box-shadow:0 0 0 2px #fff, 0 0 0 3.5px var(--ink); }
 .pl-v2 .p2-reg p{ margin:12px 0 0; font-size:14px; line-height:1.45; color:var(--ink-2); }
 .pl-v2 .p2-reg p b{ font-weight:600; color:var(--ink); }
 .pl-v2 .p2-ini{ display:flex; flex-direction:column; gap:16px; padding:24px; border-radius:20px; background:#fff; box-shadow:0 0 0 1px var(--line); }
